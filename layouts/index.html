@@ -1,0 +1,37 @@
+{{ define "main" }}
+
+    <h1 class="post-title">Latest Blog Post...</h1>
+
+    <div id="post-summary">
+        {{ range first 1 .Site.Sections.blog.Pages }}
+            <h1 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+
+            {{ partial "postmetadata.html" . }}
+
+            <div id="post-content">
+                {{ .Summary }}
+            </div>
+
+            {{ if .Truncated }}
+                <div id="read-more">
+                    <a href="{{ .RelPermalink }}">Read More...</a>
+                </div>
+            {{ end }}
+        {{ end }}
+
+        <hr>
+
+        <h1 class="summary-title"><a href="/blog">Previous posts</a></h1>
+
+        <div class="mini-summary-container">
+            {{ range after 1 (first 4 .Site.Sections.blog.Pages) }}
+                <div class="mini-summary">
+                    <a href="{{ .Permalink }}">{{ .Title}}<span class="extra-info">{{ .Date.Format "January _2 - 2006" }}</span></a>
+                </div>
+            {{ end }}
+        </div>
+        <div id="read-more">
+            <a href="/blog">See all posts</a>
+        </div>
+    </div>
+{{ end }}

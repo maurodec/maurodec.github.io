@@ -1,0 +1,11 @@
+<div id="post-metadata">
+    <span class="date-container extra-info">
+        {{ .Date.Format "January _2 - 2006" }}
+    </span>
+
+    <div class="tag-container">
+        {{ range .Params.tags }}
+            <span class="tag">{{ . }}</span>
+        {{ end }}
+    </div>
+</div>

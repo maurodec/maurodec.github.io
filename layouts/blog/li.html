@@ -1,0 +1,17 @@
+<div id="post-summary">
+    <h1 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+
+    {{ partial "postmetadata.html" . }}
+
+    <div id="post-content">
+        {{ .Summary }}
+    </div>
+
+    {{ if .Truncated }}
+        <div id="read-more">
+            <a href="{{ .RelPermalink }}">Read More...</a>
+        </div>
+    {{ end }}
+
+    <hr>
+</div>
