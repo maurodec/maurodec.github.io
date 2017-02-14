@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Objc on Blog - Mauro de Carvalho</title>
-    <link>http://username.github.io/tags/objc/index.xml</link>
+    <link>http://maurodec.github.io/tags/objc/index.xml</link>
     <description>Recent content in Objc on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://username.github.io/tags/objc/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://maurodec.github.io/tags/objc/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>A simple Material Design ripple effect for any iOS view</title>
-      <link>http://username.github.io/blog/ripple/</link>
+      <link>http://maurodec.github.io/blog/ripple/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 -0300</pubDate>
       
-      <guid>http://username.github.io/blog/ripple/</guid>
+      <guid>http://maurodec.github.io/blog/ripple/</guid>
       <description>&lt;p&gt;Some time ago I had to create a background color transition animation for an
 iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
@@ -36,7 +36,7 @@ menu.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://username.github.io/static/img/simpleripple/flashlight.gif&#34; /&gt;
+        &lt;img src=&#34;http://maurodec.github.io/static/img/simpleripple/flashlight.gif&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -119,7 +119,7 @@ that the two sliders will also show a ripple when they are touched.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;http://username.github.io/static/img/simpleripple/ripple.gif&#34; /&gt;
+        &lt;img src=&#34;http://maurodec.github.io/static/img/simpleripple/ripple.gif&#34; /&gt;
     
     
     &lt;figcaption&gt;

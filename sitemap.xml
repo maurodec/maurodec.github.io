@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://username.github.io/blog/ripple/</loc>
+    <loc>http://maurodec.github.io/blog/ripple/</loc>
     <lastmod>2017-02-13T00:00:00-03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://username.github.io/blog/helloworld/</loc>
+    <loc>http://maurodec.github.io/blog/helloworld/</loc>
     <lastmod>2017-01-15T00:00:00-03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://username.github.io/about/</loc>
+    <loc>http://maurodec.github.io/about/</loc>
     <lastmod>2017-01-01T10:00:00-03:00</lastmod>
   </url>
   
   <url>
-    <loc>http://username.github.io/</loc>
+    <loc>http://maurodec.github.io/</loc>
     <lastmod>2017-02-13T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://username.github.io/blog/</loc>
+    <loc>http://maurodec.github.io/blog/</loc>
     <lastmod>2017-02-13T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://username.github.io/tags/ios/</loc>
+    <loc>http://maurodec.github.io/tags/ios/</loc>
     <lastmod>2017-02-13T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://username.github.io/tags/meta/</loc>
+    <loc>http://maurodec.github.io/tags/meta/</loc>
     <lastmod>2017-01-15T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://username.github.io/tags/objc/</loc>
+    <loc>http://maurodec.github.io/tags/objc/</loc>
     <lastmod>2017-02-13T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://username.github.io/tags/</loc>
+    <loc>http://maurodec.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
