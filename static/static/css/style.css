@@ -269,6 +269,7 @@ footer {
     position: relative;
 
     height: 70px;
+    margin-top: 50px;
     background-image: linear-gradient(#FFFFFF, #E0E0E0);
 }
 
