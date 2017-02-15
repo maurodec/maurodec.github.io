@@ -59,7 +59,7 @@ Our `UIView` Category will look like this:
 
 {{< gist maurodec 08beefc7b8501f23b0afe59c53f89d75 >}}
 
-Out animation will be taking place in a new `CAShapeLayer`. This new layer will
+Our animation will be taking place in a new `CAShapeLayer`. This new layer will
 sit behind all other layers so that it doesn't cover any of the content of the
 `UIView`. We will then add a `CABasicAnimation` that will transform a path.
 This path will be the actual ripple, it will go from a tiny circle to the size
