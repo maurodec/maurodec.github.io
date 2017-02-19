@@ -18,8 +18,8 @@ a {
 }
 
 p {
-    margin-top: 9px;
-    margin-bottom: 9px;
+    margin-top: 13px;
+    margin-bottom: 13px;
 
     color: #3E3E3E;
     font-weight: 300;
@@ -202,8 +202,14 @@ figcaption h4 {
     padding-left: 15px;
     padding-right: 15px;
 
+    line-height: 1.6;
+
     text-align: justify;
     text-justify: inter-word;
+}
+
+#post-content li {
+    line-height: 1.6;
 }
 
 .extra-info {

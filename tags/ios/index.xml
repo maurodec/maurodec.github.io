@@ -82,7 +82,7 @@ code, but lets see how to build this first.&lt;/p&gt;
 
 &lt;script src=&#34;//gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;Out animation will be taking place in a new &lt;code&gt;CAShapeLayer&lt;/code&gt;. This new layer will
+&lt;p&gt;Our animation will be taking place in a new &lt;code&gt;CAShapeLayer&lt;/code&gt;. This new layer will
 sit behind all other layers so that it doesn&amp;rsquo;t cover any of the content of the
 &lt;code&gt;UIView&lt;/code&gt;. We will then add a &lt;code&gt;CABasicAnimation&lt;/code&gt; that will transform a path.
 This path will be the actual ripple, it will go from a tiny circle to the size
@@ -111,7 +111,8 @@ done and get rid of the ripple layer in that block.&lt;/p&gt;
 &lt;h2 id=&#34;the-end-result&#34;&gt;The end result&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/maurodec/SimpleRipple&#34;&gt;In this repository&lt;/a&gt; you can find the
-full implementation along with an example application. The example consists of
+&lt;a href=&#34;https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m&#34;&gt;full implementation&lt;/a&gt;
+full with comments and an example application. The example consists of
 two sliders that will control the ripple&amp;rsquo;s duration and radius and a button to
 test it out. If you look closer (and not that closer, really) you can also see
 that the two sliders will also show a ripple when they are touched.&lt;/p&gt;
@@ -135,9 +136,11 @@ a pull request.&lt;/p&gt;
 
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;Replicating what Google did with Material Design on iOS was rather
-straightforward. The implementation is pretty short and easy to follow and
-can be added to any application quite easily.&lt;/p&gt;</description>
+&lt;p&gt;Replicating what Google did with Material Design on iOS was pretty
+straightforward. All it took was creating two &lt;code&gt;CABasicAnimation&lt;/code&gt; and adding
+them to a new sublayer in the desired &lt;code&gt;UIView&lt;/code&gt;. Categories in Objective-C
+(or Extensions in Swift) also help make the core more generic and easier to
+use.&lt;/p&gt;</description>
     </item>
     
   </channel>
