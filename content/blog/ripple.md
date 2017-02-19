@@ -88,7 +88,8 @@ done and get rid of the ripple layer in that block.
 ## The end result
 
 [In this repository](https://github.com/maurodec/SimpleRipple) you can find the
-full implementation along with an example application. The example consists of
+[full implementation](https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m) 
+full with comments and an example application. The example consists of
 two sliders that will control the ripple's duration and radius and a button to
 test it out. If you look closer (and not that closer, really) you can also see
 that the two sliders will also show a ripple when they are touched.
@@ -100,6 +101,8 @@ a pull request.
 
 ## Conclusion
 
-Replicating what Google did with Material Design on iOS was rather
-straightforward. The implementation is pretty short and easy to follow and
-can be added to any application quite easily.
+Replicating what Google did with Material Design on iOS was pretty
+straightforward. All it took was creating two `CABasicAnimation` and adding
+them to a new sublayer in the desired `UIView`. Categories in Objective-C
+(or Extensions in Swift) also help make the core more generic and easier to 
+use.
