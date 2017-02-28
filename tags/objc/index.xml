@@ -10,10 +10,10 @@
     
     <item>
       <title>A simple Material Design ripple effect for any iOS view</title>
-      <link>http://maurodec.com/blog/ripple/</link>
+      <link>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</link>
       <pubDate>Mon, 13 Feb 2017 00:00:00 -0300</pubDate>
       
-      <guid>http://maurodec.com/blog/ripple/</guid>
+      <guid>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</guid>
       <description>&lt;p&gt;Some time ago I had to create a background color transition animation for an
 iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
