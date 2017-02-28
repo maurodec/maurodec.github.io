@@ -3,6 +3,7 @@ draft = false
 date = "2017-02-13T00:00:00-03:00"
 title = "A simple Material Design ripple effect for any iOS view"
 tags = ["iOS", "ObjC"]
+slug = "simple-ripple-effect-for-ios-views"
 +++
 
 Some time ago I had to create a background color transition animation for an

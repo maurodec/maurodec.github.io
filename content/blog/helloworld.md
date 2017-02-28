@@ -3,6 +3,7 @@ title = "Hello World!"
 draft = false
 date = "2017-01-15T00:00:00-03:00"
 tags = ["meta"]
+slug = "hello-world"
 +++
 
 Hello and welcome to my personal blog!
