@@ -30,6 +30,11 @@ ul li {
     font-weight: 300;
 }
 
+ol li {
+    color: #3E3E3E;
+    font-weight: 300;
+}
+
 code {
     font-family: 'Source Code Pro', monospace;
 }
