@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blogs on Blog - Mauro de Carvalho</title>
-    <link>http://maurodec.com/blog/index.xml</link>
-    <description>Recent content in Blogs on Blog - Mauro de Carvalho</description>
+    <title>Java on Blog - Mauro de Carvalho</title>
+    <link>http://maurodec.com/tags/java/index.xml</link>
+    <description>Recent content in Java on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Mar 2017 00:00:00 -0300</lastBuildDate>
-    <atom:link href="http://maurodec.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://maurodec.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Android Handlers, Loopers, Message Queues and communication between Threads</title>
@@ -259,164 +258,6 @@ and crude, it is actually really powerful tool for communicating between
 threads and components. Understanding how this works also gives us a lot of
 insight into the inner workings of the Android Framework, thus helping us
 create better, more reliable and easier to maintain applications.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>A simple Material Design ripple effect for any iOS view</title>
-      <link>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</link>
-      <pubDate>Mon, 13 Feb 2017 00:00:00 -0300</pubDate>
-      
-      <guid>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</guid>
-      <description>&lt;p&gt;Some time ago I had to create a background color transition animation for an
-iOS app I was working on. This animation was pretty similar to the ripple
-effect Material Design buttons have. I thought it would be a fun idea to go
-back and revise what I had done, change the animation so that it looks like the
-Material Design ripple effect and create a UIView category with it.&lt;/p&gt;
-
-&lt;p&gt;This blog post shows an implementation of this animation that can be applied to
-any UIView.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;de-constructing-the-ripple-effect&#34;&gt;De-constructing the ripple effect&lt;/h2&gt;
-
-&lt;p&gt;Before implementing anything we have to know exactly what it is we have to
-build. So first things first, let&amp;rsquo;s look at the ripple effect in slow motion.
-For this, I set the animation scale for all animations on my phone to 20x and
-recorded what happened when the flashlight tile is tapped in the quick settings
-menu.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/simpleripple/flashlight.gif&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The Ripple Effect in action&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;The effect seems to be rather simple, a semi transparent circle starts
-expanding where the tile was touched, only to start fading out before it
-reaches its maximum size. If we take a closer look we can also see that the
-expansion doesn&amp;rsquo;t seem to be uniform, it seems to expand rather quickly at
-first and then slows down towards the end.&lt;/p&gt;
-
-&lt;h2 id=&#34;constructing-the-ripple-effect&#34;&gt;Constructing the ripple effect&lt;/h2&gt;
-
-&lt;p&gt;Before we start writing any code we have to decide how we are going to be
-implementing this. Is it going to be a subclass of a particular UIView? Is it
-going to be a new type of UIView that we can add as a child? I opted for none
-of these, instead I decided extending UIView with a category would be a
-simple but effective idea. By creating a new category we can add this effect to
-any UIView seamlessly and without any trouble.&lt;/p&gt;
-
-&lt;p&gt;Now that we know where this is going to be coded we need to figure out an API
-for this animation. For now this implementation will be uncomplicated.
-For the animation there are a few things we need to define.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A position to serve as our starting point for our animation.&lt;/li&gt;
-&lt;li&gt;The color we want our ripple to have.&lt;/li&gt;
-&lt;li&gt;How big we want our ripple to be.&lt;/li&gt;
-&lt;li&gt;How fast we want it to expand, or rather, how long we want our animation to
-last.&lt;/li&gt;
-&lt;li&gt;When the ripple should start fading.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At the end of this post you can find a link to a repository holding all this
-code, but lets see how to build this first.&lt;/p&gt;
-
-&lt;p&gt;Our &lt;code&gt;UIView&lt;/code&gt; Category will look like this:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Our animation will be taking place in a new &lt;code&gt;CAShapeLayer&lt;/code&gt;. This new layer will
-sit behind all other layers so that it doesn&amp;rsquo;t cover any of the content of the
-&lt;code&gt;UIView&lt;/code&gt;. We will then add a &lt;code&gt;CABasicAnimation&lt;/code&gt; that will transform a path.
-This path will be the actual ripple, it will go from a tiny circle to the size
-we specified as one of our parameters.&lt;/p&gt;
-
-&lt;p&gt;This is a simplified version of how to do it:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/0b4c1989cab07dddb071046f91896121.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;We will do the same for the fade out effect in a similar manner:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/1de86b46518ace12e343a028adee9999.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Finally, once we are done with our animations we can remove our ripple
-animation from our &lt;code&gt;UIView&lt;/code&gt;. There is a small catch though. Normally we would
-use a &lt;code&gt;CAAnimationDelegate&lt;/code&gt; and implement the appropriate callback, however we
-would have to either store a reference to our newly added layer or we would
-have to iterate through the sublayers and find the corresponding layer.
-This would also mean we cannot (at least not easily) have more than one ripple
-animation going at the same time. Thus we are going to go for a very simple
-solution, we will enqueue a block of code to execute when the animations are
-done and get rid of the ripple layer in that block.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/339ad058447bf491185e9c90ab5e36c3.js&#34;&gt;&lt;/script&gt;
-
-&lt;h2 id=&#34;the-end-result&#34;&gt;The end result&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/maurodec/SimpleRipple&#34;&gt;In this repository&lt;/a&gt; you can find the
-&lt;a href=&#34;https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m&#34;&gt;full implementation&lt;/a&gt;
-full with comments and an example application. The example consists of
-two sliders that will control the ripple&amp;rsquo;s duration and radius and a button to
-test it out. If you look closer (and not that closer, really) you can also see
-that the two sliders will also show a ripple when they are touched.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/simpleripple/ripple.gif&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The Example App&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;If you find any bugs or can think of improvements please feel free to submit
-a pull request.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Replicating what Google did with Material Design on iOS was pretty
-straightforward. All it took was creating two &lt;code&gt;CABasicAnimation&lt;/code&gt; and adding
-them to a new sublayer in the desired &lt;code&gt;UIView&lt;/code&gt;. Categories in Objective-C
-(or Extensions in Swift) also help make the core more generic and easier to
-use.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>http://maurodec.com/blog/hello-world/</link>
-      <pubDate>Sun, 15 Jan 2017 00:00:00 -0300</pubDate>
-      
-      <guid>http://maurodec.com/blog/hello-world/</guid>
-      <description>&lt;p&gt;Hello and welcome to my personal blog!&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been meaning to have a place to write and express my thoughts for a while
-now, so I figured I might as well start my own blog. My intention is to update
-this as often as I can with posts about topics such as Software Engineering,
-Programming or other interests of mine like Video Games.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I built this using the wonderful &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; site generator
-which made everything surprisingly easy. I also handcrafted the blog theme from
-scratch, thus, it is bound to change as time goes on and I realize things don&amp;rsquo;t
-look as good as I had hoped or when they simply grow stale.&lt;/p&gt;
-
-&lt;p&gt;Enjoy your stay! 🖖🏼&lt;/p&gt;</description>
     </item>
     
   </channel>
