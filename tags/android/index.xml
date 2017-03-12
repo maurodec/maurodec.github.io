@@ -25,7 +25,7 @@ classes.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;the-main-loop&#34;&gt;The Main Loop.&lt;/h2&gt;
+&lt;h2 id=&#34;the-main-loop&#34;&gt;The Main Loop&lt;/h2&gt;
 
 &lt;p&gt;As you probably already know by now, your application has a main loop that
 runs infinitely (or at least until you tell it to quit). This main loop waits

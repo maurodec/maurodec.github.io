@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://maurodec.com/blog/using-hugo/</loc>
+    <lastmod>2017-03-12T00:00:00-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://maurodec.com/blog/android-handlers/</loc>
     <lastmod>2017-03-04T00:00:00-03:00</lastmod>
   </url>
@@ -29,13 +34,19 @@
   
   <url>
     <loc>http://maurodec.com/</loc>
-    <lastmod>2017-03-04T00:00:00-03:00</lastmod>
+    <lastmod>2017-03-12T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://maurodec.com/blog/</loc>
-    <lastmod>2017-03-04T00:00:00-03:00</lastmod>
+    <lastmod>2017-03-12T00:00:00-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://maurodec.com/tags/hugo/</loc>
+    <lastmod>2017-03-12T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,7 +64,7 @@
   
   <url>
     <loc>http://maurodec.com/tags/meta/</loc>
-    <lastmod>2017-01-15T00:00:00-03:00</lastmod>
+    <lastmod>2017-03-12T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   

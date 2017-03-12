@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meta on Blog - Mauro de Carvalho</title>
-    <link>http://maurodec.com/tags/meta/index.xml</link>
-    <description>Recent content in Meta on Blog - Mauro de Carvalho</description>
+    <title>Hugo on Blog - Mauro de Carvalho</title>
+    <link>http://maurodec.com/tags/hugo/index.xml</link>
+    <description>Recent content in Hugo on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://maurodec.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://maurodec.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Creating this Blog with Hugo</title>
@@ -112,29 +112,6 @@ me.&lt;/p&gt;
 &lt;p&gt;If you want to see how this was built you can check out the source in the &lt;code&gt;src&lt;/code&gt;
 branch &lt;a href=&#34;https://github.com/maurodec/maurodec.github.io&#34;&gt;here&lt;/a&gt;, or by clicking
 the &amp;ldquo;Source&amp;rdquo; link in the navigation bar.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>http://maurodec.com/blog/hello-world/</link>
-      <pubDate>Sun, 15 Jan 2017 00:00:00 -0300</pubDate>
-      
-      <guid>http://maurodec.com/blog/hello-world/</guid>
-      <description>&lt;p&gt;Hello and welcome to my personal blog!&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been meaning to have a place to write and express my thoughts for a while
-now, so I figured I might as well start my own blog. My intention is to update
-this as often as I can with posts about topics such as Software Engineering,
-Programming or other interests of mine like Video Games.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I built this using the wonderful &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; site generator
-which made everything surprisingly easy. I also handcrafted the blog theme from
-scratch, thus, it is bound to change as time goes on and I realize things don&amp;rsquo;t
-look as good as I had hoped or when they simply grow stale.&lt;/p&gt;
-
-&lt;p&gt;Enjoy your stay! 🖖🏼&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92824817-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+    <title>
+      
+        Blog - Mauro de Carvalho
+      
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <div class="pull-left">
+            <a href="/">Home</a>
+        </div>
+        <div class="pull-right">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/using-hugo/">Creating this Blog with Hugo</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        March 12 - 2017
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Meta</span>
+        
+            <span class="tag">Hugo</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>It&rsquo;s sometimes a bit funny how trends come and go in tech.
+For a long time dynamic websites were seen as the way to go, no matter
+for what kind of content. Lately a lot of people have gone back to
+basics and (thankfully) decided to build their sites as a collection
+of static pages.</p>
+
+<p>When I started this blog I decided I did not want to go through the
+hassle of maintaining a complex site and decided to use Hugo, a static
+site generator. In this post I will talk about my experience building
+my blog using <a href="http://gohugo.io/">Hugo</a>.</p>
+
+<p></p>
+
+<h2 id="choosing-hugo">Choosing Hugo</h2>
+
+<p>For the longest time building dynamic websites was considered the way
+to go. While this sort of site opens up a whole world of things that
+can be done, it also adds a lot of complexity
+(for example when deploying or securing a site) that can sometimes
+be unnecessary. When I decided to start this blog I did not want to
+go through the hassle of creating something from scratch, or even
+bother maintaining something like Wordpress or Drupal. I figured a static site
+would be good enough for what I needed, as I just wanted to create a
+read only site with no user interaction. Not only that, but I could
+use Github pages to host it, making things even simpler.</p>
+
+<p>I remember a few years ago while looking into Go, I read about Hugo and how it
+could be used to generate entire sites based on a few templates and files with
+the actual site content. While this seemed interesting at the time, I
+didn&rsquo;t really have much use for it. Fast-forward a few years and
+I found myself looking for a tool that I could use to build my blog with.
+While I could use something like <a href="https://jekyllrb.com/">Jekyll</a>, Hugo
+still seemed like a viable option and I had already done some
+programming in Go as opposed to not even knowing Ruby, so I
+decided to go for it instead.</p>
+
+<h2 id="the-good">The good</h2>
+
+<ul>
+<li>Hugo is <strong>fast</strong>. My blog is of course very small, but for big sites, Hugo
+is excellent as it performs really well and it gets faster and
+faster with every version.</li>
+<li>There are tons of themes available already. You can get your site up
+and running in no time by using a theme somebody else created already.
+Creating your own theme is also pretty straightforward and takes no time
+compared to what writing all the HTML/CSS will take.</li>
+<li>There is a site showcase where you can find (with source!) sites that
+were built with Hugo. The key part is here is that you can see HOW
+they were made, so they also serve as development examples and not
+just inspiration.</li>
+<li>Hugo includes a development server, so with a simple <code>hugo serve</code> you
+can try out your site without needing to set up anything. Not only that,
+it also has live reload capabilities, so you can develop and view your
+changes in your browser instantly without restarting anything.</li>
+<li>The documentation. Every aspect of Hugo is documented thoroughly, so
+you can always find information on whatever you need. And if something
+isn&rsquo;t documented you can always ask other users in the
+<a href="https://discuss.gohugo.io/">forums</a>.</li>
+<li>Markdown. Being able to write content in Markdown is so much better than
+having an editor that sometimes works and sometimes doesn&rsquo;t or that is
+frustrating as hell to use. Markdown is simple, and there are some
+incredibly simple and useful Markdown editors out there. Even if you&rsquo;re
+not a technical user Markdown is easy enough to format content with.</li>
+<li>Finally, Hugo is constantly evolving and new features are added with every
+release, so reading each version&rsquo;s changelog is always exciting.</li>
+</ul>
+
+<h2 id="the-bad">The bad</h2>
+
+<ul>
+<li>The documentation, well, not all of it, but the lack of a proper
+overview. The documentation is really good at explaining the different
+individual parts that comprise Hugo, it even has a
+<a href="https://gohugo.io/overview/quickstart/">Quickstart Guide</a>.
+This guide however, is more of a basic tour than a guide. There isn&rsquo;t really
+a place in the documentation that presents explains the different concepts
+Hugo introduces and how they fit together when building a site. This means
+that while documentation is good, there isn&rsquo;t really a place
+to start. In my case I had to go look for sites that used Hugo, looked at the
+source and figured out how how their creators built them.
+If there is one place where I think there&rsquo;s room for improvement is
+providing a place where newcomers can see the different parts of
+Hugo and how they for together.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Hugo was an amazing tool. Building my blog was very easy and quick, even
+considering I built the design myself from scratch. It&rsquo;s very flexible
+and allowed me to do everything I wanted. Being able to write posts in
+Markdown was also a requirement that Hugo fulfilled. This combined with the
+fact that I can just host everything with Github pages without any extra work
+meant that using Hugo was more than worth the (little to no) trouble it gave
+me.</p>
+
+<p>If you want to see how this was built you can check out the source in the <code>src</code>
+branch <a href="https://github.com/maurodec/maurodec.github.io">here</a>, or by clicking
+the &ldquo;Source&rdquo; link in the navigation bar.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+    <p>&copy; Mauro de Carvalho - 2017</p>
+</div>
+    </footer>
+  </body>
+
+
+</html>
