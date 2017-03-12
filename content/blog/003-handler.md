@@ -17,7 +17,7 @@ classes.
 
 <!--more-->
 
-## The Main Loop.
+## The Main Loop
 
 As you probably already know by now, your application has a main loop that
 runs infinitely (or at least until you tell it to quit). This main loop waits
