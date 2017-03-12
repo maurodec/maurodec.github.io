@@ -25,6 +25,11 @@ p {
     font-weight: 300;
 }
 
+li {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 ul li {
     color: #3E3E3E;
     font-weight: 300;
