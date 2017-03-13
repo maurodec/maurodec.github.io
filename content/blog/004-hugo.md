@@ -59,10 +59,6 @@ decided to go for it instead.
   can try out your site without needing to set up anything. Not only that,
   it also has live reload capabilities, so you can develop and view your
   changes in your browser instantly without restarting anything.
-* The documentation. Every aspect of Hugo is documented thoroughly, so
-  you can always find information on whatever you need. And if something
-  isn't documented you can always ask other users in the
-  [forums](https://discuss.gohugo.io/).
 * Markdown. Being able to write content in Markdown is so much better than
   having an editor that sometimes works and sometimes doesn't or that is
   frustrating as hell to use. Markdown is simple, and there are some
@@ -85,17 +81,24 @@ decided to go for it instead.
   source and figured out how how their creators built them.
   If there is one place where I think there's room for improvement is
   providing a place where newcomers can see the different parts of
-  Hugo and how they for together.
+  Hugo and how they for together. It's also worth mentioning that
+  the [forums](https://discuss.gohugo.io/) are an amazing place to ask 
+  questions when the answers cannot be found in the documentation.
 
 ## Conclusion
 
-Hugo was an amazing tool. Building my blog was very easy and quick, even
-considering I built the design myself from scratch. It's very flexible
-and allowed me to do everything I wanted. Being able to write posts in
+In my own experience Hugo was an amazing tool. Building my blog was very easy 
+and quick, even considering I built the design myself from scratch. It's very 
+flexible and allowed me to do everything I wanted. Being able to write posts in
 Markdown was also a requirement that Hugo fulfilled. This combined with the
 fact that I can just host everything with Github pages without any extra work
 meant that using Hugo was more than worth the (little to no) trouble it gave 
 me.
+
+If I had to give advice to new Hugo users it would be to go trough the
+Quickstart Guide to get an idea of what Hugo is like, then find a blog they
+like and see how it was made. I personally found
+[spf13.com](https://github.com/spf13/spf13.com) to be incredibly useful.
 
 If you want to see how this was built you can check out the source in the `src`
 branch [here](https://github.com/maurodec/maurodec.github.io), or by clicking
