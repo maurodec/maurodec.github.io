@@ -292,6 +292,16 @@ figcaption h4 {
     float: right;
 }
 
+.about-pic img {
+    float: left;
+
+    width: 150px;
+    height: 150px;
+
+    margin-right: 30px;
+    border-radius: 75px;
+}
+
 footer {
     position: relative;
 
