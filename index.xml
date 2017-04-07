@@ -6,8 +6,86 @@
     <description>Recent content on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Mar 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 07 Apr 2017 00:00:00 -0300</lastBuildDate>
     <atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Why I learned Python</title>
+      <link>http://maurodec.com/blog/learning-python/</link>
+      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/learning-python/</guid>
+      <description>&lt;p&gt;About eleven years ago, after finishing my first semester in University I
+decided to learn how to program in Python. In this post I will talk about why I
+found Python interesting at the time as well as how it felt to me as someone
+with little programming knowledge.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-python&#34;&gt;Why Python&lt;/h2&gt;
+
+&lt;p&gt;My first programming language was Java. I could not really compare it with
+anything else, as it was the only programming language I had worked with, but I
+was happy with it as the code I wrote felt clear and there were IDEs such as
+Eclipse that really aided my learning process. At the time I had also done the
+switch to Linux and saw that a great deal of programs and tools I was using
+were written in Python. This caught my attention as it seemed that this
+language hitherto unknown to me was rather popular and from what some people
+said at the time pretty powerful and easy to learn.&lt;/p&gt;
+
+&lt;p&gt;It wasn&amp;rsquo;t until I saw a post on &lt;a href=&#34;http://planet.ubuntu.com/&#34;&gt;Planet Ubuntu&lt;/a&gt; that
+showed a very simple Python script that I decided to learn Python. This script
+would, given a directory, go through all MP3 files (including those in
+subdirectories), open them and read the ID3 data. While this program was not
+particularly useful for me, what really caught my attention was how short and
+clear it was. I had never seen Python code before, but I could pretty much
+understand everything that was happening.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s when I decided that Python would be the next programming language I
+would learn.&lt;/p&gt;
+
+&lt;h2 id=&#34;learning-python&#34;&gt;Learning Python&lt;/h2&gt;
+
+&lt;p&gt;I decided I was going to start by reading a book about Python. I settled for
+&lt;a href=&#34;http://www.diveintopython.net/&#34;&gt;Dive into Python&lt;/a&gt; as it was (and still is)
+free. I really liked the book, it was clear and went straight to the point so I
+was doing small Python scripts in no time. Another book generally considered to
+be excellent is
+&lt;a href=&#34;https://learnpythonthehardway.org/&#34;&gt;Learn Python The Hard Way&lt;/a&gt;.
+&lt;a href=&#34;http://docs.python-guide.org/en/latest/&#34;&gt;The Hitchhiker’s Guide to Python&lt;/a&gt; is
+also an amazing resource that covers a lot of common topics, not just for
+beginners but also for people that already know the language.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-did-not-like-about-python&#34;&gt;What I did not like about Python&lt;/h2&gt;
+
+&lt;p&gt;Coming from a statically typed language like Java, what was hardest for me was
+not having static type checking. It was tough at first and I kept getting
+errors left and right probably due to the fact that I was so used to having an
+IDE check everything for me automatically. I also fell victim to a few of the
+common Python pitfalls new programmers come across, such as mixing spaces with
+tabs or forgetting to use &lt;code&gt;global&lt;/code&gt; when changing a module level variable form
+within a function.
+These are all things you get quickly used to, and a lot can be avoided by using
+something like &lt;a href=&#34;http://pychecker.sourceforge.net/&#34;&gt;PyChecker&lt;/a&gt; or
+&lt;a href=&#34;https://launchpad.net/pyflakes&#34;&gt;Pyflakes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-loved-about-python&#34;&gt;What I loved about Python&lt;/h2&gt;
+
+&lt;p&gt;The nice things Python provides far outweighed any issues I may have had.
+Again, coming from Java, list comprehensions and the way iterables worked with
+&lt;code&gt;for&lt;/code&gt; loops was mind blowing to me as so much boilerplate code could be
+avoided. I was also blown away by how easily generic code could be written by
+using &lt;code&gt;*args&lt;/code&gt; and &lt;code&gt;**kwargs&lt;/code&gt;. Python&amp;rsquo;s power also comes from it&amp;rsquo;s comprehensive
+standard library as well as the vast amount of third party libraries available,
+if you can think of anything it&amp;rsquo;s probably already available for you. Finally,
+I found Python to be an incredibly fast language to prototype or program quick
+proofs of concept in.&lt;/p&gt;
+
+&lt;p&gt;For almost five years now I have been programming in Python full time at work
+and I couldn&amp;rsquo;t be happier with it, so I think deciding to learn Python all
+those years ago really payed off. If somebody asked me whether Python was a
+good language to learn, the answer would be a definite yes.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating this Blog with Hugo</title>
