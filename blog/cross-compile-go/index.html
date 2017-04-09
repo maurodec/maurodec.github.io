@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92824817-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+    <title>
+      
+        Blog - Mauro de Carvalho
+      
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <div class="pull-left">
+            <a href="/">Home</a>
+        </div>
+        <div class="pull-right">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/cross-compile-go/">Cross compiling Go applications</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        April  7 - 2017
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Meta</span>
+        
+            <span class="tag">Go</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>I often write blog posts on different computers. Sometimes I write on my
+Macbook (which is where I run a local Hugo server to test things out), other
+times I SSH into my Raspberry Pi and write there until I am on my Macbook
+again. While writing my
+<a href="/blog/learning-python/">Why I learned Python blog post</a> I asked some friends
+for feedback, however, I did not want to push an unfinished post to Github
+Pages, so I decided to serve my Hugo blog from my Raspberry Pi. I soon realized
+that I would have to install Hugo from source which could mean trouble&hellip;</p>
+
+<p></p>
+
+<h2 id="version-mess">Version mess</h2>
+
+<p>I bought a Raspberri Pi in late 2012, so I have one of the original Raspberry Pi Model B which are&hellip; well&hellip; pretty underpowered. This is usually not a problem as I tend to run services which do not need much resources. In it, I am running a headless setup of Debian 8, which as we all know probably has some outdated packages, but this tends not to be a problem, until now.</p>
+
+<p>My blog is designed to work with Hugo 0.18+, however, it is not available in the Debian repositories (well, no version is available actually). This should be a non-issue, as all it takes is a <code>go get</code> to pull and compile the latest version. Little did I know that the latest Go version available for Debian 8 seems to be 1.3 which is not new enough for building Hugo. I could always compile a new Go version, but there&rsquo;s a big gotcha, with Go 1.5 the compiler and runtime were rewritten in Go, meaning that Go 1.4+ is needed for building it. This means that in order to install Hugo 0.18 I would have to compile Go 1.4 first and then compile Go 1.8. All of that on a Raspberry Pi? No thank you.</p>
+
+<h2 id="cross-compilation-to-the-rescue">Cross compilation to the rescue</h2>
+
+<p>I figured that there must be a simpler way of getting Hugo 0.18 on there, so I started doing some research to see whether it was possible (and how hard it would be) to compile a Hugo binary on another architecture (x86_64 in this case). I soon came across <a href="https://dave.cheney.net/2015/08/22/cross-compilation-with-go-1-5">this blog post</a> that explained how to go about cross compiling code. I decided to try this on my Macbook, as it was what I was using. The instructions seemed a bit too simple though, I was sure I was going to run into other issues. Cross compiling could not be this easy, could it? Well yes, it was. I was pleasantly surprised at how smooth it all went and how quick it was. All it took was running:</p>
+
+<pre><code>env GOOS=linux GOARCH=arm GOARM=6 go build -v github.com/spf13/hugo
+</code></pre>
+
+<p>I then <code>scp</code>-ed my freshly built binary and BAM! It worked flawlessly!</p>
+
+<h2 id="feeling-dumb-as-bricks">Feeling dumb as bricks</h2>
+
+<p>It turns out it did not have to go through all this trouble to get Hugo on Brinstar (thats what my RPi is called), as the <a href="https://github.com/spf13/hugo/releases">Hugo releases page</a> has binaries for ARM (though I did not test if they worked or not). Not only that, the <a href="https://golang.org/dl/">Go downloads page</a> provides ARMv6l binaries which for sure work on my model, I could have just downloaded that!</p>
+
+
+<figure >
+    
+        <img src="/static/img/crosscompile/facepalm.gif" />
+    
+    
+    <figcaption>
+        <h4>Judge Judy is not pleased</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>The moral of the story is: always look for pre-built binaries. All jokes aside, I was surprised at how uncomplicated cross compiling a Go binary was, which depending on what type of software you&rsquo;re building could be a very big plus.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+    <p>&copy; Mauro de Carvalho - 2017</p>
+</div>
+    </footer>
+  </body>
+
+
+</html>

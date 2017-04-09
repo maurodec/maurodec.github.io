@@ -2,11 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Meta on Blog - Mauro de Carvalho</title>
-    <link>http://maurodec.com/tags/meta/index.xml</link>
+    <link>http://maurodec.com/tags/meta/</link>
     <description>Recent content in Meta on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://maurodec.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Apr 2017 00:00:00 -0300</lastBuildDate>
+    
+	<atom:link href="http://maurodec.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross compiling Go applications</title>
+      <link>http://maurodec.com/blog/cross-compile-go/</link>
+      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/cross-compile-go/</guid>
+      <description>&lt;p&gt;I often write blog posts on different computers. Sometimes I write on my
+Macbook (which is where I run a local Hugo server to test things out), other
+times I SSH into my Raspberry Pi and write there until I am on my Macbook
+again. While writing my
+&lt;a href=&#34;http://maurodec.com/blog/learning-python/&#34;&gt;Why I learned Python blog post&lt;/a&gt; I asked some friends
+for feedback, however, I did not want to push an unfinished post to Github
+Pages, so I decided to serve my Hugo blog from my Raspberry Pi. I soon realized
+that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating this Blog with Hugo</title>
@@ -25,96 +46,7 @@ hassle of maintaining a complex site and decided to use Hugo, a static
 site generator. In this post I will talk about my experience building
 my blog using &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;choosing-hugo&#34;&gt;Choosing Hugo&lt;/h2&gt;
-
-&lt;p&gt;For the longest time building dynamic websites was considered the way
-to go. While this sort of site opens up a whole world of things that
-can be done, it also adds a lot of complexity
-(for example when deploying or securing a site) that can sometimes
-be unnecessary. When I decided to start this blog I did not want to
-go through the hassle of creating something from scratch, or even
-bother maintaining something like Wordpress or Drupal. I figured a static site
-would be good enough for what I needed, as I just wanted to create a
-read only site with no user interaction. Not only that, but I could
-use Github pages to host it, making things even simpler.&lt;/p&gt;
-
-&lt;p&gt;I remember a few years ago while looking into Go, I read about Hugo and how it
-could be used to generate entire sites based on a few templates and files with
-the actual site content. While this seemed interesting at the time, I
-didn&amp;rsquo;t really have much use for it. Fast-forward a few years and
-I found myself looking for a tool that I could use to build my blog with.
-While I could use something like &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt;, Hugo
-still seemed like a viable option and I had already done some
-programming in Go as opposed to not even knowing Ruby, so I
-decided to go for it instead.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-good&#34;&gt;The good&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Hugo is &lt;strong&gt;fast&lt;/strong&gt;. My blog is of course very small, but for big sites, Hugo
-is excellent as it performs really well and it gets faster and
-faster with every version.&lt;/li&gt;
-&lt;li&gt;There are tons of themes available already. You can get your site up
-and running in no time by using a theme somebody else created already.
-Creating your own theme is also pretty straightforward and takes no time
-compared to what writing all the HTML/CSS will take.&lt;/li&gt;
-&lt;li&gt;There is a site showcase where you can find (with source!) sites that
-were built with Hugo. The key part is here is that you can see HOW
-they were made, so they also serve as development examples and not
-just inspiration.&lt;/li&gt;
-&lt;li&gt;Hugo includes a development server, so with a simple &lt;code&gt;hugo serve&lt;/code&gt; you
-can try out your site without needing to set up anything. Not only that,
-it also has live reload capabilities, so you can develop and view your
-changes in your browser instantly without restarting anything.&lt;/li&gt;
-&lt;li&gt;Markdown. Being able to write content in Markdown is so much better than
-having an editor that sometimes works and sometimes doesn&amp;rsquo;t or that is
-frustrating as hell to use. Markdown is simple, and there are some
-incredibly simple and useful Markdown editors out there. Even if you&amp;rsquo;re
-not a technical user Markdown is easy enough to format content with.&lt;/li&gt;
-&lt;li&gt;Finally, Hugo is constantly evolving and new features are added with every
-release, so reading each version&amp;rsquo;s changelog is always exciting.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;the-bad&#34;&gt;The bad&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The documentation, well, not all of it, but the lack of a proper
-overview. The documentation is really good at explaining the different
-individual parts that comprise Hugo, it even has a
-&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Quickstart Guide&lt;/a&gt;.
-This guide however, is more of a basic tour than a guide. There isn&amp;rsquo;t really
-a place in the documentation that presents explains the different concepts
-Hugo introduces and how they fit together when building a site. This means
-that while documentation is good, there isn&amp;rsquo;t really a place
-to start. In my case I had to go look for sites that used Hugo, looked at the
-source and figured out how how their creators built them.
-If there is one place where I think there&amp;rsquo;s room for improvement is
-providing a place where newcomers can see the different parts of
-Hugo and how they for together. It&amp;rsquo;s also worth mentioning that
-the &lt;a href=&#34;https://discuss.gohugo.io/&#34;&gt;forums&lt;/a&gt; are an amazing place to ask
-questions when the answers cannot be found in the documentation.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;In my own experience Hugo was an amazing tool. Building my blog was very easy
-and quick, even considering I built the design myself from scratch. It&amp;rsquo;s very
-flexible and allowed me to do everything I wanted. Being able to write posts in
-Markdown was also a requirement that Hugo fulfilled. This combined with the
-fact that I can just host everything with Github pages without any extra work
-meant that using Hugo was more than worth the (little to no) trouble it gave
-me.&lt;/p&gt;
-
-&lt;p&gt;If I had to give advice to new Hugo users it would be to go trough the
-Quickstart Guide to get an idea of what Hugo is like, then find a blog they
-like and see how it was made. I personally found
-&lt;a href=&#34;https://github.com/spf13/spf13.com&#34;&gt;spf13.com&lt;/a&gt; to be incredibly useful.&lt;/p&gt;
-
-&lt;p&gt;If you want to see how this was built you can check out the source in the &lt;code&gt;src&lt;/code&gt;
-branch &lt;a href=&#34;https://github.com/maurodec/maurodec.github.io&#34;&gt;here&lt;/a&gt;, or by clicking
-the &amp;ldquo;Source&amp;rdquo; link in the navigation bar.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -130,14 +62,7 @@ now, so I figured I might as well start my own blog. My intention is to update
 this as often as I can with posts about topics such as Software Engineering,
 Programming or other interests of mine like Video Games.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I built this using the wonderful &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; site generator
-which made everything surprisingly easy. I also handcrafted the blog theme from
-scratch, thus, it is bound to change as time goes on and I realize things don&amp;rsquo;t
-look as good as I had hoped or when they simply grow stale.&lt;/p&gt;
-
-&lt;p&gt;Enjoy your stay! 🖖🏼&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

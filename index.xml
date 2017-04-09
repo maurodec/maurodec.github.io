@@ -2,12 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog - Mauro de Carvalho</title>
-    <link>http://maurodec.com/index.xml</link>
+    <link>http://maurodec.com/</link>
     <description>Recent content on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Apr 2017 00:00:00 -0300</lastBuildDate>
-    <atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross compiling Go applications</title>
+      <link>http://maurodec.com/blog/cross-compile-go/</link>
+      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/cross-compile-go/</guid>
+      <description>&lt;p&gt;I often write blog posts on different computers. Sometimes I write on my
+Macbook (which is where I run a local Hugo server to test things out), other
+times I SSH into my Raspberry Pi and write there until I am on my Macbook
+again. While writing my
+&lt;a href=&#34;http://maurodec.com/blog/learning-python/&#34;&gt;Why I learned Python blog post&lt;/a&gt; I asked some friends
+for feedback, however, I did not want to push an unfinished post to Github
+Pages, so I decided to serve my Hugo blog from my Raspberry Pi. I soon realized
+that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Why I learned Python</title>
@@ -20,71 +40,7 @@ decided to learn how to program in Python. In this post I will talk about why I
 found Python interesting at the time as well as how it felt to me as someone
 with little programming knowledge.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;why-python&#34;&gt;Why Python&lt;/h2&gt;
-
-&lt;p&gt;My first programming language was Java. I could not really compare it with
-anything else, as it was the only programming language I had worked with, but I
-was happy with it as the code I wrote felt clear and there were IDEs such as
-Eclipse that really aided my learning process. At the time I had also done the
-switch to Linux and saw that a great deal of programs and tools I was using
-were written in Python. This caught my attention as it seemed that this
-language hitherto unknown to me was rather popular and from what some people
-said at the time pretty powerful and easy to learn.&lt;/p&gt;
-
-&lt;p&gt;It wasn&amp;rsquo;t until I saw a post on &lt;a href=&#34;http://planet.ubuntu.com/&#34;&gt;Planet Ubuntu&lt;/a&gt; that
-showed a very simple Python script that I decided to learn Python. This script
-would, given a directory, go through all MP3 files (including those in
-subdirectories), open them and read the ID3 data. While this program was not
-particularly useful for me, what really caught my attention was how short and
-clear it was. I had never seen Python code before, but I could pretty much
-understand everything that was happening.&lt;/p&gt;
-
-&lt;p&gt;That&amp;rsquo;s when I decided that Python would be the next programming language I
-would learn.&lt;/p&gt;
-
-&lt;h2 id=&#34;learning-python&#34;&gt;Learning Python&lt;/h2&gt;
-
-&lt;p&gt;I decided I was going to start by reading a book about Python. I settled for
-&lt;a href=&#34;http://www.diveintopython.net/&#34;&gt;Dive into Python&lt;/a&gt; as it was (and still is)
-free. I really liked the book, it was clear and went straight to the point so I
-was doing small Python scripts in no time. Another book generally considered to
-be excellent is
-&lt;a href=&#34;https://learnpythonthehardway.org/&#34;&gt;Learn Python The Hard Way&lt;/a&gt;.
-&lt;a href=&#34;http://docs.python-guide.org/en/latest/&#34;&gt;The Hitchhiker’s Guide to Python&lt;/a&gt; is
-also an amazing resource that covers a lot of common topics, not just for
-beginners but also for people that already know the language.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-i-did-not-like-about-python&#34;&gt;What I did not like about Python&lt;/h2&gt;
-
-&lt;p&gt;Coming from a statically typed language like Java, what was hardest for me was
-not having static type checking. It was tough at first and I kept getting
-errors left and right probably due to the fact that I was so used to having an
-IDE check everything for me automatically. I also fell victim to a few of the
-common Python pitfalls new programmers come across, such as mixing spaces with
-tabs or forgetting to use &lt;code&gt;global&lt;/code&gt; when changing a module level variable form
-within a function.
-These are all things you get quickly used to, and a lot can be avoided by using
-something like &lt;a href=&#34;http://pychecker.sourceforge.net/&#34;&gt;PyChecker&lt;/a&gt; or
-&lt;a href=&#34;https://launchpad.net/pyflakes&#34;&gt;Pyflakes&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-i-loved-about-python&#34;&gt;What I loved about Python&lt;/h2&gt;
-
-&lt;p&gt;The nice things Python provides far outweighed any issues I may have had.
-Again, coming from Java, list comprehensions and the way iterables worked with
-&lt;code&gt;for&lt;/code&gt; loops was mind blowing to me as so much boilerplate code could be
-avoided. I was also blown away by how easily generic code could be written by
-using &lt;code&gt;*args&lt;/code&gt; and &lt;code&gt;**kwargs&lt;/code&gt;. Python&amp;rsquo;s power also comes from it&amp;rsquo;s comprehensive
-standard library as well as the vast amount of third party libraries available,
-if you can think of anything it&amp;rsquo;s probably already available for you. Finally,
-I found Python to be an incredibly fast language to prototype or program quick
-proofs of concept in.&lt;/p&gt;
-
-&lt;p&gt;For almost five years now I have been programming in Python full time at work
-and I couldn&amp;rsquo;t be happier with it, so I think deciding to learn Python all
-those years ago really payed off. If somebody asked me whether Python was a
-good language to learn, the answer would be a definite yes.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -104,96 +60,7 @@ hassle of maintaining a complex site and decided to use Hugo, a static
 site generator. In this post I will talk about my experience building
 my blog using &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;choosing-hugo&#34;&gt;Choosing Hugo&lt;/h2&gt;
-
-&lt;p&gt;For the longest time building dynamic websites was considered the way
-to go. While this sort of site opens up a whole world of things that
-can be done, it also adds a lot of complexity
-(for example when deploying or securing a site) that can sometimes
-be unnecessary. When I decided to start this blog I did not want to
-go through the hassle of creating something from scratch, or even
-bother maintaining something like Wordpress or Drupal. I figured a static site
-would be good enough for what I needed, as I just wanted to create a
-read only site with no user interaction. Not only that, but I could
-use Github pages to host it, making things even simpler.&lt;/p&gt;
-
-&lt;p&gt;I remember a few years ago while looking into Go, I read about Hugo and how it
-could be used to generate entire sites based on a few templates and files with
-the actual site content. While this seemed interesting at the time, I
-didn&amp;rsquo;t really have much use for it. Fast-forward a few years and
-I found myself looking for a tool that I could use to build my blog with.
-While I could use something like &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt;, Hugo
-still seemed like a viable option and I had already done some
-programming in Go as opposed to not even knowing Ruby, so I
-decided to go for it instead.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-good&#34;&gt;The good&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Hugo is &lt;strong&gt;fast&lt;/strong&gt;. My blog is of course very small, but for big sites, Hugo
-is excellent as it performs really well and it gets faster and
-faster with every version.&lt;/li&gt;
-&lt;li&gt;There are tons of themes available already. You can get your site up
-and running in no time by using a theme somebody else created already.
-Creating your own theme is also pretty straightforward and takes no time
-compared to what writing all the HTML/CSS will take.&lt;/li&gt;
-&lt;li&gt;There is a site showcase where you can find (with source!) sites that
-were built with Hugo. The key part is here is that you can see HOW
-they were made, so they also serve as development examples and not
-just inspiration.&lt;/li&gt;
-&lt;li&gt;Hugo includes a development server, so with a simple &lt;code&gt;hugo serve&lt;/code&gt; you
-can try out your site without needing to set up anything. Not only that,
-it also has live reload capabilities, so you can develop and view your
-changes in your browser instantly without restarting anything.&lt;/li&gt;
-&lt;li&gt;Markdown. Being able to write content in Markdown is so much better than
-having an editor that sometimes works and sometimes doesn&amp;rsquo;t or that is
-frustrating as hell to use. Markdown is simple, and there are some
-incredibly simple and useful Markdown editors out there. Even if you&amp;rsquo;re
-not a technical user Markdown is easy enough to format content with.&lt;/li&gt;
-&lt;li&gt;Finally, Hugo is constantly evolving and new features are added with every
-release, so reading each version&amp;rsquo;s changelog is always exciting.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;the-bad&#34;&gt;The bad&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The documentation, well, not all of it, but the lack of a proper
-overview. The documentation is really good at explaining the different
-individual parts that comprise Hugo, it even has a
-&lt;a href=&#34;https://gohugo.io/overview/quickstart/&#34;&gt;Quickstart Guide&lt;/a&gt;.
-This guide however, is more of a basic tour than a guide. There isn&amp;rsquo;t really
-a place in the documentation that presents explains the different concepts
-Hugo introduces and how they fit together when building a site. This means
-that while documentation is good, there isn&amp;rsquo;t really a place
-to start. In my case I had to go look for sites that used Hugo, looked at the
-source and figured out how how their creators built them.
-If there is one place where I think there&amp;rsquo;s room for improvement is
-providing a place where newcomers can see the different parts of
-Hugo and how they for together. It&amp;rsquo;s also worth mentioning that
-the &lt;a href=&#34;https://discuss.gohugo.io/&#34;&gt;forums&lt;/a&gt; are an amazing place to ask
-questions when the answers cannot be found in the documentation.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;In my own experience Hugo was an amazing tool. Building my blog was very easy
-and quick, even considering I built the design myself from scratch. It&amp;rsquo;s very
-flexible and allowed me to do everything I wanted. Being able to write posts in
-Markdown was also a requirement that Hugo fulfilled. This combined with the
-fact that I can just host everything with Github pages without any extra work
-meant that using Hugo was more than worth the (little to no) trouble it gave
-me.&lt;/p&gt;
-
-&lt;p&gt;If I had to give advice to new Hugo users it would be to go trough the
-Quickstart Guide to get an idea of what Hugo is like, then find a blog they
-like and see how it was made. I personally found
-&lt;a href=&#34;https://github.com/spf13/spf13.com&#34;&gt;spf13.com&lt;/a&gt; to be incredibly useful.&lt;/p&gt;
-
-&lt;p&gt;If you want to see how this was built you can check out the source in the &lt;code&gt;src&lt;/code&gt;
-branch &lt;a href=&#34;https://github.com/maurodec/maurodec.github.io&#34;&gt;here&lt;/a&gt;, or by clicking
-the &amp;ldquo;Source&amp;rdquo; link in the navigation bar.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -211,241 +78,7 @@ communicating with background threads via the use of the &lt;code&gt;Message&lt;
 them, but also how they relate to the &lt;code&gt;Looper&lt;/code&gt; and the &lt;code&gt;MessageQueue&lt;/code&gt;
 classes.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;the-main-loop&#34;&gt;The Main Loop&lt;/h2&gt;
-
-&lt;p&gt;As you probably already know by now, your application has a main loop that
-runs infinitely (or at least until you tell it to quit). This main loop waits
-for events - or messages - to arrive and handles them accordingly. These events
-can  range from user generate events (such a button being tapped), to drawing
-events or changes in the lifecycle of your current Activity. This isn&amp;rsquo;t any
-different from how desktop applications have always worked, however, taking a
-look at how it was  implemented in Android can be rather interesting and can
-also give you an insight on how things are working under the hood.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look at all the parts involved one by one first, then we can put it all
-together in a more complete example. I will be also linking to the relevant
-parts of the Android source for each of the different components.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-message-class&#34;&gt;The Message class&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://developer.android.com/reference/android/os/Message.html&#34;&gt;&lt;code&gt;Message&lt;/code&gt;&lt;/a&gt;
-instances are objects that can be used to pass data around between Threads (and
-even between processes).
-Messages are rather simple (you can check out the implementation
-&lt;a href=&#34;https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/Message.java&#34;&gt;here&lt;/a&gt;),
-and can hold any data you may need when talking to other threads or processes.
-There isn&amp;rsquo;t much more to say about Messages other than we will be seeing them
-in action later.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-messagequeue-class&#34;&gt;The MessageQueue class&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://developer.android.com/reference/android/os/MessageQueue.html&#34;&gt;&lt;code&gt;MessageQueue&lt;/code&gt;&lt;/a&gt;
-class is the basic building block of all this. MessaqueQueue instances
-basically hold a list of all events or messages that need to be taken care of.
-You can look at the implementation of the MessageQueue
-&lt;a href=&#34;https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/MessageQueue.java&#34;&gt;here&lt;/a&gt;.
-As you probably guessed, what handles the events we mentioned before in your
-Main Thread is a MessageQueue instance. However, the component that does a lot
-of the heavy lifting isn&amp;rsquo;t the MessageQueue, it&amp;rsquo;s actually the Looper.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-looper-class&#34;&gt;The Looper class&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://developer.android.com/reference/android/os/Looper.html&#34;&gt;&lt;code&gt;Looper&lt;/code&gt;&lt;/a&gt;
-class really is the heart of all this. First and foremost, Looper instances
-are the ones that actually hold and create a MessageQueue and iterate over
-the pending messages, blocking if none are available. In the case of our
-Main Thread, it is a looper that blocks it until an event occurs (for example
-the user tapping a button in the UI) and finally delivers that event to whoever
-should handle it (more about that later). This can be seen in action in the
-&lt;a href=&#34;https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/Looper.java#L123&#34;&gt;implementation of the &lt;code&gt;loop()&lt;/code&gt; method&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;One key thing to notice here is how Looper instances relate to Threads.
-If you look closely at the implementation of the Looper class, you can see
-that it does not have any public constructors. In order to obtain an instance,
-the
-&lt;a href=&#34;https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/Looper.java#L83&#34;&gt;static method &lt;code&gt;prepare()&lt;/code&gt;&lt;/a&gt;
-must be called.
-Loopers are associated with one Thread only, the Thread in which they
-were prepared. Threads can also have only one Looper.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-handler-class&#34;&gt;The Handler class&lt;/h2&gt;
-
-&lt;p&gt;After all this buildup we finally get to the
-&lt;a href=&#34;https://developer.android.com/reference/android/os/Handler.html&#34;&gt;&lt;code&gt;Handler&lt;/code&gt;&lt;/a&gt;
-class.
-Handlers are what actually handle the Messages that end up in a MessageQueue.
-&amp;ldquo;Handle&amp;rdquo; in this case does not mean just process an incoming message, it
-is also means adding and removing messages from a MessageQueue as we can
-interact with a MessageQueue via Handlers.
-Handlers are always associated with one Looper instance as well, and therefore
-with one Thread and one MessageQueue. However, unlike Loopers, many Handlers
-can exist for one Thread.
-When a message is delivered to a Handler, its &lt;code&gt;onMessage()&lt;/code&gt; method is called on
-that Handler&amp;rsquo;s Thread, this means that posting a Message to a Handler can be
-used as a means of communicating between Threads. This is very powerful
-when we consider that Runnables can also be posted to a Handler, not just
-Message instances.&lt;/p&gt;
-
-&lt;p&gt;One important thing to also remember is that we will be asking Handlers for
-Message instances, not creating them directly and that these instances are
-reused.&lt;/p&gt;
-
-&lt;p&gt;In short: if we want a Thread to function as an event loop and be able to
-receive Messages from other Threads, we must:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Call the &lt;code&gt;Looper.prepare()&lt;/code&gt; method. This will create a Looper instance for
-that Thread as well as a MessageQueue.&lt;/li&gt;
-&lt;li&gt;Create a Handler (or several). This Handler will automatically be associated
-with the Looper of the Thread that created it.&lt;/li&gt;
-&lt;li&gt;Call the &lt;code&gt;Looper.loop()&lt;/code&gt; method so that the MessageQueue for that Thread
-starts running.&lt;/li&gt;
-&lt;li&gt;From another Thread call the &lt;code&gt;obtain()&lt;/code&gt; method of the Handler we want to
-send messages to.&lt;/li&gt;
-&lt;li&gt;Add our data and call &lt;code&gt;sendMessage(Message)&lt;/code&gt; on the Handler so that the
-Message gets posted to the MessageQueue of that Handler&amp;rsquo;s Thread.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;putting-it-all-together&#34;&gt;Putting it all together&lt;/h2&gt;
-
-&lt;p&gt;In order to fully understand how all these pieces relate, lets look at a simple
-example. We will be creating a simple activity with two views, a switch and a
-regular view which we will change the background coloR of periodically.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/handlers/preview.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Out Application&amp;#39;s Activity&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;In order to do this, we will have two Threads. One the one hand, our Main
-Thread will handle updating the UI as well as UI events (such as the switch
-being turned on or off). On the other hand, we will have a background Thread.
-This Thread will create a random color periodically, and will tell the Main
-Thread, via a &lt;code&gt;Message&lt;/code&gt;, to update the UI. Our background Thread will live as
-long as out Activity is showing so we will handle creating and destroying it in
-the &lt;code&gt;onResume&lt;/code&gt; and &lt;code&gt;onPause&lt;/code&gt; methods of our activity respectively&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/6c4d0ae50d179f3e8b5971da3c5587bd.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Remember that switch we added to our activity? Well, it wasn&amp;rsquo;t just for
-decoration. With that switch we will be telling our background Thread that we
-want it to create (or to stop creating) random colors for us. How will we do
-this you ask? Passing &lt;code&gt;Message&lt;/code&gt;s back and forth is the answer. This means that
-when we flip the switch on it will send a &lt;code&gt;Message&lt;/code&gt; to the background Thread
-telling it to start generating colors. The background Thread will then create a
-new color and will send it to the Main Thread to have it update the UI and will
-keep doing so every second. When we flip the switch off, we will send another
-&lt;code&gt;Message&lt;/code&gt; to the background Thread telling it to stop creating random colors.&lt;/p&gt;
-
-&lt;p&gt;This means we will need two &lt;code&gt;Handler&lt;/code&gt;s, one for the Main Thread and one for the
-background Thread. Let&amp;rsquo;s take a look at how we will handle messages in the Main
-Thread first:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/51d8d94f614f23f48749acccdcb273c0.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;The code is rather straightforward, however, there are two things we should
-look at here. The first is that we create and assign our &lt;code&gt;Handler&lt;/code&gt; at the same
-time. The Android Framework will create our Activity on the Main Thread which
-means this newly created Handler will handle messages for the Main Thread.
-Also note that the Main Thread of an application already works as an event
-loop, meaning a Looper has already been created for that Thread and is ready to
-have Handlers &amp;ldquo;attach&amp;rdquo; to it. The second thing we should take a look at here is
-how the color we created is passed. Data can be added to a
-&lt;a href=&#34;https://developer.android.com/reference/android/os/Message.html&#34;&gt;&lt;code&gt;Message&lt;/code&gt;&lt;/a&gt; in
-two different ways. The first is using the &lt;code&gt;arg1&lt;/code&gt;, &lt;code&gt;arg2&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; attributes.
-Using these attributes is an inexpensive way of passing data around and should
-be used whenever possible, as there is little overhead. In this case we want to
-pass a simple integer, so &lt;code&gt;arg1&lt;/code&gt; will do just fine. If we want to pass an
-Object, then we have to use the &lt;code&gt;obj&lt;/code&gt; attribute. This, however, has one
-important restriction.&lt;/p&gt;
-
-&lt;p&gt;From the &lt;a href=&#34;https://developer.android.com/reference/android/os/Message.html#obj&#34;&gt;documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;An arbitrary object to send to the recipient. When using Messenger to send
-  the message across processes this can only be non-null if it contains a
-  Parcelable of a framework class (not one implemented by the application).
-  For other data transfer use &lt;code&gt;setData(Bundle)&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This means that in some cases the second way of passing data, the &lt;code&gt;setData&lt;/code&gt;
-method should be used. Using &lt;code&gt;setData&lt;/code&gt; also means doing more work, so it should
-be avoided whenever possible as to avoid unnecessary overhead.&lt;/p&gt;
-
-&lt;p&gt;We can now take a look at how the handler for the background Thread should be
-created:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/670cfc8762d8c79c8a6637976d35672c.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;As with the Handler in the Main Thread, there are a few things to note here.
-For starters, we do not define the Handler the same way we did in the Main
-Thread. If we did, the Handler would be attached to the Main Thread, as the
-assignment would happen on there. That means we have to create our Handler in
-the &lt;code&gt;run&lt;/code&gt; method, as that is what is actually run in parallel, but not before
-we prepared a Looper for that Thread (if we did we would get an exception).
-Other noteworthy things are what happens when the background Thread gets a
-message telling it to stop (it simply removed all pending messages from the
-queue) and how the background Thread keeps generating colors at a random
-interval (it just enqueues a message to be processed at a set time).&lt;/p&gt;
-
-&lt;p&gt;The rest of the code of the Activity should be fairly easy to follow.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-end-result&#34;&gt;The end result&lt;/h2&gt;
-
-&lt;p&gt;The complete code (with comments!) for the activity can be found
-&lt;a href=&#34;https://github.com/maurodec/AndroidHandlerExample/blob/master/app/src/main/java/com/maurodec/handlerexample/MainActivity.java&#34;&gt;here&lt;/a&gt;.
-If you want you can also just clone the whole repository
-&lt;a href=&#34;https://github.com/maurodec/AndroidHandlerExample&#34;&gt;here&lt;/a&gt; and try it out
-yourself in your phone or an emulator.&lt;/p&gt;
-
-&lt;p&gt;If you find any issues with the code or can think of ways to improve it, please
-feel free to submit a Pull Request.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/handlers/result.gif&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Our end result&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;h2 id=&#34;handlerthread&#34;&gt;HandlerThread&lt;/h2&gt;
-
-&lt;p&gt;The previous example was rather simple and easy to follow, however, the
-Android Framework provides us with a nifty class we can take advantage of
-in order to do less work.&lt;/p&gt;
-
-&lt;p&gt;When creating a new Thread by hand, we can inherit from
-&lt;a href=&#34;https://developer.android.com/reference/android/os/HandlerThread.html&#34;&gt;HandlerThread&lt;/a&gt;
-which makes things even easier. HandlerThread can be used for starting a new
-Thread to which we can easily attach handlers to. This would have actually been
-perfect for the example we just saw, instead of subclassing Thread, preparing
-the Looper etc,  we could have just created an instance of this class.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Although message passing in an event loop can feel at times a bit barebones
-and crude, it is actually really powerful tool for communicating between
-threads and components. Understanding how this works also gives us a lot of
-insight into the inner workings of the Android Framework, thus helping us
-create better, more reliable and easier to maintain applications.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -463,124 +96,7 @@ Material Design ripple effect and create a UIView category with it.&lt;/p&gt;
 &lt;p&gt;This blog post shows an implementation of this animation that can be applied to
 any UIView.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;de-constructing-the-ripple-effect&#34;&gt;De-constructing the ripple effect&lt;/h2&gt;
-
-&lt;p&gt;Before implementing anything we have to know exactly what it is we have to
-build. So first things first, let&amp;rsquo;s look at the ripple effect in slow motion.
-For this, I set the animation scale for all animations on my phone to 20x and
-recorded what happened when the flashlight tile is tapped in the quick settings
-menu.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/simpleripple/flashlight.gif&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The Ripple Effect in action&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;The effect seems to be rather simple, a semi transparent circle starts
-expanding where the tile was touched, only to start fading out before it
-reaches its maximum size. If we take a closer look we can also see that the
-expansion doesn&amp;rsquo;t seem to be uniform, it seems to expand rather quickly at
-first and then slows down towards the end.&lt;/p&gt;
-
-&lt;h2 id=&#34;constructing-the-ripple-effect&#34;&gt;Constructing the ripple effect&lt;/h2&gt;
-
-&lt;p&gt;Before we start writing any code we have to decide how we are going to be
-implementing this. Is it going to be a subclass of a particular UIView? Is it
-going to be a new type of UIView that we can add as a child? I opted for none
-of these, instead I decided extending UIView with a category would be a
-simple but effective idea. By creating a new category we can add this effect to
-any UIView seamlessly and without any trouble.&lt;/p&gt;
-
-&lt;p&gt;Now that we know where this is going to be coded we need to figure out an API
-for this animation. For now this implementation will be uncomplicated.
-For the animation there are a few things we need to define.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A position to serve as our starting point for our animation.&lt;/li&gt;
-&lt;li&gt;The color we want our ripple to have.&lt;/li&gt;
-&lt;li&gt;How big we want our ripple to be.&lt;/li&gt;
-&lt;li&gt;How fast we want it to expand, or rather, how long we want our animation to
-last.&lt;/li&gt;
-&lt;li&gt;When the ripple should start fading.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At the end of this post you can find a link to a repository holding all this
-code, but lets see how to build this first.&lt;/p&gt;
-
-&lt;p&gt;Our &lt;code&gt;UIView&lt;/code&gt; Category will look like this:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Our animation will be taking place in a new &lt;code&gt;CAShapeLayer&lt;/code&gt;. This new layer will
-sit behind all other layers so that it doesn&amp;rsquo;t cover any of the content of the
-&lt;code&gt;UIView&lt;/code&gt;. We will then add a &lt;code&gt;CABasicAnimation&lt;/code&gt; that will transform a path.
-This path will be the actual ripple, it will go from a tiny circle to the size
-we specified as one of our parameters.&lt;/p&gt;
-
-&lt;p&gt;This is a simplified version of how to do it:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/0b4c1989cab07dddb071046f91896121.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;We will do the same for the fade out effect in a similar manner:&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/1de86b46518ace12e343a028adee9999.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;Finally, once we are done with our animations we can remove our ripple
-animation from our &lt;code&gt;UIView&lt;/code&gt;. There is a small catch though. Normally we would
-use a &lt;code&gt;CAAnimationDelegate&lt;/code&gt; and implement the appropriate callback, however we
-would have to either store a reference to our newly added layer or we would
-have to iterate through the sublayers and find the corresponding layer.
-This would also mean we cannot (at least not easily) have more than one ripple
-animation going at the same time. Thus we are going to go for a very simple
-solution, we will enqueue a block of code to execute when the animations are
-done and get rid of the ripple layer in that block.&lt;/p&gt;
-
-&lt;script src=&#34;//gist.github.com/maurodec/339ad058447bf491185e9c90ab5e36c3.js&#34;&gt;&lt;/script&gt;
-
-&lt;h2 id=&#34;the-end-result&#34;&gt;The end result&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/maurodec/SimpleRipple&#34;&gt;In this repository&lt;/a&gt; you can find the
-&lt;a href=&#34;https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m&#34;&gt;full implementation&lt;/a&gt;
-full with comments and an example application. The example consists of
-two sliders that will control the ripple&amp;rsquo;s duration and radius and a button to
-test it out. If you look closer (and not that closer, really) you can also see
-that the two sliders will also show a ripple when they are touched.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://maurodec.com/static/img/simpleripple/ripple.gif&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The Example App&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;If you find any bugs or can think of improvements please feel free to submit
-a pull request.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Replicating what Google did with Material Design on iOS was pretty
-straightforward. All it took was creating two &lt;code&gt;CABasicAnimation&lt;/code&gt; and adding
-them to a new sublayer in the desired &lt;code&gt;UIView&lt;/code&gt;. Categories in Objective-C
-(or Extensions in Swift) also help make the core more generic and easier to
-use.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -596,14 +112,7 @@ now, so I figured I might as well start my own blog. My intention is to update
 this as often as I can with posts about topics such as Software Engineering,
 Programming or other interests of mine like Video Games.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I built this using the wonderful &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; site generator
-which made everything surprisingly easy. I also handcrafted the blog theme from
-scratch, thus, it is bound to change as time goes on and I realize things don&amp;rsquo;t
-look as good as I had hoped or when they simply grow stale.&lt;/p&gt;
-
-&lt;p&gt;Enjoy your stay! 🖖🏼&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
