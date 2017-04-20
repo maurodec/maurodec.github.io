@@ -127,6 +127,13 @@ figcaption h4 {
     border-bottom-color: #DCDCDC;
 }
 
+.navbar a {
+    display: inline-block;
+
+    width: 90px;
+    text-align: center;
+}
+
 .pull-left {
     float: left;
 }
