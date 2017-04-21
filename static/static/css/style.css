@@ -255,10 +255,6 @@ figcaption h4 {
     font-weight: 300;
 }
 
-#post-summary {
-    margin-bottom: 45px;
-}
-
 #post-summary .summary-title {
     color: #0098CC;
     margin-bottom: 5px;
@@ -274,8 +270,9 @@ figcaption h4 {
     text-align: right;
 }
 
-#post-summary hr {
+.post-separator {
     margin-top: 25px;
+    margin-bottom: 45px;
     width: 90%;
 
     border: 0; 

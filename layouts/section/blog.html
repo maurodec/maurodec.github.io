@@ -1,7 +1,11 @@
 {{ define "main" }}
     <h1 class="post-title">Blog</h1>
-    
-    {{ range .Data.Pages }}
+
+    {{ range $index, $e := .Data.Pages }}
+        {{ if $index }}
+            <hr class="post-separator">
+        {{ end }}
+
         {{ .Render "li"}}
     {{ end }}
 {{ end }}
