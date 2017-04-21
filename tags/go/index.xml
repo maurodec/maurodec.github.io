@@ -6,7 +6,7 @@
     <description>Recent content in Go on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Apr 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sat, 08 Apr 2017 00:00:00 -0300</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Cross compiling Go applications</title>
       <link>http://maurodec.com/blog/cross-compile-go/</link>
-      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 -0300</pubDate>
       
       <guid>http://maurodec.com/blog/cross-compile-go/</guid>
       <description>&lt;p&gt;I often write blog posts on different computers. Sometimes I write on my

@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://maurodec.com/blog/amet/</loc>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://maurodec.com/blog/cross-compile-go/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-08T00:00:00-03:00</lastmod>
   </url>
   
   <url>
@@ -37,6 +42,12 @@
   </url>
   
   <url>
+    <loc>http://maurodec.com/tags/amet/</loc>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://maurodec.com/tags/android/</loc>
     <lastmod>2017-03-04T00:00:00-03:00</lastmod>
     <priority>0</priority>
@@ -44,13 +55,13 @@
   
   <url>
     <loc>http://maurodec.com/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://maurodec.com/blog/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -61,7 +72,7 @@
   
   <url>
     <loc>http://maurodec.com/tags/go/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-08T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -85,7 +96,7 @@
   
   <url>
     <loc>http://maurodec.com/tags/meta/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-08T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -97,13 +108,13 @@
   
   <url>
     <loc>http://maurodec.com/tags/python/</loc>
-    <lastmod>2017-04-07T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://maurodec.com/tags/</loc>
-    <lastmod>2017-03-04T00:00:00-03:00</lastmod>
+    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
     <priority>0</priority>
   </url>
   

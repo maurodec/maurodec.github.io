@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Mar 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Thu, 20 Apr 2017 00:00:00 -0300</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Amet</title>
+      <link>http://maurodec.com/tags/amet/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/tags/amet/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Android</title>
@@ -23,7 +32,7 @@
     <item>
       <title>Go</title>
       <link>http://maurodec.com/tags/go/</link>
-      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 -0300</pubDate>
       
       <guid>http://maurodec.com/tags/go/</guid>
       <description></description>
@@ -59,7 +68,7 @@
     <item>
       <title>Meta</title>
       <link>http://maurodec.com/tags/meta/</link>
-      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 -0300</pubDate>
       
       <guid>http://maurodec.com/tags/meta/</guid>
       <description></description>
@@ -77,7 +86,7 @@
     <item>
       <title>Python</title>
       <link>http://maurodec.com/tags/python/</link>
-      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 -0300</pubDate>
       
       <guid>http://maurodec.com/tags/python/</guid>
       <description></description>

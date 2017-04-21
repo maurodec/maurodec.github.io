@@ -6,15 +6,29 @@
     <description>Recent content on Blog - Mauro de Carvalho</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Apr 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Thu, 20 Apr 2017 00:00:00 -0300</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Amet - Flattening a Python dictionary as environment variables</title>
+      <link>http://maurodec.com/blog/amet/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/amet/</guid>
+      <description>&lt;p&gt;I recently had to build an ETL job in Python that was initially going to be
+deployed on AWS. Little did I know that a last minute change from AWS to
+Heroku would cause me to change how the job&amp;rsquo;s configuration was going to be
+read significantly.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Cross compiling Go applications</title>
       <link>http://maurodec.com/blog/cross-compile-go/</link>
-      <pubDate>Fri, 07 Apr 2017 00:00:00 -0300</pubDate>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 -0300</pubDate>
       
       <guid>http://maurodec.com/blog/cross-compile-go/</guid>
       <description>&lt;p&gt;I often write blog posts on different computers. Sometimes I write on my
