@@ -2,7 +2,7 @@
 draft = false
 date = "2017-03-12T00:00:00-03:00"
 title = "Creating this Blog with Hugo"
-tags = ["Meta", "Hugo"]
+tags = ["meta", "Hugo"]
 slug = "using-hugo"
 +++
 
