@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog - Mauro de Carvalho</title>
+    <title>Blog - maurodec.com</title>
     <link>http://maurodec.com/</link>
-    <description>Recent content on Blog - Mauro de Carvalho</description>
+    <description>Recent content on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Apr 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Tue, 05 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Code smell and a lesson learned</title>
+      <link>http://maurodec.com/blog/side-effects/</link>
+      <pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/side-effects/</guid>
+      <description>&lt;p&gt;In an ideal world there&amp;rsquo;s always time and resources available to refactor code
+and to make sure it is as clean as possible. Even though it is well known that
+refactoring code helps with maintainability and thus reduces development costs
+in the long run, for various reasons refactoring does not always happen, or at
+least not until things start to fall apart.&lt;/p&gt;
+
+&lt;p&gt;In this post I will tell a little horror story that happened to me recently and
+that could have been avoided if we had stopped to refactor the code we were
+working on&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Amet - Flattening a Python dictionary as environment variables</title>

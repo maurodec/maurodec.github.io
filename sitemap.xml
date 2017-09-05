@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://maurodec.com/blog/side-effects/</loc>
+    <lastmod>2017-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://maurodec.com/blog/amet/</loc>
     <lastmod>2017-04-20T00:00:00-03:00</lastmod>
   </url>
@@ -55,18 +60,24 @@
   
   <url>
     <loc>http://maurodec.com/</loc>
-    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
+    <lastmod>2017-09-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://maurodec.com/blog/</loc>
-    <lastmod>2017-04-20T00:00:00-03:00</lastmod>
+    <lastmod>2017-09-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://maurodec.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://maurodec.com/tags/engineering/</loc>
+    <lastmod>2017-09-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -30,7 +30,7 @@
 
     <title>
       
-        Blog - Mauro de Carvalho
+        Blog - maurodec.com
       
     </title>
   </head>
@@ -58,34 +58,37 @@
 
     <div id="post-summary">
         
-            <h1 class="summary-title"><a href="/blog/amet/">Amet - Flattening a Python dictionary as environment variables</a></h1>
+            <h1 class="summary-title"><a href="/blog/side-effects/">Code smell and a lesson learned</a></h1>
 
             <div id="post-metadata">
     <span class="date-container extra-info">
-        April 20 - 2017
+        September  5 - 2017
     </span>
 
     <div class="tag-container">
         
-            <span class="tag">Python</span>
-        
-            <span class="tag">Amet</span>
+            <span class="tag">Engineering</span>
         
     </div>
 </div>
 
             <div id="post-content">
-                <p>I recently had to build an ETL job in Python that was initially going to be
-deployed on AWS. Little did I know that a last minute change from AWS to
-Heroku would cause me to change how the job&rsquo;s configuration was going to be
-read significantly.</p>
+                <p>In an ideal world there&rsquo;s always time and resources available to refactor code
+and to make sure it is as clean as possible. Even though it is well known that
+refactoring code helps with maintainability and thus reduces development costs
+in the long run, for various reasons refactoring does not always happen, or at
+least not until things start to fall apart.</p>
+
+<p>In this post I will tell a little horror story that happened to me recently and
+that could have been avoided if we had stopped to refactor the code we were
+working on&hellip;</p>
 
 <p></p>
             </div>
 
             
                 <div id="read-more">
-                    <a href="/blog/amet/">Read More...</a>
+                    <a href="/blog/side-effects/">Read More...</a>
                 </div>
             
         
@@ -95,6 +98,10 @@ read significantly.</p>
         <h1 class="summary-title"><a href="/blog">Previous posts</a></h1>
 
         <div class="mini-summary-container">
+            
+                <div class="mini-summary">
+                    <a href="http://maurodec.com/blog/amet/">Amet - Flattening a Python dictionary as environment variables<span class="extra-info">April 20 - 2017</span></a>
+                </div>
             
                 <div class="mini-summary">
                     <a href="http://maurodec.com/blog/cross-compile-go/">Cross compiling Go applications<span class="extra-info">April  8 - 2017</span></a>
@@ -112,10 +119,6 @@ read significantly.</p>
                     <a href="http://maurodec.com/blog/android-handlers/">Android Handlers, Loopers, Message Queues and communication between Threads<span class="extra-info">March  4 - 2017</span></a>
                 </div>
             
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/simple-ripple-effect-for-ios-views/">A simple Material Design ripple effect for any iOS view<span class="extra-info">February 13 - 2017</span></a>
-                </div>
-            
         </div>
         <div id="read-more">
             <a href="/blog">See all posts</a>
@@ -126,12 +129,11 @@ read significantly.</p>
     </div>
 
     <footer>
-      <hr>
-<div id=footer-content>
-    <div class="pull-right align-right">
+      <div id=footer-content>
+    <div class="pull-left align-right">
         <p>&copy; Mauro de Carvalho - 2017</p>
     </div>
-    <div class="pull-left">
+    <div class="pull-right align-right">
         <a href="https://github.com/maurodec">Github</a>
         <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a>
         <p>mauro@maurodec.com</p>
