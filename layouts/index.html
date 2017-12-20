@@ -2,8 +2,9 @@
 
     <h1 class="post-title">Latest Blog Post...</h1>
 
+    {{ $section := $.Site.GetPage "section" "blog" }}
     <div id="post-summary">
-        {{ range first 1 .Site.Sections.blog.Pages }}
+        {{ range first 1 $section.Pages }}
             <h1 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
 
             {{ partial "postmetadata.html" . }}
@@ -24,7 +25,7 @@
         <h1 class="summary-title"><a href="/blog">Previous posts</a></h1>
 
         <div class="mini-summary-container">
-            {{ range after 1 (first 6 .Site.Sections.blog.Pages) }}
+            {{ range after 1 (first 6 $section.Pages) }}
                 <div class="mini-summary">
                     <a href="{{ .Permalink }}">{{ .Title}}<span class="extra-info">{{ .Date.Format "January _2 - 2006" }}</span></a>
                 </div>
