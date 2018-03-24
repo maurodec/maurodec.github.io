@@ -6,10 +6,25 @@
     <description>Recent content in Engineering on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/tags/engineering/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Text editors: which is the best?</title>
+      <link>http://maurodec.com/blog/best-text-editors/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/best-text-editors/</guid>
+      <description>&lt;p&gt;Text editors are probably the most basic tool of every software developer,
+without them we would not be able to do our jobs. It makes sense then to try
+and find out what the best text editor is, doesn&amp;rsquo;t it? Is it Vim? Is it Emacs?
+Is it another? It&amp;rsquo;s important to first look at what we want in a text editor
+before we are able to answer this.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Code smell and a lesson learned</title>
