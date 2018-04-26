@@ -101,8 +101,9 @@ header a:hover {
     font-weight: bold;
 }
 
-figure {
+figure img {
     text-align: center;
+    max-width: 100%;
 }
 
 figcaption h4 {
