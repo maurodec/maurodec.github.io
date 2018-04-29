@@ -101,8 +101,9 @@ header a:hover {
     font-weight: bold;
 }
 
-figure {
+figure img {
     text-align: center;
+    max-width: 100%;
 }
 
 figcaption h4 {
@@ -116,6 +117,7 @@ figcaption h4 {
 .highlight {
     height: 3px;
     background-color: #0098CC;
+    background-image: linear-gradient(135deg, #0098CC -20%, #006c90 120%);
 }
 
 .navbar {
@@ -153,7 +155,7 @@ figcaption h4 {
 }
 
 #main {
-    margin: 0 auto; 
+    margin: 0 auto;
     max-width: 1000px;
 }
 
@@ -180,7 +182,7 @@ figcaption h4 {
 
 #post-metadata .date-container{
     display: inline-block;
-}  
+}
 
 #post-metadata .tag-container {
     display: inline-block;
@@ -201,6 +203,7 @@ figcaption h4 {
     font-size: 13px;
     font-weight: 300;
     background-color: #0098CC;
+    background-image: linear-gradient(135deg, #0098CC 35%, #006c90 120%);
 }
 
 #post-metadata #tag-icon {
@@ -275,12 +278,13 @@ figcaption h4 {
     margin-bottom: 45px;
     width: 90%;
 
-    border: 0; 
-    height: 1px; 
+    border: 0;
+    height: 1px;
+
     background-image: -webkit-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
     background-image:    -moz-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
     background-image:     -ms-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
-    background-image:      -o-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0); 
+    background-image:      -o-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
 }
 
 .mini-summary-container {
@@ -319,21 +323,11 @@ figcaption h4 {
 footer {
     position: relative;
 
-    height: 130px;
+    height: 115px;
     margin-top: 50px;
 
     background-color: #272727;
-}
-
-footer hr {
-    border: 0; 
-    height: 1px; 
-    width: 95%;
-
-    background-image: -webkit-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
-    background-image:    -moz-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
-    background-image:     -ms-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0);
-    background-image:      -o-linear-gradient(left, #F0F0F0, #DCDCDC, #F0F0F0); 
+    background-image: linear-gradient(135deg, #002b3a 35%, #10495d 120%);
 }
 
 footer p, footer a {

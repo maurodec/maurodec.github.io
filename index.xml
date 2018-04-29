@@ -6,10 +6,28 @@
     <description>Recent content on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python Classes, namedtuples and __slots__</title>
+      <link>http://maurodec.com/blog/classes-namedtuples-slots/</link>
+      <pubDate>Sun, 29 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/classes-namedtuples-slots/</guid>
+      <description>&lt;p&gt;Data types are needed in pretty much every program that needs to store and
+manipulate data. These types usually have little to no behavior and simply
+exist to keep track of information in a structured and orderly way. Recently,
+&lt;a href=&#34;https://www.python.org/dev/peps/pep-0557/&#34;&gt;PEP 557 (Data Classes)&lt;/a&gt; was
+accepted, however, it won&amp;rsquo;t appear until Python 3.7.&lt;/p&gt;
+
+&lt;p&gt;In this Blog Post we will explore what options currently exist in Python 2.7
+and 3.6 and how they differ from each other.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Text editors: which is the best?</title>

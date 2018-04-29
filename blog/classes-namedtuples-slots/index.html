@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92824817-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+
+    <title>
+      
+    Python Classes, namedtuples and __slots__ - maurodec.com
+
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <div class="pull-left">
+            <a href="/">Home</a>
+        </div>
+        <div class="pull-right">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/classes-namedtuples-slots/">Python Classes, namedtuples and __slots__</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        April 29 - 2018
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Python</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>Data types are needed in pretty much every program that needs to store and
+manipulate data. These types usually have little to no behavior and simply
+exist to keep track of information in a structured and orderly way. Recently,
+<a href="https://www.python.org/dev/peps/pep-0557/">PEP 557 (Data Classes)</a> was
+accepted, however, it won&rsquo;t appear until Python 3.7.</p>
+
+<p>In this Blog Post we will explore what options currently exist in Python 2.7
+and 3.6 and how they differ from each other.</p>
+
+<p></p>
+
+<h2 id="why-data-classes">Why Data Classes</h2>
+
+<p>Pretty much every program needs to keep track of information and structure it
+in some particular way so that it&rsquo;s manageable. If the information that needs
+holding is not much, a simple tuple or dictionary may suffice. These two types
+are very simple and they do the job, albeit in different ways. Although they
+technically work, solving problems with tuples and dictionaries is a nightmare
+once you realize you can&rsquo;t really customize instance creation/initialization
+or change the default behavior (easily at least). They may be good for simple
+cases, but it does not scale with complexity.</p>
+
+<p>This is where it makes sense to have classes as data containers. You can add
+as much data as you please, change initialization behavior, override dunder
+methods, etc. Creating new classes as data containers is a good solution then
+(some people argue that Data Classes are bad in the grand scheme of Object
+Orientation, but that&rsquo;s a discussion for another time), as they provide
+flexibility and maintainability without any apparent drawbacks.</p>
+
+<p>It is important to keep in mind that class instances will store any attributes
+inside a dictionary, <code>__dict__</code>. This means that instances will use a bit
+more memory than one would expect. There&rsquo;s detailed information about that in
+<a href="https://docs.python.org/3/reference/datamodel.html">The Python Documentation</a>.</p>
+
+<h2 id="introducing-namedtuples-and-slots">Introducing namedtuples and __slots__</h2>
+
+<p>Data Classes are fine for most cases, but Python also provides other mechanisms
+for holding data that slightly differ to plain classes.</p>
+
+<h3 id="namedtuples"><code>namedtuples</code></h3>
+
+<p>The <code>collections</code> module includes the <code>namedtuple</code> factory function.
+Calling <code>namedtuple</code> will simply return a new tuple subclass that allows
+accessing its fields by name instead of just by index, this makes <code>namedtuple</code>
+a step up from plain tuples. They are also memory efficient as they do do not
+have a <code>__dict__</code> field to hold arbitrary values. If all you need is an
+immutable data container without any behavior then <code>namedtuple</code> might be a
+better alternative to creating a new class.</p>
+
+<p><code>namedtuples</code> are immutable, which means that if the value of one of the fields
+needs to be changed (or if it is not known at creation time) then a new
+instance has to be created and all the fields copied. This also means that
+inheritance will have to be used if you want to add any behavior to your newly
+created types.</p>
+
+<p>You can see a couple of examples of <code>namedtuples</code> in action in the
+<a href="https://github.com/python/cpython/blob/master/Lib/urllib/parse.py"><code>urllib</code></a>
+module as well as in the
+<a href="https://github.com/python/cpython/blob/master/Lib/tokenize.py"><code>tokenize</code></a>
+module.</p>
+
+<h3 id="slots"><code>__slots__</code></h3>
+
+<p>Using <code>__slots__</code> is another option. if a <code>__slots__</code> list or tuple is defined,
+then a class will not have a <code>__dict__</code> to store arbitrary values, thus
+saving memory. Instead, only the attributes defined in <code>__slots__</code> can be set.</p>
+
+<p>Instances of these classes can have their attributes mutated normally and
+methods can be defined as they normally would. Classes with <code>__slots__</code> are
+halfway between using a <code>namedtuple</code> and a regular class.</p>
+
+<p>You can see an example of this in the
+<a href="https://github.com/python/cpython/blob/master/Lib/tarfile.py"><code>tarinfo</code> class</a>.</p>
+
+<h2 id="a-simple-benchmark">A simple benchmark</h2>
+
+<p>So far we have only mentioned <code>namedtuple</code> and <code>__slots__</code> are more memory
+efficient, but it&rsquo;s better to actually see it in action. we will create and run
+a simple script to measure memory usage, we will then plot and compare. While
+the measurements we will be taking are not 100% accurate, they should be good
+enough to take a look at how they all perform.</p>
+
+<p>If you want to run this script yourself you will have to install <code>psutil</code> as a
+dependency.</p>
+
+<script src="//gist.github.com/maurodec/963edefaec4500c02aecff1f0441a063.js"></script>
+
+<h3 id="what-should-we-expect-to-see">What should we expect to see?</h3>
+
+<p>The benchmark of course is not perfect as we depend on things like the garbage
+collector freeing memory correctly, however, what really matters for each case
+is how memory usage scales. Memory use will probably grow linearly, but what is
+really important is to take a look at the slope in each of the three cases. I
+expect the regular class to take a lot more memory than the other two which I
+expect will look pretty much the same.</p>
+
+<p>Without further ado&hellip; the results!</p>
+
+
+<figure>
+    
+        <img src="/static/img/slots/chart.png" />
+    
+    
+</figure>
+
+
+<p>In the graph we can see the Data Class in blue, namedtuple in yellow and
+<code>__slots__</code> in red. As expected the three show up as lines, with regular Data
+classes taking a lot more memory than instances that do not contain a
+<code>__dict__</code>. However, what is most surprising is that <code>namedtuple</code> instances
+take a bit more memory than instances with <code>__slots__</code>. If we look at the
+<a href="https://github.com/python/cpython/blob/master/Lib/collections/__init__.py">CPython source code</a>
+and see what is happening internally, we can probably guess it is because by
+default they implement some dunder methods that were not added in the example.
+This however is a guess and should probably be investigated in detail to figure
+out where the memory is going.</p>
+
+<h2 id="some-questions">Some questions&hellip;</h2>
+
+<p>Using <code>__slots__</code> seems pretty beneficial, however, there are some questions
+that have not been answered here:</p>
+
+<ul>
+<li>What happens if a <code>__dict__</code> attribute is added?</li>
+<li>What happens when subclassing classes with <code>__slots__</code>? What if there&rsquo;s
+multiple inheritance in the mix?</li>
+<li>How does this affect long term maintainability of code?</li>
+<li>Does this have any effect on meta classes?</li>
+</ul>
+
+<p>There is an excellent Stack Overflow post
+<a href="https://stackoverflow.com/questions/472000/usage-of-slots">here</a> that
+addresses about the use of <code>__slots__</code> and some of these possible caveats.</p>
+
+<h2 id="tl-dr">tl;dr</h2>
+
+<p>When needing Data Classes, if the number of objects that need to be created is
+large, memory usage can be reduces drastically and easily by using <code>namedtuples</code>
+or classes implementing <code>__slots__</code>.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+    <div class="pull-left align-right">
+        <p>&copy; Mauro de Carvalho - 2018</p>
+    </div>
+    <div class="pull-right align-right">
+        <a href="https://github.com/maurodec">Github</a>
+        <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a>
+        <p>mauro@maurodec.com</p>
+    </div>
+</div>
+
+    </footer>
+  </body>
+
+
+</html>
