@@ -6,10 +6,26 @@
     <description>Recent content on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Short Thoughts: Microsoft’s GitHub acquisition</title>
+      <link>http://maurodec.com/blog/microsoft-github-acquisition/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/microsoft-github-acquisition/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blog.github.com/2018-06-04-github-microsoft/&#34;&gt;It has recently been
+announced&lt;/a&gt; that Microsoft
+will be acquiring Github got USD 7.5b. The news was received by some with
+dismay as Microsoft has historically been seen as a threat to Open Source
+(Linux is a cancer, anyone?), while it was praised by others who consider
+Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Python Classes, namedtuples and __slots__</title>

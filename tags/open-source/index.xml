@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open Source on Blog - maurodec.com</title>
+    <link>http://maurodec.com/tags/open-source/</link>
+    <description>Recent content in Open Source on Blog - maurodec.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://maurodec.com/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Short Thoughts: Microsoft’s GitHub acquisition</title>
+      <link>http://maurodec.com/blog/microsoft-github-acquisition/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/microsoft-github-acquisition/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blog.github.com/2018-06-04-github-microsoft/&#34;&gt;It has recently been
+announced&lt;/a&gt; that Microsoft
+will be acquiring Github got USD 7.5b. The news was received by some with
+dismay as Microsoft has historically been seen as a threat to Open Source
+(Linux is a cancer, anyone?), while it was praised by others who consider
+Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Amet - Flattening a Python dictionary as environment variables</title>
+      <link>http://maurodec.com/blog/amet/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/amet/</guid>
+      <description>&lt;p&gt;I recently had to build an ETL job in Python that was initially going to be
+deployed on AWS. Little did I know that a last minute change from AWS to
+Heroku would cause me to change how the job&amp;rsquo;s configuration was going to be
+read significantly.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Android Handlers, Loopers, Message Queues and communication between Threads</title>
+      <link>http://maurodec.com/blog/android-handlers/</link>
+      <pubDate>Sat, 04 Mar 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/android-handlers/</guid>
+      <description>&lt;p&gt;In Android applications, as well as in applications with a GUI in general,
+doing work in the background is essential as we do not want the UI to be
+blocked by long running tasks that may cause it to appear to be frozen.
+The Android Framework provides a simple but interesting mechanism for
+communicating with background threads via the use of the &lt;code&gt;Message&lt;/code&gt; and
+&lt;code&gt;Handler&lt;/code&gt; classes. In this post I will attempt to explain not only how to use
+them, but also how they relate to the &lt;code&gt;Looper&lt;/code&gt; and the &lt;code&gt;MessageQueue&lt;/code&gt;
+classes.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A simple Material Design ripple effect for any iOS view</title>
+      <link>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</link>
+      <pubDate>Mon, 13 Feb 2017 00:00:00 -0300</pubDate>
+      
+      <guid>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</guid>
+      <description>&lt;p&gt;Some time ago I had to create a background color transition animation for an
+iOS app I was working on. This animation was pretty similar to the ripple
+effect Material Design buttons have. I thought it would be a fun idea to go
+back and revise what I had done, change the animation so that it looks like the
+Material Design ripple effect and create a UIView category with it.&lt;/p&gt;
+
+&lt;p&gt;This blog post shows an implementation of this animation that can be applied to
+any UIView.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
