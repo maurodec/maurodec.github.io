@@ -2,7 +2,7 @@
 draft = false
 date = "2017-03-04T00:00:00-03:00"
 title = "Android Handlers, Loopers, Message Queues and communication between Threads"
-tags = ["Android", "Java"]
+tags = ["Android", "Java", "Open Source"]
 slug = "android-handlers"
 +++
 
@@ -36,8 +36,8 @@ parts of the Android source for each of the different components.
 
 [`Message`](https://developer.android.com/reference/android/os/Message.html)
 instances are objects that can be used to pass data around between Threads (and
-even between processes). 
-Messages are rather simple (you can check out the implementation 
+even between processes).
+Messages are rather simple (you can check out the implementation
 [here](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/Message.java)),
 and can hold any data you may need when talking to other threads or processes.
 There isn't much more to say about Messages other than we will be seeing them
@@ -46,7 +46,7 @@ in action later.
 ## The MessageQueue class
 
 The [`MessageQueue`](https://developer.android.com/reference/android/os/MessageQueue.html)
-class is the basic building block of all this. MessaqueQueue instances 
+class is the basic building block of all this. MessaqueQueue instances
 basically hold a list of all events or messages that need to be taken care of.
 You can look at the implementation of the MessageQueue
 [here](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/MessageQueue.java).
@@ -68,7 +68,7 @@ should handle it (more about that later). This can be seen in action in the
 One key thing to notice here is how Looper instances relate to Threads.
 If you look closely at the implementation of the Looper class, you can see
 that it does not have any public constructors. In order to obtain an instance,
-the 
+the
 [static method `prepare()`](https://github.com/android/platform_frameworks_base/blob/master/core/java/android/os/Looper.java#L83)
 must be called.
 Loopers are associated with one Thread only, the Thread in which they
@@ -81,7 +81,7 @@ After all this buildup we finally get to the
 class.
 Handlers are what actually handle the Messages that end up in a MessageQueue.
 "Handle" in this case does not mean just process an incoming message, it
-is also means adding and removing messages from a MessageQueue as we can 
+is also means adding and removing messages from a MessageQueue as we can
 interact with a MessageQueue via Handlers.
 Handlers are always associated with one Looper instance as well, and therefore
 with one Thread and one MessageQueue. However, unlike Loopers, many Handlers
@@ -195,7 +195,7 @@ The rest of the code of the Activity should be fairly easy to follow.
 The complete code (with comments!) for the activity can be found
 [here](https://github.com/maurodec/AndroidHandlerExample/blob/master/app/src/main/java/com/maurodec/handlerexample/MainActivity.java).
 If you want you can also just clone the whole repository
-[here](https://github.com/maurodec/AndroidHandlerExample) and try it out 
+[here](https://github.com/maurodec/AndroidHandlerExample) and try it out
 yourself in your phone or an emulator.
 
 If you find any issues with the code or can think of ways to improve it, please

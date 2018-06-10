@@ -2,7 +2,7 @@
 draft = false
 date = "2017-04-20T00:00:00-03:00"
 title = "Amet - Flattening a Python dictionary as environment variables"
-tags = ["Python", "Amet"]
+tags = ["Python", "Amet", "Open Source"]
 slug = "amet"
 +++
 
@@ -77,7 +77,7 @@ A simplified pseudocode version of the function looks like:
 {{< gist maurodec efe473036f1fc55aa20c3651fdf5d4ef >}}
 
 After we have our dictionary of variable names as keys we can either
-`export` them or (in my case) 
+`export` them or (in my case)
 [call the Heroku API](https://devcenter.heroku.com/articles/config-vars)
 so they are set in my app's configuration.
 

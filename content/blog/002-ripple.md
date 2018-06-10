@@ -2,7 +2,7 @@
 draft = false
 date = "2017-02-13T00:00:00-03:00"
 title = "A simple Material Design ripple effect for any iOS view"
-tags = ["iOS", "ObjC"]
+tags = ["iOS", "ObjC", "Open Source"]
 slug = "simple-ripple-effect-for-ios-views"
 +++
 
@@ -19,7 +19,7 @@ any UIView.
 
 ## De-constructing the ripple effect
 
-Before implementing anything we have to know exactly what it is we have to 
+Before implementing anything we have to know exactly what it is we have to
 build. So first things first, let's look at the ripple effect in slow motion.
 For this, I set the animation scale for all animations on my phone to 20x and
 recorded what happened when the flashlight tile is tapped in the quick settings
@@ -89,7 +89,7 @@ done and get rid of the ripple layer in that block.
 ## The end result
 
 [In this repository](https://github.com/maurodec/SimpleRipple) you can find the
-[full implementation](https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m) 
+[full implementation](https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m)
 full with comments and an example application. The example consists of
 two sliders that will control the ripple's duration and radius and a button to
 test it out. If you look closer (and not that closer, really) you can also see
@@ -105,5 +105,5 @@ a pull request.
 Replicating what Google did with Material Design on iOS was pretty
 straightforward. All it took was creating two `CABasicAnimation` and adding
 them to a new sublayer in the desired `UIView`. Categories in Objective-C
-(or Extensions in Swift) also help make the core more generic and easier to 
+(or Extensions in Swift) also help make the core more generic and easier to
 use.
