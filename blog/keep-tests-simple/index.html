@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<meta name="generator" content="Hugo 0.42.1" />
     <meta charset="utf-8">
 
     <script>
@@ -30,8 +29,8 @@
 
     <title>
       
-        Blog - maurodec.com
-      
+    Short Thoughts: keep your tests simple - maurodec.com
+
     </title>
   </head>
 
@@ -54,14 +53,9 @@
       <div id="main">
         
 
-    <h1 class="post-title">Latest Blog Post...</h1>
+    <h1 class="post-title"><a href="http://maurodec.com/blog/keep-tests-simple/">Short Thoughts: keep your tests simple</a></h1>
 
-    
-    <div id="post-summary">
-        
-            <h1 class="summary-title"><a href="/blog/keep-tests-simple/">Short Thoughts: keep your tests simple</a></h1>
-
-            <div id="post-metadata">
+    <div id="post-metadata">
     <span class="date-container extra-info">
         August  8 - 2018
     </span>
@@ -75,8 +69,8 @@
     </div>
 </div>
 
-            <div id="post-content">
-                <p>Writing good tests, whether they are unit, acceptance, integration etc, is
+    <div id="post-content">
+        <p>Writing good tests, whether they are unit, acceptance, integration etc, is
 hard. Few tests will run quickly but probably won&rsquo;t cover much of the code,
 however, having high coverage doesn&rsquo;t mean your tests are good either.
 The way tests are written also depends on what the software and it&rsquo;s structure
@@ -84,45 +78,44 @@ is. Notwithstanding, there&rsquo;s one aspect that I believe always helps,
 simplicity.</p>
 
 <p></p>
-            </div>
 
-            
-                <div id="read-more">
-                    <a href="/blog/keep-tests-simple/">Read More...</a>
-                </div>
-            
-        
+<h2 id="software-is-complex">Software is complex</h2>
 
-        <hr class="post-separator">
+<p>Writing software is hard, and thus, bugs are an unavoidable and undesired side
+effect. While complexity should be avoided, some problems require solutions
+that are not simple, therefore, we can say some software is inherently complex.</p>
 
-        <h1 class="summary-title"><a href="/blog">Previous posts</a></h1>
+<p>By creating tests we attempt to ensure software behaves the way we want and
+that it continues to do so as it is modified. With different kinds of tests at
+different abstraction levels we attempt to unravel this complexity.</p>
 
-        <div class="mini-summary-container">
-            
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/microsoft-github-acquisition/">Short Thoughts: Microsoft’s GitHub acquisition<span class="extra-info">June 10 - 2018</span></a>
-                </div>
-            
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/classes-namedtuples-slots/">Python Classes, namedtuples and __slots__<span class="extra-info">April 29 - 2018</span></a>
-                </div>
-            
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/best-text-editors/">Text editors: which is the best?<span class="extra-info">March 24 - 2018</span></a>
-                </div>
-            
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/games-done-quick/">GDQ - Playing games for fun and charity<span class="extra-info">December 26 - 2017</span></a>
-                </div>
-            
-                <div class="mini-summary">
-                    <a href="http://maurodec.com/blog/side-effects/">Code smell and a lesson learned<span class="extra-info">September  5 - 2017</span></a>
-                </div>
-            
-        </div>
-        <div id="read-more">
-            <a href="/blog">See all posts</a>
-        </div>
+<h2 id="destroying-complexity-is-the-whole-point">Destroying complexity is the whole point</h2>
+
+<p>Tests should be kept as <strong>simple and explicit</strong> as possible. If tests contain
+bugs then that defeats the purpose of having them in the first place.When
+looking at a test it should be fairly obvious:</p>
+
+<ul>
+<li>What is being tested.</li>
+<li>What is expected (and what shouldn&rsquo;t happen).</li>
+<li>Where test data comes from.</li>
+<li>How they add value.</li>
+</ul>
+
+<p>There&rsquo;s probably a problem with your tests if:</p>
+
+<ul>
+<li>There&rsquo;s logic in them aside from the use of simple helper functions (such as,
+for example checking if two collections have the same elements).</li>
+<li>There are branching paths.</li>
+<li>They depend on each other due to side effects.</li>
+<li>It is hard to track where data is coming from or even what the test data is.</li>
+</ul>
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>Complexity causes bugs, <strong>keep your tests explicit and easy to follow</strong> so
+that you <strong>avoid the problem tests try to fix in the first place</strong>.</p>
     </div>
 
       </div>
