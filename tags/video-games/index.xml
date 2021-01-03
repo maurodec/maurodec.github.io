@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Video Games on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Video Games on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Dec 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/video-games/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 26 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/video-games/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GDQ - Playing games for fun and charity</title>
       <link>http://maurodec.com/blog/games-done-quick/</link>
@@ -20,14 +16,11 @@
       <description>&lt;p&gt;In a nutshell, speedrunning is trying to finish a game as fast as possible.
 There&amp;rsquo;s different set of rules for each game (called categories), but it always
 boils down to how fast a game can be finished.&lt;/p&gt;
-
 &lt;p&gt;Video games mean different things for different people. For some they are their
 day-to-day source of entertainment or it&amp;rsquo;s their competitive nature that speaks
 to them, while for others it may be childhood nostalgia. Whatever reason that
 may be, GDQ, the seven day speedrunning marathon raises incredible amounts of
-money for charity each year, and it only keeps on growing.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+money for charity each year, and it only keeps on growing.&lt;/p&gt;</description>
     </item>
     
   </channel>

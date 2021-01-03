@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Short Thoughts on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Short Thoughts on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/short-thoughts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 08 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/short-thoughts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Short Thoughts: keep your tests simple</title>
       <link>http://maurodec.com/blog/keep-tests-simple/</link>
@@ -22,9 +18,7 @@ hard. Few tests will run quickly but probably won&amp;rsquo;t cover much of the 
 however, having high coverage doesn&amp;rsquo;t mean your tests are good either.
 The way tests are written also depends on what the software and it&amp;rsquo;s structure
 is. Notwithstanding, there&amp;rsquo;s one aspect that I believe always helps,
-simplicity.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+simplicity.&lt;/p&gt;</description>
     </item>
     
   </channel>

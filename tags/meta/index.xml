@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meta on Blog - maurodec.com</title>
+    <title>meta on Blog - maurodec.com</title>
     <link>http://maurodec.com/tags/meta/</link>
-    <description>Recent content in Meta on Blog - maurodec.com</description>
+    <description>Recent content in meta on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Apr 2017 00:00:00 -0300</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 08 Apr 2017 00:00:00 -0300</lastBuildDate><atom:link href="http://maurodec.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cross compiling Go applications</title>
       <link>http://maurodec.com/blog/cross-compile-go/</link>
@@ -24,9 +20,7 @@ again. While writing my
 &lt;a href=&#34;http://maurodec.com/blog/learning-python/&#34;&gt;Why I learned Python blog post&lt;/a&gt; I asked some friends
 for feedback, however, I did not want to push an unfinished post to Github
 Pages, so I decided to serve my Hugo blog from my Raspberry Pi. I soon realized
-that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,13 +34,10 @@ For a long time dynamic websites were seen as the way to go, no matter
 for what kind of content. Lately a lot of people have gone back to
 basics and (thankfully) decided to build their sites as a collection
 of static pages.&lt;/p&gt;
-
 &lt;p&gt;When I started this blog I decided I did not want to go through the
 hassle of maintaining a complex site and decided to use Hugo, a static
 site generator. In this post I will talk about my experience building
-my blog using &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+my blog using &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,13 +47,10 @@ my blog using &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt
       
       <guid>http://maurodec.com/blog/hello-world/</guid>
       <description>&lt;p&gt;Hello and welcome to my personal blog!&lt;/p&gt;
-
 &lt;p&gt;I&amp;rsquo;ve been meaning to have a place to write and express my thoughts for a while
 now, so I figured I might as well start my own blog. My intention is to update
 this as often as I can with posts about topics such as Software Engineering,
-Programming or other interests of mine like Video Games.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Programming or other interests of mine like Video Games.&lt;/p&gt;</description>
     </item>
     
   </channel>

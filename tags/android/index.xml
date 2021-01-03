@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Android on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Mar 2017 00:00:00 -0300</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 04 Mar 2017 00:00:00 -0300</lastBuildDate><atom:link href="http://maurodec.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Android Handlers, Loopers, Message Queues and communication between Threads</title>
       <link>http://maurodec.com/blog/android-handlers/</link>
@@ -24,9 +20,7 @@ The Android Framework provides a simple but interesting mechanism for
 communicating with background threads via the use of the &lt;code&gt;Message&lt;/code&gt; and
 &lt;code&gt;Handler&lt;/code&gt; classes. In this post I will attempt to explain not only how to use
 them, but also how they relate to the &lt;code&gt;Looper&lt;/code&gt; and the &lt;code&gt;MessageQueue&lt;/code&gt;
-classes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+classes.&lt;/p&gt;</description>
     </item>
     
   </channel>

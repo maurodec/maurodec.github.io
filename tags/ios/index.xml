@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ios on Blog - maurodec.com</title>
+    <title>iOS on Blog - maurodec.com</title>
     <link>http://maurodec.com/tags/ios/</link>
-    <description>Recent content in Ios on Blog - maurodec.com</description>
+    <description>Recent content in iOS on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Feb 2017 00:00:00 -0300</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 13 Feb 2017 00:00:00 -0300</lastBuildDate><atom:link href="http://maurodec.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A simple Material Design ripple effect for any iOS view</title>
       <link>http://maurodec.com/blog/simple-ripple-effect-for-ios-views/</link>
@@ -22,11 +18,8 @@ iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
 back and revise what I had done, change the animation so that it looks like the
 Material Design ripple effect and create a UIView category with it.&lt;/p&gt;
-
 &lt;p&gt;This blog post shows an implementation of this animation that can be applied to
-any UIView.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+any UIView.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -3,17 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-92824817-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
 <link rel="manifest" href="/static/favicon/manifest.json">
@@ -21,11 +11,12 @@
 <link rel="shortcut icon" href="/static/favicon/favicon.ico">
 <meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
-
 
     <title>
       
@@ -39,16 +30,15 @@
       <header>
     <div class="highlight"></div>
     <div class="navbar">
-        <div class="pull-left">
-            <a href="/">Home</a>
-        </div>
-        <div class="pull-right">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
             <a href="/blog/">Blog</a>
             <a href="/about/">About me</a>
             <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
         </div>
     </div>
 </header>
+
 
       <div id="main">
         
@@ -77,53 +67,35 @@ iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
 back and revise what I had done, change the animation so that it looks like the
 Material Design ripple effect and create a UIView category with it.</p>
-
 <p>This blog post shows an implementation of this animation that can be applied to
 any UIView.</p>
-
-<p></p>
-
 <h2 id="de-constructing-the-ripple-effect">De-constructing the ripple effect</h2>
-
 <p>Before implementing anything we have to know exactly what it is we have to
 build. So first things first, let&rsquo;s look at the ripple effect in slow motion.
 For this, I set the animation scale for all animations on my phone to 20x and
 recorded what happened when the flashlight tile is tapped in the quick settings
 menu.</p>
-
-
 <figure>
-    
-        <img src="/static/img/simpleripple/flashlight.gif" />
-    
-    
-    <figcaption>
-        <h4>The Ripple Effect in action</h4>
-        
-    </figcaption>
-    
+    <img src="/static/img/simpleripple/flashlight.gif"/> <figcaption>
+            <h4>The Ripple Effect in action</h4>
+        </figcaption>
 </figure>
-
 
 <p>The effect seems to be rather simple, a semi transparent circle starts
 expanding where the tile was touched, only to start fading out before it
 reaches its maximum size. If we take a closer look we can also see that the
 expansion doesn&rsquo;t seem to be uniform, it seems to expand rather quickly at
 first and then slows down towards the end.</p>
-
 <h2 id="constructing-the-ripple-effect">Constructing the ripple effect</h2>
-
 <p>Before we start writing any code we have to decide how we are going to be
 implementing this. Is it going to be a subclass of a particular UIView? Is it
 going to be a new type of UIView that we can add as a child? I opted for none
 of these, instead I decided extending UIView with a category would be a
 simple but effective idea. By creating a new category we can add this effect to
 any UIView seamlessly and without any trouble.</p>
-
 <p>Now that we know where this is going to be coded we need to figure out an API
 for this animation. For now this implementation will be uncomplicated.
 For the animation there are a few things we need to define.</p>
-
 <ul>
 <li>A position to serve as our starting point for our animation.</li>
 <li>The color we want our ripple to have.</li>
@@ -132,27 +104,21 @@ For the animation there are a few things we need to define.</p>
 last.</li>
 <li>When the ripple should start fading.</li>
 </ul>
-
 <p>At the end of this post you can find a link to a repository holding all this
 code, but lets see how to build this first.</p>
-
 <p>Our <code>UIView</code> Category will look like this:</p>
-
-<script src="//gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js"></script>
+<script type="application/javascript" src="https://gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js"></script>
 
 <p>Our animation will be taking place in a new <code>CAShapeLayer</code>. This new layer will
 sit behind all other layers so that it doesn&rsquo;t cover any of the content of the
 <code>UIView</code>. We will then add a <code>CABasicAnimation</code> that will transform a path.
 This path will be the actual ripple, it will go from a tiny circle to the size
 we specified as one of our parameters.</p>
-
 <p>This is a simplified version of how to do it:</p>
-
-<script src="//gist.github.com/maurodec/0b4c1989cab07dddb071046f91896121.js"></script>
+<script type="application/javascript" src="https://gist.github.com/maurodec/0b4c1989cab07dddb071046f91896121.js"></script>
 
 <p>We will do the same for the fade out effect in a similar manner:</p>
-
-<script src="//gist.github.com/maurodec/1de86b46518ace12e343a028adee9999.js"></script>
+<script type="application/javascript" src="https://gist.github.com/maurodec/1de86b46518ace12e343a028adee9999.js"></script>
 
 <p>Finally, once we are done with our animations we can remove our ripple
 animation from our <code>UIView</code>. There is a small catch though. Normally we would
@@ -163,37 +129,24 @@ This would also mean we cannot (at least not easily) have more than one ripple
 animation going at the same time. Thus we are going to go for a very simple
 solution, we will enqueue a block of code to execute when the animations are
 done and get rid of the ripple layer in that block.</p>
-
-<script src="//gist.github.com/maurodec/339ad058447bf491185e9c90ab5e36c3.js"></script>
+<script type="application/javascript" src="https://gist.github.com/maurodec/339ad058447bf491185e9c90ab5e36c3.js"></script>
 
 <h2 id="the-end-result">The end result</h2>
-
 <p><a href="https://github.com/maurodec/SimpleRipple">In this repository</a> you can find the
 <a href="https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m">full implementation</a>
 full with comments and an example application. The example consists of
 two sliders that will control the ripple&rsquo;s duration and radius and a button to
 test it out. If you look closer (and not that closer, really) you can also see
 that the two sliders will also show a ripple when they are touched.</p>
-
-
 <figure>
-    
-        <img src="/static/img/simpleripple/ripple.gif" />
-    
-    
-    <figcaption>
-        <h4>The Example App</h4>
-        
-    </figcaption>
-    
+    <img src="/static/img/simpleripple/ripple.gif"/> <figcaption>
+            <h4>The Example App</h4>
+        </figcaption>
 </figure>
-
 
 <p>If you find any bugs or can think of improvements please feel free to submit
 a pull request.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>Replicating what Google did with Material Design on iOS was pretty
 straightforward. All it took was creating two <code>CABasicAnimation</code> and adding
 them to a new sublayer in the desired <code>UIView</code>. Categories in Objective-C
@@ -206,14 +159,8 @@ use.</p>
 
     <footer>
       <div id=footer-content>
-    <div class="pull-left align-right">
-        <p>Made with ❤️ by Mauro de Carvalho using Hugo.</p>
-    </div>
-    <div class="pull-right align-right">
-        <a href="https://github.com/maurodec">Github</a>
-        <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a>
-        <p>mauro@maurodec.com</p>
-    </div>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
 </div>
 
     </footer>

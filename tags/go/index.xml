@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Go on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Apr 2017 00:00:00 -0300</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 08 Apr 2017 00:00:00 -0300</lastBuildDate><atom:link href="http://maurodec.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cross compiling Go applications</title>
       <link>http://maurodec.com/blog/cross-compile-go/</link>
@@ -24,9 +20,7 @@ again. While writing my
 &lt;a href=&#34;http://maurodec.com/blog/learning-python/&#34;&gt;Why I learned Python blog post&lt;/a&gt; I asked some friends
 for feedback, however, I did not want to push an unfinished post to Github
 Pages, so I decided to serve my Hugo blog from my Raspberry Pi. I soon realized
-that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+that I would have to install Hugo from source which could mean trouble&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

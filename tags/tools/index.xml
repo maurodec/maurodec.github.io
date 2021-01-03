@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Tools on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Text editors: which is the best?</title>
       <link>http://maurodec.com/blog/best-text-editors/</link>
@@ -21,9 +17,7 @@
 without them we would not be able to do our jobs. It makes sense then to try
 and find out what the best text editor is, doesn&amp;rsquo;t it? Is it Vim? Is it Emacs?
 Is it another? It&amp;rsquo;s important to first look at what we want in a text editor
-before we are able to answer this.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+before we are able to answer this.&lt;/p&gt;</description>
     </item>
     
   </channel>

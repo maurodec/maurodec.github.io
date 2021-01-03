@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Python on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Apr 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 29 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Classes, namedtuples and __slots__</title>
       <link>http://maurodec.com/blog/classes-namedtuples-slots/</link>
@@ -22,11 +18,8 @@ manipulate data. These types usually have little to no behavior and simply
 exist to keep track of information in a structured and orderly way. Recently,
 &lt;a href=&#34;https://www.python.org/dev/peps/pep-0557/&#34;&gt;PEP 557 (Data Classes)&lt;/a&gt; was
 accepted, however, it won&amp;rsquo;t appear until Python 3.7.&lt;/p&gt;
-
 &lt;p&gt;In this Blog Post we will explore what options currently exist in Python 2.7
-and 3.6 and how they differ from each other.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+and 3.6 and how they differ from each other.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,9 +31,7 @@ and 3.6 and how they differ from each other.&lt;/p&gt;
       <description>&lt;p&gt;I recently had to build an ETL job in Python that was initially going to be
 deployed on AWS. Little did I know that a last minute change from AWS to
 Heroku would cause me to change how the job&amp;rsquo;s configuration was going to be
-read significantly.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+read significantly.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,9 +43,7 @@ read significantly.&lt;/p&gt;
       <description>&lt;p&gt;About eleven years ago, after finishing my first semester in University I
 decided to learn how to program in Python. In this post I will talk about why I
 found Python interesting at the time as well as how it felt to me as someone
-with little programming knowledge.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+with little programming knowledge.&lt;/p&gt;</description>
     </item>
     
   </channel>

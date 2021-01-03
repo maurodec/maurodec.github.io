@@ -3,17 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-92824817-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
 <link rel="manifest" href="/static/favicon/manifest.json">
@@ -21,11 +11,12 @@
 <link rel="shortcut icon" href="/static/favicon/favicon.ico">
 <meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
-
 
     <title>
       
@@ -39,16 +30,15 @@
       <header>
     <div class="highlight"></div>
     <div class="navbar">
-        <div class="pull-left">
-            <a href="/">Home</a>
-        </div>
-        <div class="pull-right">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
             <a href="/blog/">Blog</a>
             <a href="/about/">About me</a>
             <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
         </div>
     </div>
 </header>
+
 
       <div id="main">
         
@@ -73,15 +63,10 @@ and to make sure it is as clean as possible. Even though it is well known that
 refactoring code helps with maintainability and thus reduces development costs
 in the long run, for various reasons refactoring does not always happen, or at
 least not until things start to fall apart.</p>
-
 <p>In this post I will tell a little horror story that happened to me recently and
 that could have been avoided if we had stopped to refactor the code we were
 working on&hellip;</p>
-
-<p></p>
-
 <h2 id="back-story">Back story</h2>
-
 <p>I recently had to work on an Angular 1 app that was having some issues. The app
 would display forms based on JSON documents that were usually pretty large. The
 problem was that sometimes the forms would take a long time to load (especially
@@ -89,22 +74,18 @@ the really large ones), or changing some of the inputs caused noticeable lag.
 Some slowness was expected as some of these forms were particularly huge, but
 at times the app became too frustrating to use, and even when sitting in the
 background, the CPU usage of the app was incredibly high.</p>
-
 <h2 id="fixing-things-little-by-little">Fixing things little by little</h2>
-
 <p>I always found performance problems to be interesting for some reason. I&rsquo;ve
 come across some problems with really simple solutions (like applying the
 <a href="https://en.wikipedia.org/wiki/Flyweight_pattern">Flyweight</a> pattern to avoid
 unnecessary object creation), while others have proven to be a lot more
 challenging (such as having to debug and fix polygon merging algorithms).</p>
-
 <p>For this particular case, I decided to go for simple and obvious optimizations
 and best practices first and delve into more complicated ones later. My first
 step was to remove functions from expressions such as <code>ng-disable</code> and replace
 them with attributes on plain objects. This improved performance a lot, as
 adding functions in expressions like these causes them to be called often.
 Unfortunately it was still not enough, something else had to be done.</p>
-
 <p>The form rendering code was put together impressively quick and was not too
 hard to follow, however it was clear that parts of the code had mutated to do
 different things than originally intended and thus the naming of some of some
@@ -116,9 +97,7 @@ called each time an input changed which sounds reasonable, the problem was that
 some inputs could cause other inputs to be disabled triggering another call to
 the function. These inputs could in turn disable yet more inputs, causing a
 cascade of calls.</p>
-
 <h2 id="a-better-solution">A better solution</h2>
-
 <p>Because in most cases inputs would only disable inputs that came after, a
 simple but effective solution was to avoid calling the function over and over
 and instead wrap part of the logic in a loop. On each iteration, check if
@@ -127,16 +106,13 @@ set a flag. This would continue until no inputs were changed. Unless
 inputs somehow disabled previous inputs (which was very very rare), no more
 than two iterations would be needed to make sure the form was valid. A <em>very</em>
 simple version of the algorithm looked like this:</p>
-
-<script src="//gist.github.com/maurodec/c54989238a5cf6685d6e90d3171d2e9d.js"></script>
+<script type="application/javascript" src="https://gist.github.com/maurodec/c54989238a5cf6685d6e90d3171d2e9d.js"></script>
 
 <p>This solution was pretty straight forward, we loaded forms, checked the number
 of iterations and they were indeed 2. We selected an input that would cause
 another to be disabled and the number of iterations was also 2! This seemed to
 work, notwithstanding, performance did not improve much.</p>
-
 <h2 id="more-optimizations-and-the-real-culprit-code-smell">More optimizations and the real culprit, code smell</h2>
-
 <p>Days passed, and more things were optimized, but performance still was not as
 expected. While adding some logging statements we accidentally found out that
 the <code>setValid</code> function was looping many times, as in, thousands of times for
@@ -150,19 +126,15 @@ the <code>||</code> operator short circuits only the first input would be disabl
 subsequent inputs were totally ignored. This made it so that only one input was
 disabled per iteration instead of all (or most) of them. We felt like total
 fools.</p>
-
 <p>If we had stopped to actually refactor code and make sure functions were
 properly named and separated before even attempting to optimize, it would have
 saved us a headache, embarrassment, and most importantly, a lot of time.</p>
-
 <h2 id="avoiding-this-in-the-future">Avoiding this in the future</h2>
-
 <p>The need to follow best practices and to constantly clean up code is something
 we all knew but failed to do. This was a kick in the teeth to remind us that it
 is something that always needs to be done, without exception. Because we let
 our code rot, we ended up with functions that had side effects we relied on for
 our logic to work which eventually bit us in the ass, big time.</p>
-
 <p>This is also a lesson learned on why writing
 <a href="http://www.onlamp.com/pub/a/onlamp/2007/07/12/introduction-to-haskell-pure-functions.html">pure functions</a>
 is pretty much always a good idea, as they help make the code easier to
@@ -171,7 +143,6 @@ seeing what a function does and what it does not helps a lot when attempting to
 figure out if a program is correct or not. This does not mean that we should
 all move to functional programming, but good things from it can most certainly
 be followed.</p>
-
 <p>Of course this was a very stupid mistake that we failed to notice because we
 were busy looking at details and not the whole pictures, but these points
 still stand. It is important to keep your code clean in order to avoid silly
@@ -184,14 +155,8 @@ as I can.</p>
 
     <footer>
       <div id=footer-content>
-    <div class="pull-left align-right">
-        <p>Made with ❤️ by Mauro de Carvalho using Hugo.</p>
-    </div>
-    <div class="pull-right align-right">
-        <a href="https://github.com/maurodec">Github</a>
-        <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a>
-        <p>mauro@maurodec.com</p>
-    </div>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
 </div>
 
     </footer>

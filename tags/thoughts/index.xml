@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Thoughts on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Thoughts on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/thoughts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/thoughts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Short Thoughts: Microsoft’s GitHub acquisition</title>
       <link>http://maurodec.com/blog/microsoft-github-acquisition/</link>
@@ -22,9 +18,7 @@ announced&lt;/a&gt; that Microsoft
 will be acquiring Github got USD 7.5b. The news was received by some with
 dismay as Microsoft has historically been seen as a threat to Open Source
 (Linux is a cancer, anyone?), while it was praised by others who consider
-Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Open Source on Blog - maurodec.com</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Open Source on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://maurodec.com/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Short Thoughts: Microsoft’s GitHub acquisition</title>
       <link>http://maurodec.com/blog/microsoft-github-acquisition/</link>
@@ -22,9 +18,7 @@ announced&lt;/a&gt; that Microsoft
 will be acquiring Github got USD 7.5b. The news was received by some with
 dismay as Microsoft has historically been seen as a threat to Open Source
 (Linux is a cancer, anyone?), while it was praised by others who consider
-Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Microsoft has changed. What will the future hold for Github and Open Source?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,9 +30,7 @@ Microsoft has changed. What will the future hold for Github and Open Source?&lt;
       <description>&lt;p&gt;I recently had to build an ETL job in Python that was initially going to be
 deployed on AWS. Little did I know that a last minute change from AWS to
 Heroku would cause me to change how the job&amp;rsquo;s configuration was going to be
-read significantly.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+read significantly.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,9 +46,7 @@ The Android Framework provides a simple but interesting mechanism for
 communicating with background threads via the use of the &lt;code&gt;Message&lt;/code&gt; and
 &lt;code&gt;Handler&lt;/code&gt; classes. In this post I will attempt to explain not only how to use
 them, but also how they relate to the &lt;code&gt;Looper&lt;/code&gt; and the &lt;code&gt;MessageQueue&lt;/code&gt;
-classes.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+classes.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -70,11 +60,8 @@ iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
 back and revise what I had done, change the animation so that it looks like the
 Material Design ripple effect and create a UIView category with it.&lt;/p&gt;
-
 &lt;p&gt;This blog post shows an implementation of this animation that can be applied to
-any UIView.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+any UIView.&lt;/p&gt;</description>
     </item>
     
   </channel>

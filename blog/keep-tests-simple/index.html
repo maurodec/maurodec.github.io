@@ -3,17 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-92824817-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
 <link rel="manifest" href="/static/favicon/manifest.json">
@@ -21,11 +11,12 @@
 <link rel="shortcut icon" href="/static/favicon/favicon.ico">
 <meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
-
 
     <title>
       
@@ -39,16 +30,15 @@
       <header>
     <div class="highlight"></div>
     <div class="navbar">
-        <div class="pull-left">
-            <a href="/">Home</a>
-        </div>
-        <div class="pull-right">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
             <a href="/blog/">Blog</a>
             <a href="/about/">About me</a>
             <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
         </div>
     </div>
 </header>
+
 
       <div id="main">
         
@@ -76,34 +66,24 @@ however, having high coverage doesn&rsquo;t mean your tests are good either.
 The way tests are written also depends on what the software and it&rsquo;s structure
 is. Notwithstanding, there&rsquo;s one aspect that I believe always helps,
 simplicity.</p>
-
-<p></p>
-
 <h2 id="software-is-complex">Software is complex</h2>
-
 <p>Writing software is hard, and thus, bugs are an unavoidable and undesired side
 effect. While complexity should be avoided, some problems require solutions
 that are not simple, therefore, we can say some software is inherently complex.</p>
-
 <p>By creating tests we attempt to ensure software behaves the way we want and
 that it continues to do so as it is modified. With different kinds of tests at
 different abstraction levels we attempt to unravel this complexity.</p>
-
 <h2 id="destroying-complexity-is-the-whole-point">Destroying complexity is the whole point</h2>
-
 <p>Tests should be kept as <strong>simple and explicit</strong> as possible. If tests contain
 bugs then that defeats the purpose of having them in the first place.When
 looking at a test it should be fairly obvious:</p>
-
 <ul>
 <li>What is being tested.</li>
 <li>What is expected (and what shouldn&rsquo;t happen).</li>
 <li>Where test data comes from.</li>
 <li>How they add value.</li>
 </ul>
-
 <p>There&rsquo;s probably a problem with your tests if:</p>
-
 <ul>
 <li>There&rsquo;s logic in them aside from the use of simple helper functions (such as,
 for example checking if two collections have the same elements).</li>
@@ -111,9 +91,7 @@ for example checking if two collections have the same elements).</li>
 <li>They depend on each other due to side effects.</li>
 <li>It is hard to track where data is coming from or even what the test data is.</li>
 </ul>
-
-<h2 id="tl-dr">TL;DR</h2>
-
+<h2 id="tldr">TL;DR</h2>
 <p>Complexity causes bugs, <strong>keep your tests explicit and easy to follow</strong> so
 that you <strong>avoid the problem tests try to fix in the first place</strong>.</p>
     </div>
@@ -123,14 +101,8 @@ that you <strong>avoid the problem tests try to fix in the first place</strong>.
 
     <footer>
       <div id=footer-content>
-    <div class="pull-left align-right">
-        <p>Made with ❤️ by Mauro de Carvalho using Hugo.</p>
-    </div>
-    <div class="pull-right align-right">
-        <a href="https://github.com/maurodec">Github</a>
-        <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a>
-        <p>mauro@maurodec.com</p>
-    </div>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
 </div>
 
     </footer>
