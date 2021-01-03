@@ -10,7 +10,7 @@ Hi, I’m Mauro, a software engineer from Uruguay 🇺🇾 currently living in D
 🇮🇪. I am a foodie and a gamer, but first and foremost, I am a passionate
 programmer.
 
-Ever since I started programming professionally 9 years ago, I’ve been involved
+Ever since I started programming professionally in 2009, I’ve been involved
 in a myriad of different projects, crafting code with programming languages
 ranging from __Objective-C__, __Python__ and __Go__ to __PHP__, __VB__ and
 __Java__.
