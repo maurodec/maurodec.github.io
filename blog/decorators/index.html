@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+    <title>
+      
+    Python Decorators - maurodec.com
+
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/decorators/">Python Decorators</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        February  7 - 2021
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Python</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>Originally described in the &ldquo;Design Patterns: Elements of Reusable
+Object-Oriented Software&rdquo; book, decorators are a powerful design pattern that
+allows us to extend or augment an object&rsquo;s functionality. In this post I will
+show with some practical examples how this can be achieved in Python via the
+<code>@decorator</code> syntax.</p>
+<h2 id="what-do-decorators-do">What do decorators do?</h2>
+<p>The important question is not what decorators <strong>are</strong>, but what they can <strong>do</strong>
+for us. Decorators can be implemented as functions or as classes (we will see
+examples of both later), but what they do is &ldquo;wrap&rdquo; functions (or even classes)
+so that their behavior can be changed seamlessly. Python provides the
+<code>@decorator</code> syntax to do this, though it is merely syntactic sugar and not
+actually required to implement the decorator pattern.</p>
+<p>Before we start implementing decorators though, there are a few things we need
+to remember:</p>
+<ul>
+<li>Functions and classes are objects, and they can be passed around as
+arguments, functions can also return functions.</li>
+<li>When we define nested functions, they will have access to the context they
+were defined in. This is basically a
+<a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a>.</li>
+</ul>
+<h2 id="building-the-concept-with-examples">Building the concept with examples</h2>
+<p>A decorator will wrap a function and add some behavior (before or after) the
+original function. Probably the simplest way of decorating a function is:</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/40325afb2da14657400857267f6fd944.js"></script>
+
+<p>This works, but it&rsquo;s pretty clunky. There&rsquo;s the obvious problem that we need to
+remember to call the <code>decorated</code> function instead of the original. Of course we
+could add something like <code>say_name = decorated</code> at the end of our code, but
+there&rsquo;s also another problem, our &ldquo;decorator&rdquo; is pretty much impossible to
+reuse. It&rsquo;s not that this way of decorating functions doesn&rsquo;t work, it does,
+but it&rsquo;s just not particularly useful.</p>
+<p>If we consider we can pass functions around, we can come up with a slightly
+more reusable way of decorating functions. We can write our decorator as a
+function that takes a function to be wrapped and whose return value will be
+the decorated function. This sounds like a bit of a tongue-twister, it is
+better understood when seen in action.</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/e5ce531f87fe6163ee0ee8e4a4d2887f.js"></script>
+
+<p>If we now call <code>wrapped_say_name</code> we will get:</p>
+<pre><code>I'm going to call the original function...
+I'm Mauro.
+I just called the original function.
+</code></pre><p>There&rsquo;s a few important things to note here:</p>
+<ol>
+<li>We are passing the <code>say_name</code> function as an argument to <code>decorator</code>.</li>
+<li>The nested function, <code>wrapped</code>, has access to the context in which it was
+defined and can call <code>function_to_wrap</code>.</li>
+<li>The return value of our function (<code>decorator</code>) is a function (<code>wrapped</code>).</li>
+</ol>
+<p>This is clearly much better as we can now reuse the same code to wrap other
+functions. This is still, however, a very flawed example as there are a couple
+of things we are not considering:</p>
+<ul>
+<li>What would happen if the wrapped function had arguments that needed to be
+passed?</li>
+<li>What would happen if the wrapped function had to return a value?</li>
+</ul>
+<p>Addressing the second point is the easiest, we just need to add a <code>return</code> when
+calling <code>function_to_wrap</code>.
+Addressing the first point might be a bit tougher if we want to make sure our
+decorator is as generic as it can be. We can obviously add the same parameters
+that <code>function_to_wrap</code> would take (if it took any), but the generic solution
+here would be to take advantage of using
+<a href="https://stackoverflow.com/questions/36901/what-does-double-star-asterisk-and-star-asterisk-do-for-parameters"><code>* and **</code></a>
+in function definitions.</p>
+<p>Let&rsquo;s look at a more real life example of decorating a function. Let&rsquo;s create
+a decorator that will time how long a function takes to execute and will
+print it out.</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/8d264374c8a2f928d24cfbdb5a0c5143.js"></script>
+
+<p>The output was:</p>
+<pre><code>Function took 1.9073486328125e-06 seconds.
+0.5
+Function took 9.5367431640625e-07 seconds.
+5.0
+</code></pre><p>In this case we wrapped the <code>division</code> function and timed how long it took.
+This is a more interesting example because <code>division</code> takes two arguments, the
+numbers to divide, and also returns the result. What the interface will look
+like for our decorator, and what we will do with the return value is something
+that we need to account for when designing a decorator. In this case the
+decorator&rsquo;s  interface is as generic as it can be, basically taking any
+positional and keyword arguments and passing them on to the wrapped function.
+It also has to be slightly careful with the return value, as it needs to store
+it before returning it so that it can print out the &ldquo;Function took&hellip;&rdquo; message
+instead of returning prematurely.</p>
+<p>There is one thing this decorator is still not considering though, exceptions.
+Some functions, like the division function can raise exceptions. It is then the
+decorator&rsquo;s responsibility to decide that to do (or not do) with them. In this
+case exceptions are ignored and allowed to go though, but this means we will
+never know how long it took for the function to fail. If it was relevant to us
+we would probably wrap the call in a <code>try/except</code> block and re-raise the
+original exception.</p>
+<p>A fixed version of our decorator could look like:</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/0d50b5a78a5ff111b7b78a7c0f36a511.js"></script>
+
+<p>Something interesting about exceptions raised in decorators is that when
+looking at the stack trace we can see the decorator is there.</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/e211af81e6171a803f501eb1a86c1df4.js"></script>
+
+<p>Now that we&rsquo;ve understood what decorators can do, let&rsquo;s look at some syntactic
+sugar we can use and at some more complex examples.</p>
+<h2 id="the-decorator-syntax">The <code>@decorator</code> syntax</h2>
+<p>Python provides a handy way of decorating functions by preceding a function
+definition with a <code>@</code> followed by the decorator name. This can be used
+in module-level functions or even in class methods. If we go back to our
+previous example, we can simply define our <code>division</code> function as:</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/82f01eba4502b27eb758400fddbb4fcb.js"></script>
+
+<p>If we do this, our definition of <code>division</code> is replaced by the decorated
+function, so in this case using <code>@timed</code> replaces <code>division</code> with what we
+previously defined as <code>timed_division</code>. Using <code>@timed</code> just allowed us to call
+the wrapped function as if we were calling the original one.</p>
+<h2 id="decorators-with-parameters">Decorators with parameters</h2>
+<p>Up until now, the decorator we were using did not take any arguments, but what
+if it did? In this case, the function to wrap would be wrapped with the result
+of calling <code>decorator(args)</code>. This means that our decorator function has to be
+first &ldquo;built&rdquo; before it can be used to return a decorated function. This sounds
+a bit confusing so let&rsquo;s look at an example. Let&rsquo;s take the <code>timed</code> decorator
+from before and make it so that it can print a shorter version of the message.
+For brevity&rsquo;s sake we will remove the exception handling. This new decorator
+will look like so:</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/35f2478423a19393e5cf457feac75cf8.js"></script>
+
+<p>This will output:</p>
+<pre><code>Function call took 2.1457672119140625e-06 seconds.
+0.5
+1.1920928955078125e-06s.
+0.5
+</code></pre><p>What the <code>timed</code> function now does is build the decorator itself, while the
+<code>decorator</code> function is what actually decorates <code>division</code>. <code>decorator</code> is now
+what <code>timed</code> was in our previous examples.</p>
+<p>It is important to note that now when decorating something, we need to decorate
+with a call. Using plain old <code>@timed</code> will not work, we need to either use it
+like <code>@timed()</code> or pass a boolean in this case like <code>@timed(False)</code>.</p>
+<p>To do this we could also use a class instead of nesting functions. Basically
+instead of returning a function we can return a class instance that is also
+callable. Calling that class instance will return the decorated function. An
+alternative implementation of the decorator in this case could look like so:</p>
+<script type="application/javascript" src="https://gist.github.com/maurodec/a1a0e391255b07b9143a035415171bf2.js"></script>
+
+<p>When we do <code>@timed()</code>, a new instance of the <code>timed</code> class is created and
+initialized with <code>verbose = false</code>. Then that instance is called with
+<code>division</code> as an argument which is stored in <code>self.decorated_f</code> and a reference
+to the <code>wrapper</code> method is returned. It is the <code>wrapper</code> method that will
+wrap <code>division</code> and replace it. Note that I opted to make the <code>wrapper</code> a
+method, but it could have also been a nested function like we had been doing
+before.</p>
+<p>Looking back, we could have also implemented the original decorator as a class
+with an <code>__init__</code> that took the function to wrap and a <code>__call__</code> to act as
+the decorated function.</p>
+<p>If you want to use a class or a set of nested functions is really up to you, it
+depends on what you want to implement and what would look best in that case.</p>
+<h2 id="functoolswraps">@functools.wraps</h2>
+<p>So far we&rsquo;ve seen that it is rather easy to decorate a function and replace the
+original with it, but by replacing the original we are actually destroying
+some information.</p>
+<p>All functions have a <code>__name__</code> attribute which returns, you&rsquo;ve guessed it,
+its name. Functions will also have a <code>__doc__</code> attribute with their docstring.
+However, by replacing the original function, these are lost. If we took
+our last example and checked the value of <code>division.__name__</code> we would see it
+returns <code>'wrapper'</code>. If we checked <code>division.__doc__</code>, the wrapper&rsquo;s docstring
+would be returned and not the one from our <code>division</code> function (if we had one).</p>
+<p>Thankfully, the standard library comes with
+<a href="https://docs.python.org/3/library/functools.html#functools.wraps"><code>functools.wraps</code></a>
+which ensures that the original name and docstring (among others) are
+preserved. The implementation is rather simple and can be found
+<a href="https://docs.python.org/3/library/functools.html#functools.wraps">here</a>.</p>
+<h2 id="examples-in-the-standard-library">Examples in the standard library</h2>
+<p>Some commonly used decorators in the standard library include:</p>
+<ul>
+<li><a href="https://docs.python.org/3/library/functions.html#staticmethod"><code>@staticmethod</code></a>
+and <a href="https://docs.python.org/3/library/functions.html#classmethod"><code>@classmethod</code></a>
+for transforming a method into a static method and a class method
+respectively.</li>
+<li><a href="https://docs.python.org/3/library/functions.html#property"><code>@property</code></a> for
+defining managed attributes.</li>
+<li><a href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager"><code>@contextlib.contextmanager</code></a>
+for easily turning a function into a context manager.</li>
+<li><a href="https://docs.python.org/3/library/unittest.mock.html#unittest.mock.patch"><code>unittest.mock.patch</code></a>
+for easily patching functions during unit tests.</li>
+<li><a href="https://docs.python.org/3/library/functools.html#functools.cache"><code>functools.cache</code></a>
+and <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>functools.lru_cache</code></a>
+for caching method calls. The
+<a href="https://github.com/python/cpython/blob/3.9/Lib/functools.py#L478">implementation</a>
+if the latter is actually quite cool.</li>
+</ul>
+<h2 id="decorating-classes">Decorating classes</h2>
+<p>It is also possible to decorate classes, the difference is that the decorator
+will return a class instead of a function (or at least something that behaves
+like a class).</p>
+<p>One example of this is the
+<a href="https://www.python.org/dev/peps/pep-0557/"><code>@dataclass</code> decorator</a> in the
+standard library.</p>
+<p>While this can be useful, it means treading deeper into metaprogramming
+territory, and depending on the case, it is possible that metaclasses fit this
+use-case better. This is a whole other topic and is something too big to cover
+here.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Decorators are powerful tools that allow us to enhance our code and change its
+behavior in a very simple way that does not require us to change the structure
+of our programs. Mastering the use of decorators is a must for every Python
+programmer.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
+</div>
+
+    </footer>
+  </body>
+
+
+</html>
