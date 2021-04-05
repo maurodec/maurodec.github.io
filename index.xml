@@ -6,7 +6,18 @@
     <description>Recent content on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 -2100</lastBuildDate><atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Short Thoughts: The existential horror of Progress Bars</title>
+      <link>http://maurodec.com/blog/progress-bars/</link>
+      <pubDate>Mon, 05 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/progress-bars/</guid>
+      <description>&lt;p&gt;Progress bars are UI elements that have been in use for decades. They are
+so commonplace that not only we don&amp;rsquo;t question them, but we also expect them
+to be there. However, are they actually any good? Do we need them?&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Python Decorators</title>
       <link>http://maurodec.com/blog/decorators/</link>

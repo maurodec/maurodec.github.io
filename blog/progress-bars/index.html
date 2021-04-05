@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+    <title>
+      
+    Short Thoughts: The existential horror of Progress Bars - maurodec.com
+
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/progress-bars/">Short Thoughts: The existential horror of Progress Bars</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        April  5 - 2021
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Short Thoughts</span>
+        
+            <span class="tag">UI</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>Progress bars are UI elements that have been in use for decades. They are
+so commonplace that not only we don&rsquo;t question them, but we also expect them
+to be there. However, are they actually any good? Do we need them?</p>
+<h2 id="types-of-progress-indicators">Types of Progress Indicators</h2>
+<p>I think instead of talking about progress bars we need to talk about progress
+indicators. Basically a set of UI elements that show that work is being done
+and that the user must wait. We can place these indicators in two categories:
+elements showing an &ldquo;amount of progress&rdquo; (determinate indicators) and elements
+showing &ldquo;indefinite progress&rdquo; (indeterminate indicators). The former category
+would contain things like progress bars that fill up, UI elements showing a
+percentage etc. In contrast, the latter would contain elements like spinners,
+progress bars (that don&rsquo;t actually show a value and instead show some sort of
+animation) or even different mouse cursors such as an hourglass or Mac OS'
+dreaded beach ball.</p>
+<h2 id="determinate-indicators-are-kind-of-a-lie">Determinate indicators are (kind of) a lie</h2>
+<p>Showing a task&rsquo;s percentage of completion sounds like a great idea. It shows
+how much work is done and therefore how much is left, but most importantly it
+can give the user a rough idea of how long until something will be done. The
+problem, in general, is not with the indicator itself but with the tasks.
+Realistically, the progress of a lot of tasks cannot be accurately (or even
+roughly) estimated. This is especially bad when things like networking are
+involved. It&rsquo;s not uncommon to see progress bars fly only to get stuck for a
+long time near the end or in random places.</p>
+<p>Does this mean determinate indicators are useless? If they can&rsquo;t show accurate
+progress, wouldn&rsquo;t an indeterminate indicator work just as well?</p>
+<h2 id="its-all-about-the-feedback">It&rsquo;s all about the feedback</h2>
+<p>If we can argue against having determine indicators unless they are accurate,
+can we argue against indeterminate indicators and to just say a &ldquo;Please wait&rdquo;
+text would work well enough?</p>
+<p>I don&rsquo;t think so&hellip;</p>
+<p>Progress indicators serve another purpose, which is to tell the user that stuff
+is happening and the application is not frozen. While may not actually be true,
+it at least gives the illusion that work is being done behind the scenes. Not
+only that, different kinds of indicators will subconsciously inform the user
+of the magnitude of what is happening in the background and thus how long a
+&ldquo;normal&rdquo; wait time would be. For example, showing a skeleton on a web page
+not only tells the user that it is loading, but also that the information
+will be loaded at any instant. This is conveyed not only by showing the user
+(a fake version of) the page they are loading immediately, but also by taking
+advantage of what users are already used to! If we used a progress bar for that
+same page it would probably feel slower (even if it took the same amount of
+time) simply because we are used to seeing progress bars for longer tasks. The
+opposite  I believe also applies. Normally things like spinners are used for
+short loading times. Using a spinner for something like an OS upgrade can work
+but only if it&rsquo;s accompanied by some other information. If this was not the
+case, and users just saw a spinning circle for half an hour, they would probably
+think something is broken.</p>
+<p>Basically, the way we&rsquo;ve been using progress indicators determines our
+expectations for the future and in turn determines how we will be able to use
+them again.</p>
+<h2 id="the-best-indicator-is-no-indicator">The best indicator is no indicator</h2>
+<p>The best progress indicator is the one not shown, not because we chose not to
+show one but because we can actually mask it. An example of this would be
+loading things while some animation is shown or even pre-loading information
+that we are likely to show in the future. An example of this is fading out a
+login screen. This gives whatever should be shown e.g. a desktop some time to
+load while making it feel seamless. Another good example of this in action is
+in video games, where things can be preemptively loaded for example during a
+cutscene.</p>
+<p>Finding places where this can be done is extremely hard though and this not
+done often</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Progress indicators are weird. More often than not they aren&rsquo;t even remotely
+accurate, however, we need them to give us emotional comfort and to assure us
+work is happening behind the scenes and that everything is going according to
+plan. It is always a good idea too, to do work in advance and not have to ask
+the user to wait.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
+</div>
+
+    </footer>
+  </body>
+
+
+</html>

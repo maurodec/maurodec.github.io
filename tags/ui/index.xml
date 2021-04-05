@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UI on Blog - maurodec.com</title>
+    <link>http://maurodec.com/tags/ui/</link>
+    <description>Recent content in UI on Blog - maurodec.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/ui/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Short Thoughts: The existential horror of Progress Bars</title>
+      <link>http://maurodec.com/blog/progress-bars/</link>
+      <pubDate>Mon, 05 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/blog/progress-bars/</guid>
+      <description>&lt;p&gt;Progress bars are UI elements that have been in use for decades. They are
+so commonplace that not only we don&amp;rsquo;t question them, but we also expect them
+to be there. However, are they actually any good? Do we need them?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
