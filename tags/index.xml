@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Blog - maurodec.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://maurodec.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Engineering</title>
+      <link>http://maurodec.com/tags/engineering/</link>
+      <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://maurodec.com/tags/engineering/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Short Thoughts</title>
       <link>http://maurodec.com/tags/short-thoughts/</link>
@@ -31,15 +40,6 @@
       <pubDate>Sun, 07 Feb 2021 00:00:00 -2100</pubDate>
       
       <guid>http://maurodec.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Engineering</title>
-      <link>http://maurodec.com/tags/engineering/</link>
-      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://maurodec.com/tags/engineering/</guid>
       <description></description>
     </item>
     

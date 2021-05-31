@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/favicon/manifest.json">
+<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicon/favicon.ico">
+<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+
+    <title>
+      
+    Use automated code formatting - maurodec.com
+
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+    <div class="highlight"></div>
+    <div class="navbar">
+        <a class="pull-left" href="/">Home</a>
+        <div class="pull-right navbar-extra">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About me</a>
+            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
+        </div>
+    </div>
+</header>
+
+
+      <div id="main">
+        
+
+    <h1 class="post-title"><a href="http://maurodec.com/blog/code-formatting/">Use automated code formatting</a></h1>
+
+    <div id="post-metadata">
+    <span class="date-container extra-info">
+        April 19 - 2021
+    </span>
+
+    <div class="tag-container">
+        
+            <span class="tag">Engineering</span>
+        
+    </div>
+</div>
+
+    <div id="post-content">
+        <p>Tabs or spaces? Newlines before braces? End every line with a semicolon, even
+if unneeded? Code formatting is one of those topics where discussions are
+endless and consensus is pretty much impossible. Everybody prefers things a
+certain way and sometimes it can be tough to find a middle ground where
+everyone is happy.</p>
+<p>In this post I will argue in favor of using tools to enforce code formatting in
+order to ensure it stays consistent.</p>
+<h2 id="the-benefits-of-automating-code-formatting">The benefits of automating code formatting</h2>
+<p>When coding, everybody has their own preferences on how to format their code.
+Maybe it&rsquo;s because they learned following one style or another, or simply
+because they are applying the style of one programming language to another.
+Whatever the reason may be doesn&rsquo;t really matter. If several people are working
+on the same codebase and they all attempt to apply their own style to it,
+problems are bound to come up.</p>
+<p>Utilizing automated code formatting provides important benefits with very
+little disadvantages. The most obvious one is that all the code will be
+consistently formatted which makes reading easier. This in turn, helps reduce
+cognitive load which might help prevent bugs when having to read complicated
+code. In addition, if the format followed is a well known standard
+(<a href="https://www.python.org/dev/peps/pep-0008/">like PEP8</a> for Python) it will
+probably also be consistent with third party libraries.</p>
+<p>Having a consistent format throughout a codebase will also make the code feel
+less like it belongs to a specific person and more like it belongs to everyone
+contributing to it.</p>
+<p>There are a few things that need to be considered when using a code formatter
+though. First an foremost, the standard or format chosen needs to be a good one
+that promotes readability. If the code ends up horribly formatted and is hard
+to read then all the possible benefits are negated (and it could arguably make
+things worse). Integrating one of these tools mid project is also something
+that should not be taken lightly, as formatting everything in one go will make
+following the change history harder.</p>
+<p>There&rsquo;s also the question of when to apply it. Should it be done in the editor
+when a file is saved? Something like a Git hook? Do you apply it automatically
+in your CI pipeline or do you make it fail if files need formatting? This
+really depends on those involved in development and what works best for them.</p>
+<h2 id="bonus-static-analysis">Bonus: Static analysis</h2>
+<p>While we are on the topic of code quality, we can take the opportunity to talk
+about static analysis. Depending on the language you&rsquo;re developing on, several
+tools can also be integrated to catch errors before they become a problem.
+Things like linters can help find common mistakes or point out places where the
+structure of the code can be improved. They are also normally really easy to
+include in your CI pipeline so there&rsquo;s really no excuse to not do so.</p>
+<p>Sometimes new tools aren&rsquo;t even needed. Compiling your code with options such
+as <code>-Wall</code> can help avoid running potentially unsafe code.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Integrating a code formatting tool in your development process is relatively
+easy, and together with other static analysis tools can provide a boost in the
+quality of the software produced. Integrating these tools is something that is
+so easy and painless to do that even if the benefits were small it would still
+be worth doing.</p>
+    </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div id=footer-content>
+        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
+        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
+</div>
+
+    </footer>
+  </body>
+
+
+</html>
