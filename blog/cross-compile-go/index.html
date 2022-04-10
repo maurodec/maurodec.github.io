@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
 
@@ -94,7 +94,7 @@ my Macbook, as it was what I was using. The instructions seemed a bit too
 simple though, I was sure I was going to run into other issues. Cross compiling
 could not be this easy, could it? Well yes, it was. I was pleasantly surprised
 at how smooth it all went and how quick it was. All it took was running:</p>
-<pre><code>env GOOS=linux GOARCH=arm GOARM=6 go build -v github.com/spf13/hugo
+<pre tabindex="0"><code>env GOOS=linux GOARCH=arm GOARM=6 go build -v github.com/spf13/hugo
 </code></pre><p>I then <code>scp</code>-ed my freshly built binary and BAM! It worked flawlessly!</p>
 <h2 id="feeling-dumb-as-bricks">Feeling dumb as bricks</h2>
 <p>It turns out it did not have to go through all this trouble to get Hugo on
@@ -103,8 +103,7 @@ Brinstar (thats what my Pi is called), as the
 ARM (though I did not test if they worked or not). Not only that, the
 <a href="https://golang.org/dl/">Go downloads page</a> provides ARMv6l binaries which
 for sure work on my model, I could have just downloaded that!</p>
-<figure>
-    <img src="/static/img/crosscompile/facepalm.gif"/> <figcaption>
+<figure><img src="/static/img/crosscompile/facepalm.gif"/><figcaption>
             <h4>Judge Judy is not pleased</h4>
         </figcaption>
 </figure>
