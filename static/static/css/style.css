@@ -83,6 +83,10 @@ header a {
     text-transform: uppercase;
 }
 
+strong {
+    font-weight: 700;
+}
+
 header a:hover {
     font-weight: bold;
 }
