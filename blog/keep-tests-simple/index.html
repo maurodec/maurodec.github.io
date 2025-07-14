@@ -1,112 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/static/favicon/manifest.json">
-<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/static/favicon/favicon.ico">
-<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/style.css">
-    <title>
-      
-    Short Thoughts: keep your tests simple - maurodec.com
-
-    </title>
-  </head>
-
-  <body>
-    <div id="content">
-      <header>
-    <div class="highlight"></div>
-    <div class="navbar">
-        <a class="pull-left" href="/">Home</a>
-        <div class="pull-right navbar-extra">
-            <a href="/blog/">Blog</a>
-            <a href="/about/">About me</a>
-            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
-        </div>
-    </div>
-</header>
-
-
-      <div id="main">
-        
-
-    <h1 class="post-title"><a href="http://maurodec.com/blog/keep-tests-simple/">Short Thoughts: keep your tests simple</a></h1>
-
-    <div id="post-metadata">
-    <span class="date-container extra-info">
-        August  8 - 2018
-    </span>
-
-    <div class="tag-container">
-        
-            <span class="tag">Short Thoughts</span>
-        
-            <span class="tag">Engineering</span>
-        
-    </div>
-</div>
-
-    <div id="post-content">
-        <p>Writing good tests, whether they are unit, acceptance, integration etc, is
+<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.b7ba360344d296c7ba210239ede4128485b60a5b141b4de7e987b01937611386.css><title>Short Thoughts: keep your tests simple - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
+<a href=/about/>About me</a>
+<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=post-title><a href=https://maurodec.com/blog/keep-tests-simple/>Short Thoughts: keep your tests simple</a></h1><div id=post-metadata><span class="date-container extra-info">August 8 - 2018</span><div class=tag-container><span class=tag>Short Thoughts</span>
+<span class=tag>Engineering</span></div></div><div id=post-content><p>Writing good tests, whether they are unit, acceptance, integration etc, is
 hard. Few tests will run quickly but probably won&rsquo;t cover much of the code,
 however, having high coverage doesn&rsquo;t mean your tests are good either.
 The way tests are written also depends on what the software and it&rsquo;s structure
 is. Notwithstanding, there&rsquo;s one aspect that I believe always helps,
-simplicity.</p>
-<h2 id="software-is-complex">Software is complex</h2>
-<p>Writing software is hard, and thus, bugs are an unavoidable and undesired side
+simplicity.</p><h2 id=software-is-complex>Software is complex</h2><p>Writing software is hard, and thus, bugs are an unavoidable and undesired side
 effect. While complexity should be avoided, some problems require solutions
-that are not simple, therefore, we can say some software is inherently complex.</p>
-<p>By creating tests we attempt to ensure software behaves the way we want and
+that are not simple, therefore, we can say some software is inherently complex.</p><p>By creating tests we attempt to ensure software behaves the way we want and
 that it continues to do so as it is modified. With different kinds of tests at
-different abstraction levels we attempt to unravel this complexity.</p>
-<h2 id="destroying-complexity-is-the-whole-point">Destroying complexity is the whole point</h2>
-<p>Tests should be kept as <strong>simple and explicit</strong> as possible. If tests contain
+different abstraction levels we attempt to unravel this complexity.</p><h2 id=destroying-complexity-is-the-whole-point>Destroying complexity is the whole point</h2><p>Tests should be kept as <strong>simple and explicit</strong> as possible. If tests contain
 bugs then that defeats the purpose of having them in the first place.When
-looking at a test it should be fairly obvious:</p>
-<ul>
-<li>What is being tested.</li>
-<li>What is expected (and what shouldn&rsquo;t happen).</li>
-<li>Where test data comes from.</li>
-<li>How they add value.</li>
-</ul>
-<p>There&rsquo;s probably a problem with your tests if:</p>
-<ul>
-<li>There&rsquo;s logic in them aside from the use of simple helper functions (such as,
-for example checking if two collections have the same elements).</li>
-<li>There are branching paths.</li>
-<li>They depend on each other due to side effects.</li>
-<li>It is hard to track where data is coming from or even what the test data is.</li>
-</ul>
-<h2 id="tldr">TL;DR</h2>
-<p>Complexity causes bugs, <strong>keep your tests explicit and easy to follow</strong> so
-that you <strong>avoid the problem tests try to fix in the first place</strong>.</p>
-    </div>
-
-      </div>
-    </div>
-
-    <footer>
-      <div id=footer-content>
-        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
-        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
-</div>
-
-    </footer>
-  </body>
-
-
-</html>
+looking at a test it should be fairly obvious:</p><ul><li>What is being tested.</li><li>What is expected (and what shouldn&rsquo;t happen).</li><li>Where test data comes from.</li><li>How they add value.</li></ul><p>There&rsquo;s probably a problem with your tests if:</p><ul><li>There&rsquo;s logic in them aside from the use of simple helper functions (such as,
+for example checking if two collections have the same elements).</li><li>There are branching paths.</li><li>They depend on each other due to side effects.</li><li>It is hard to track where data is coming from or even what the test data is.</li></ul><h2 id=tldr>TL;DR</h2><p>Complexity causes bugs, <strong>keep your tests explicit and easy to follow</strong> so
+that you <strong>avoid the problem tests try to fix in the first place</strong>.</p></div></div></div><footer><div id=footer-content><p>Made with ❤️ by Mauro de Carvalho using <a href=https://gohugo.io/>Hugo</a>.</p><p><a href=https://github.com/maurodec>Github</a> &#9679 mauro@maurodec.com &#9679 <a href=https://www.linkedin.com/in/maurodec/>LinkedIn</a></p></div></footer></body></html>

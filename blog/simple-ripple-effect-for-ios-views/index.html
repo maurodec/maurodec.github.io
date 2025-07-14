@@ -1,125 +1,100 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/static/favicon/manifest.json">
-<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/static/favicon/favicon.ico">
-<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/style.css">
-    <title>
-      
-    A simple Material Design ripple effect for any iOS view - maurodec.com
-
-    </title>
-  </head>
-
-  <body>
-    <div id="content">
-      <header>
-    <div class="highlight"></div>
-    <div class="navbar">
-        <a class="pull-left" href="/">Home</a>
-        <div class="pull-right navbar-extra">
-            <a href="/blog/">Blog</a>
-            <a href="/about/">About me</a>
-            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
-        </div>
-    </div>
-</header>
-
-
-      <div id="main">
-        
-
-    <h1 class="post-title"><a href="http://maurodec.com/blog/simple-ripple-effect-for-ios-views/">A simple Material Design ripple effect for any iOS view</a></h1>
-
-    <div id="post-metadata">
-    <span class="date-container extra-info">
-        February 13 - 2017
-    </span>
-
-    <div class="tag-container">
-        
-            <span class="tag">iOS</span>
-        
-            <span class="tag">ObjC</span>
-        
-            <span class="tag">Open Source</span>
-        
-    </div>
-</div>
-
-    <div id="post-content">
-        <p>Some time ago I had to create a background color transition animation for an
+<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.b7ba360344d296c7ba210239ede4128485b60a5b141b4de7e987b01937611386.css><title>A simple Material Design ripple effect for any iOS view - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
+<a href=/about/>About me</a>
+<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=post-title><a href=https://maurodec.com/blog/simple-ripple-effect-for-ios-views/>A simple Material Design ripple effect for any iOS view</a></h1><div id=post-metadata><span class="date-container extra-info">February 13 - 2017</span><div class=tag-container><span class=tag>iOS</span>
+<span class=tag>ObjC</span>
+<span class=tag>Open Source</span></div></div><div id=post-content><p>Some time ago I had to create a background color transition animation for an
 iOS app I was working on. This animation was pretty similar to the ripple
 effect Material Design buttons have. I thought it would be a fun idea to go
 back and revise what I had done, change the animation so that it looks like the
-Material Design ripple effect and create a UIView category with it.</p>
-<p>This blog post shows an implementation of this animation that can be applied to
-any UIView.</p>
-<h2 id="de-constructing-the-ripple-effect">De-constructing the ripple effect</h2>
-<p>Before implementing anything we have to know exactly what it is we have to
+Material Design ripple effect and create a UIView category with it.</p><p>This blog post shows an implementation of this animation that can be applied to
+any UIView.</p><h2 id=de-constructing-the-ripple-effect>De-constructing the ripple effect</h2><p>Before implementing anything we have to know exactly what it is we have to
 build. So first things first, let&rsquo;s look at the ripple effect in slow motion.
 For this, I set the animation scale for all animations on my phone to 20x and
 recorded what happened when the flashlight tile is tapped in the quick settings
-menu.</p>
-<figure><img src="/static/img/simpleripple/flashlight.gif"/><figcaption>
-            <h4>The Ripple Effect in action</h4>
-        </figcaption>
-</figure>
-
-<p>The effect seems to be rather simple, a semi transparent circle starts
+menu.</p><figure><img src=/static/img/simpleripple/flashlight.gif><figcaption><h4>The Ripple Effect in action</h4></figcaption></figure><p>The effect seems to be rather simple, a semi transparent circle starts
 expanding where the tile was touched, only to start fading out before it
 reaches its maximum size. If we take a closer look we can also see that the
 expansion doesn&rsquo;t seem to be uniform, it seems to expand rather quickly at
-first and then slows down towards the end.</p>
-<h2 id="constructing-the-ripple-effect">Constructing the ripple effect</h2>
-<p>Before we start writing any code we have to decide how we are going to be
+first and then slows down towards the end.</p><h2 id=constructing-the-ripple-effect>Constructing the ripple effect</h2><p>Before we start writing any code we have to decide how we are going to be
 implementing this. Is it going to be a subclass of a particular UIView? Is it
 going to be a new type of UIView that we can add as a child? I opted for none
 of these, instead I decided extending UIView with a category would be a
 simple but effective idea. By creating a new category we can add this effect to
-any UIView seamlessly and without any trouble.</p>
-<p>Now that we know where this is going to be coded we need to figure out an API
+any UIView seamlessly and without any trouble.</p><p>Now that we know where this is going to be coded we need to figure out an API
 for this animation. For now this implementation will be uncomplicated.
-For the animation there are a few things we need to define.</p>
-<ul>
-<li>A position to serve as our starting point for our animation.</li>
-<li>The color we want our ripple to have.</li>
-<li>How big we want our ripple to be.</li>
-<li>How fast we want it to expand, or rather, how long we want our animation to
-last.</li>
-<li>When the ripple should start fading.</li>
-</ul>
-<p>At the end of this post you can find a link to a repository holding all this
-code, but lets see how to build this first.</p>
-<p>Our <code>UIView</code> Category will look like this:</p>
-<script type="application/javascript" src="https://gist.github.com/maurodec/08beefc7b8501f23b0afe59c53f89d75.js"></script>
-
-<p>Our animation will be taking place in a new <code>CAShapeLayer</code>. This new layer will
+For the animation there are a few things we need to define.</p><ul><li>A position to serve as our starting point for our animation.</li><li>The color we want our ripple to have.</li><li>How big we want our ripple to be.</li><li>How fast we want it to expand, or rather, how long we want our animation to
+last.</li><li>When the ripple should start fading.</li></ul><p>At the end of this post you can find a link to a repository holding all this
+code, but lets see how to build this first.</p><p>Our <code>UIView</code> Category will look like this:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec><span style=display:flex><span><span style=color:#00a8c8>@interface</span> <span style=color:#75af00>UIView</span> <span style=color:#111>(SimpleRipple)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:red>-</span> <span style=color:red>(</span><span style=color:maroon>void</span><span style=color:red>)</span><span style=color:#75af00>rippleStartingAt:</span><span style=color:red>(</span><span style=color:#111>CGPoint</span><span style=color:red>)</span><span style=color:#111>origin</span>
+</span></span><span style=display:flex><span>               <span style=color:#75af00>withColor:</span><span style=color:red>(</span><span style=color:#111>UIColor</span> <span style=color:#f92672>*</span><span style=color:red>)</span><span style=color:#111>color</span>
+</span></span><span style=display:flex><span>                <span style=color:#75af00>duration:</span><span style=color:red>(</span><span style=color:#111>NSTimeInterval</span><span style=color:red>)</span><span style=color:#111>duration</span>
+</span></span><span style=display:flex><span>                  <span style=color:#75af00>radius:</span><span style=color:red>(</span><span style=color:#111>CGFloat</span><span style=color:red>)</span><span style=color:#111>radius</span>
+</span></span><span style=display:flex><span>               <span style=color:#75af00>fadeAfter:</span><span style=color:red>(</span><span style=color:#111>NSTimeInterval</span><span style=color:red>)</span><span style=color:#111>fadeAfter</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00a8c8>@end</span>
+</span></span></code></pre></td></tr></table></div></div><p>Our animation will be taking place in a new <code>CAShapeLayer</code>. This new layer will
 sit behind all other layers so that it doesn&rsquo;t cover any of the content of the
 <code>UIView</code>. We will then add a <code>CABasicAnimation</code> that will transform a path.
 This path will be the actual ripple, it will go from a tiny circle to the size
-we specified as one of our parameters.</p>
-<p>This is a simplified version of how to do it:</p>
-<script type="application/javascript" src="https://gist.github.com/maurodec/0b4c1989cab07dddb071046f91896121.js"></script>
-
-<p>We will do the same for the fade out effect in a similar manner:</p>
-<script type="application/javascript" src="https://gist.github.com/maurodec/1de86b46518ace12e343a028adee9999.js"></script>
-
-<p>Finally, once we are done with our animations we can remove our ripple
+we specified as one of our parameters.</p><p>This is a simplified version of how to do it:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec><span style=display:flex><span><span style=color:#111>CAShapeLayer</span> <span style=color:#f92672>*</span><span style=color:#111>rippleLayer</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>CAShapeLayer</span> <span style=color:#111>layer</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#111>UIBezierPath</span> <span style=color:#f92672>*</span><span style=color:#111>startPath</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>UIBezierPath</span> <span style=color:#111>bezierPathWithArcCenter</span><span style=color:red>:</span><span style=color:#111>origin</span>
+</span></span><span style=display:flex><span>                                                         <span style=color:#111>radius</span><span style=color:red>:</span><span style=color:#111>startRadius</span>
+</span></span><span style=display:flex><span>                                                     <span style=color:#111>startAngle</span><span style=color:red>:</span><span style=color:#ae81ff>0</span> <span style=color:#111>endAngle</span><span style=color:red>:</span><span style=color:#111>FULL</span>
+</span></span><span style=display:flex><span>                                                      <span style=color:#111>clockwise</span><span style=color:red>:</span><span style=color:#111>YES</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span><span style=color:#111>UIBezierPath</span> <span style=color:#f92672>*</span><span style=color:#111>endPath</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>UIBezierPath</span> <span style=color:#111>bezierPathWithArcCenter</span><span style=color:red>:</span><span style=color:#111>origin</span>
+</span></span><span style=display:flex><span>                                                       <span style=color:#111>radius</span><span style=color:red>:</span><span style=color:#111>endRadius</span>
+</span></span><span style=display:flex><span>                                                   <span style=color:#111>startAngle</span><span style=color:red>:</span><span style=color:#ae81ff>0</span> <span style=color:#111>endAngle</span><span style=color:red>:</span><span style=color:#111>FULL</span>
+</span></span><span style=display:flex><span>                                                    <span style=color:#111>clockwise</span><span style=color:red>:</span><span style=color:#111>YES</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#111>CABasicAnimation</span> <span style=color:#f92672>*</span><span style=color:#111>rippleAnimation</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>CABasicAnimation</span> <span style=color:#111>animationWithKeyPath</span><span style=color:red>:</span><span style=color:#d88200>@&#34;path&#34;</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span><span style=color:#111>rippleAnimation</span><span style=color:red>.</span><span style=color:#111>fromValue</span> <span style=color:#f92672>=</span> <span style=color:red>(</span><span style=color:maroon>id</span><span style=color:red>)(</span><span style=color:#111>startPath</span><span style=color:red>.</span><span style=color:#111>CGPath</span><span style=color:red>);</span>
+</span></span><span style=display:flex><span><span style=color:#111>rippleAnimation</span><span style=color:red>.</span><span style=color:#111>toValue</span> <span style=color:#f92672>=</span> <span style=color:red>(</span><span style=color:maroon>id</span><span style=color:red>)(</span><span style=color:#111>endPath</span><span style=color:red>.</span><span style=color:#111>CGPath</span><span style=color:red>);</span>
+</span></span><span style=display:flex><span><span style=color:#111>rippleAnimation</span><span style=color:red>.</span><span style=color:#111>duration</span> <span style=color:#f92672>=</span> <span style=color:#111>duration</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:red>[</span><span style=color:#111>self</span><span style=color:red>.</span><span style=color:#111>layer</span> <span style=color:#111>insertSublayer</span><span style=color:red>:</span><span style=color:#111>rippleLayer</span> <span style=color:#111>atIndex</span><span style=color:red>:</span><span style=color:#ae81ff>0</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span><span style=color:red>[</span><span style=color:#111>rippleLayer</span> <span style=color:#111>addAnimation</span><span style=color:red>:</span><span style=color:#111>rippleAnimation</span> <span style=color:#111>forKey</span><span style=color:red>:</span><span style=color:#111>nil</span><span style=color:red>];</span>
+</span></span></code></pre></td></tr></table></div></div><p>We will do the same for the fade out effect in a similar manner:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec><span style=display:flex><span><span style=color:#111>CABasicAnimation</span> <span style=color:#f92672>*</span><span style=color:#111>fadeAnimation</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>CABasicAnimation</span> <span style=color:#111>animationWithKeyPath</span><span style=color:red>:</span><span style=color:#d88200>@&#34;opacity&#34;</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span><span style=color:#111>fadeAnimation</span><span style=color:red>.</span><span style=color:#111>duration</span> <span style=color:#f92672>=</span> <span style=color:#111>duration</span> <span style=color:#f92672>-</span> <span style=color:#111>fadeAfter</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span><span style=color:#111>fadeAnimation</span><span style=color:red>.</span><span style=color:#111>fromValue</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>@1.0f</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span><span style=color:#111>fadeAnimation</span><span style=color:red>.</span><span style=color:#111>toValue</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>@0.0f</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:red>[</span><span style=color:#111>rippleLayer</span> <span style=color:#111>addAnimation</span><span style=color:red>:</span><span style=color:#111>fadeAnimation</span> <span style=color:#111>forKey</span><span style=color:red>:</span><span style=color:#111>nil</span><span style=color:red>];</span>
+</span></span></code></pre></td></tr></table></div></div><p>Finally, once we are done with our animations we can remove our ripple
 animation from our <code>UIView</code>. There is a small catch though. Normally we would
 use a <code>CAAnimationDelegate</code> and implement the appropriate callback, however we
 would have to either store a reference to our newly added layer or we would
@@ -127,42 +102,22 @@ have to iterate through the sublayers and find the corresponding layer.
 This would also mean we cannot (at least not easily) have more than one ripple
 animation going at the same time. Thus we are going to go for a very simple
 solution, we will enqueue a block of code to execute when the animations are
-done and get rid of the ripple layer in that block.</p>
-<script type="application/javascript" src="https://gist.github.com/maurodec/339ad058447bf491185e9c90ab5e36c3.js"></script>
-
-<h2 id="the-end-result">The end result</h2>
-<p><a href="https://github.com/maurodec/SimpleRipple">In this repository</a> you can find the
-<a href="https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m">full implementation</a>
+done and get rid of the ripple layer in that block.</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec><span style=display:flex><span><span style=color:#111>dispatch_after</span><span style=color:red>(</span><span style=color:#111>dispatch_time</span><span style=color:red>(</span><span style=color:#111>DISPATCH_TIME_NOW</span><span style=color:red>,</span> <span style=color:#111>duration</span> <span style=color:#f92672>*</span> <span style=color:#111>NSEC_PER_SEC</span><span style=color:red>),</span> <span style=color:#111>dispatch_get_main_queue</span><span style=color:red>(),</span> <span style=color:#f92672>^</span><span style=color:red>{</span>
+</span></span><span style=display:flex><span>    <span style=color:red>[</span><span style=color:#111>rippleLayer</span> <span style=color:#111>removeAllAnimations</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span>    <span style=color:red>[</span><span style=color:#111>rippleLayer</span> <span style=color:#111>removeFromSuperlayer</span><span style=color:red>];</span>
+</span></span><span style=display:flex><span><span style=color:red>});</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=the-end-result>The end result</h2><p><a href=https://github.com/maurodec/SimpleRipple>In this repository</a> you can find the
+<a href=https://github.com/maurodec/SimpleRipple/blob/master/SimpleRipple/UIView%2BSimpleRipple.m>full implementation</a>
 full with comments and an example application. The example consists of
 two sliders that will control the ripple&rsquo;s duration and radius and a button to
 test it out. If you look closer (and not that closer, really) you can also see
-that the two sliders will also show a ripple when they are touched.</p>
-<figure><img src="/static/img/simpleripple/ripple.gif"/><figcaption>
-            <h4>The Example App</h4>
-        </figcaption>
-</figure>
-
-<p>If you find any bugs or can think of improvements please feel free to submit
-a pull request.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Replicating what Google did with Material Design on iOS was pretty
+that the two sliders will also show a ripple when they are touched.</p><figure><img src=/static/img/simpleripple/ripple.gif><figcaption><h4>The Example App</h4></figcaption></figure><p>If you find any bugs or can think of improvements please feel free to submit
+a pull request.</p><h2 id=conclusion>Conclusion</h2><p>Replicating what Google did with Material Design on iOS was pretty
 straightforward. All it took was creating two <code>CABasicAnimation</code> and adding
 them to a new sublayer in the desired <code>UIView</code>. Categories in Objective-C
 (or Extensions in Swift) also help make the core more generic and easier to
-use.</p>
-    </div>
-
-      </div>
-    </div>
-
-    <footer>
-      <div id=footer-content>
-        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
-        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
-</div>
-
-    </footer>
-  </body>
-
-
-</html>
+use.</p></div></div></div><footer><div id=footer-content><p>Made with ❤️ by Mauro de Carvalho using <a href=https://gohugo.io/>Hugo</a>.</p><p><a href=https://github.com/maurodec>Github</a> &#9679 mauro@maurodec.com &#9679 <a href=https://www.linkedin.com/in/maurodec/>LinkedIn</a></p></div></footer></body></html>

@@ -1,180 +1,162 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/static/favicon/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/static/favicon/manifest.json">
-<link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/static/favicon/favicon.ico">
-<meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/style.css">
-    <title>
-      
-    Python Classes, namedtuples and __slots__ - maurodec.com
-
-    </title>
-  </head>
-
-  <body>
-    <div id="content">
-      <header>
-    <div class="highlight"></div>
-    <div class="navbar">
-        <a class="pull-left" href="/">Home</a>
-        <div class="pull-right navbar-extra">
-            <a href="/blog/">Blog</a>
-            <a href="/about/">About me</a>
-            <a href="https://github.com/maurodec/maurodec.github.io">Source</a>
-        </div>
-    </div>
-</header>
-
-
-      <div id="main">
-        
-
-    <h1 class="post-title"><a href="http://maurodec.com/blog/classes-namedtuples-slots/">Python Classes, namedtuples and __slots__</a></h1>
-
-    <div id="post-metadata">
-    <span class="date-container extra-info">
-        April 29 - 2018
-    </span>
-
-    <div class="tag-container">
-        
-            <span class="tag">Python</span>
-        
-    </div>
-</div>
-
-    <div id="post-content">
-        <p>Data types are needed in pretty much every program that needs to store and
+<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.b7ba360344d296c7ba210239ede4128485b60a5b141b4de7e987b01937611386.css><title>Python Classes, namedtuples and __slots__ - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
+<a href=/about/>About me</a>
+<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=post-title><a href=https://maurodec.com/blog/classes-namedtuples-slots/>Python Classes, namedtuples and __slots__</a></h1><div id=post-metadata><span class="date-container extra-info">April 29 - 2018</span><div class=tag-container><span class=tag>Python</span></div></div><div id=post-content><p>Data types are needed in pretty much every program that needs to store and
 manipulate data. These types usually have little to no behavior and simply
 exist to keep track of information in a structured and orderly way. Recently,
-<a href="https://www.python.org/dev/peps/pep-0557/">PEP 557 (Data Classes)</a> was
-accepted, however, it won&rsquo;t appear until Python 3.7.</p>
-<p>In this Blog Post we will explore what options currently exist in Python 2.7
-and 3.6 and how they differ from each other.</p>
-<h2 id="why-data-classes">Why Data Classes</h2>
-<p>Pretty much every program needs to keep track of information and structure it
+<a href=https://www.python.org/dev/peps/pep-0557/>PEP 557 (Data Classes)</a> was
+accepted, however, it won&rsquo;t appear until Python 3.7.</p><p>In this Blog Post we will explore what options currently exist in Python 2.7
+and 3.6 and how they differ from each other.</p><h2 id=why-data-classes>Why Data Classes</h2><p>Pretty much every program needs to keep track of information and structure it
 in some particular way so that it&rsquo;s manageable. If the information that needs
 holding is not much, a simple tuple or dictionary may suffice. These two types
 are very simple and they do the job, albeit in different ways. Although they
 technically work, solving problems with tuples and dictionaries is a nightmare
 once you realize you can&rsquo;t really customize instance creation/initialization
 or change the default behavior (easily at least). They may be good for simple
-cases, but it does not scale with complexity.</p>
-<p>This is where it makes sense to have classes as data containers. You can add
+cases, but it does not scale with complexity.</p><p>This is where it makes sense to have classes as data containers. You can add
 as much data as you please, change initialization behavior, override dunder
 methods, etc. Creating new classes as data containers is a good solution then
 (some people argue that Data Classes are bad in the grand scheme of Object
 Orientation, but that&rsquo;s a discussion for another time), as they provide
-flexibility and maintainability without any apparent drawbacks.</p>
-<p>It is important to keep in mind that class instances will store any attributes
+flexibility and maintainability without any apparent drawbacks.</p><p>It is important to keep in mind that class instances will store any attributes
 inside a dictionary, <code>__dict__</code>. This means that instances will use a bit
 more memory than one would expect. There&rsquo;s detailed information about that in
-<a href="https://docs.python.org/3/reference/datamodel.html">The Python Documentation</a>.</p>
-<h2 id="introducing-namedtuples-and-__slots__">Introducing namedtuples and __slots__</h2>
-<p>Data Classes are fine for most cases, but Python also provides other mechanisms
-for holding data that slightly differ to plain classes.</p>
-<h3 id="namedtuples"><code>namedtuples</code></h3>
-<p>The <code>collections</code> module includes the <code>namedtuple</code> factory function.
+<a href=https://docs.python.org/3/reference/datamodel.html>The Python Documentation</a>.</p><h2 id=introducing-namedtuples-and-__slots__>Introducing namedtuples and __slots__</h2><p>Data Classes are fine for most cases, but Python also provides other mechanisms
+for holding data that slightly differ to plain classes.</p><h3 id=namedtuples><code>namedtuples</code></h3><p>The <code>collections</code> module includes the <code>namedtuple</code> factory function.
 Calling <code>namedtuple</code> will simply return a new tuple subclass that allows
 accessing its fields by name instead of just by index, this makes <code>namedtuple</code>
 a step up from plain tuples. They are also memory efficient as they do do not
 have a <code>__dict__</code> field to hold arbitrary values. If all you need is an
 immutable data container without any behavior then <code>namedtuple</code> might be a
-better alternative to creating a new class.</p>
-<p><code>namedtuples</code> are immutable, which means that if the value of one of the fields
+better alternative to creating a new class.</p><p><code>namedtuples</code> are immutable, which means that if the value of one of the fields
 needs to be changed (or if it is not known at creation time) then a new
 instance has to be created and all the fields copied. This also means that
 inheritance will have to be used if you want to add any behavior to your newly
-created types.</p>
-<p>You can see a couple of examples of <code>namedtuples</code> in action in the
-<a href="https://github.com/python/cpython/blob/master/Lib/urllib/parse.py"><code>urllib</code></a>
+created types.</p><p>You can see a couple of examples of <code>namedtuples</code> in action in the
+<a href=https://github.com/python/cpython/blob/master/Lib/urllib/parse.py><code>urllib</code></a>
 module as well as in the
-<a href="https://github.com/python/cpython/blob/master/Lib/tokenize.py"><code>tokenize</code></a>
-module.</p>
-<h3 id="__slots__"><code>__slots__</code></h3>
-<p>Using <code>__slots__</code> is another option. if a <code>__slots__</code> list or tuple is defined,
+<a href=https://github.com/python/cpython/blob/master/Lib/tokenize.py><code>tokenize</code></a>
+module.</p><h3 id=__slots__><code>__slots__</code></h3><p>Using <code>__slots__</code> is another option. if a <code>__slots__</code> list or tuple is defined,
 then a class will not have a <code>__dict__</code> to store arbitrary values, thus
-saving memory. Instead, only the attributes defined in <code>__slots__</code> can be set.</p>
-<p>Instances of these classes can have their attributes mutated normally and
+saving memory. Instead, only the attributes defined in <code>__slots__</code> can be set.</p><p>Instances of these classes can have their attributes mutated normally and
 methods can be defined as they normally would. Classes with <code>__slots__</code> are
-halfway between using a <code>namedtuple</code> and a regular class.</p>
-<p>You can see an example of this in the
-<a href="https://github.com/python/cpython/blob/master/Lib/tarfile.py"><code>tarinfo</code> class</a>.</p>
-<h2 id="a-simple-benchmark">A simple benchmark</h2>
-<p>So far we have only mentioned <code>namedtuple</code> and <code>__slots__</code> are more memory
+halfway between using a <code>namedtuple</code> and a regular class.</p><p>You can see an example of this in the
+<a href=https://github.com/python/cpython/blob/master/Lib/tarfile.py><code>tarinfo</code> class</a>.</p><h2 id=a-simple-benchmark>A simple benchmark</h2><p>So far we have only mentioned <code>namedtuple</code> and <code>__slots__</code> are more memory
 efficient, but it&rsquo;s better to actually see it in action. we will create and run
 a simple script to measure memory usage, we will then plot and compare. While
 the measurements we will be taking are not 100% accurate, they should be good
-enough to take a look at how they all perform.</p>
-<p>If you want to run this script yourself you will have to install <code>psutil</code> as a
-dependency.</p>
-<script type="application/javascript" src="https://gist.github.com/maurodec/963edefaec4500c02aecff1f0441a063.js"></script>
-
-<h3 id="what-should-we-expect-to-see">What should we expect to see?</h3>
-<p>The benchmark of course is not perfect as we depend on things like the garbage
+enough to take a look at how they all perform.</p><p>If you want to run this script yourself you will have to install <code>psutil</code> as a
+dependency.</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python2 data-lang=python2><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>gc</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>os</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> <span style=color:#111>collections</span> <span style=color:#f92672>import</span> <span style=color:#111>namedtuple</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>psutil</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#111>NamedtupleDataClass</span> <span style=color:#f92672>=</span> <span style=color:#111>namedtuple</span><span style=color:red>(</span><span style=color:#d88200>&#39;NamedtupleDataClass&#39;</span><span style=color:red>,</span> <span style=color:red>[</span><span style=color:#d88200>&#39;int1&#39;</span><span style=color:red>,</span> <span style=color:#d88200>&#39;int2&#39;</span><span style=color:red>,</span> <span style=color:#d88200>&#39;int3&#39;</span><span style=color:red>])</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00a8c8>class</span> <span style=color:#75af00>NormalDataClass</span><span style=color:red>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>__init__</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#111>int1</span><span style=color:red>,</span> <span style=color:#111>int2</span><span style=color:red>,</span> <span style=color:#111>int3</span><span style=color:red>):</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int1</span> <span style=color:#f92672>=</span> <span style=color:#111>int1</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int2</span> <span style=color:#f92672>=</span> <span style=color:#111>int2</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int3</span> <span style=color:#f92672>=</span> <span style=color:#111>int3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00a8c8>class</span> <span style=color:#75af00>SlotsDataClass</span><span style=color:red>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>__slots__</span> <span style=color:#f92672>=</span> <span style=color:red>(</span><span style=color:#d88200>&#39;int1&#39;</span><span style=color:red>,</span> <span style=color:#d88200>&#39;int2&#39;</span><span style=color:red>,</span> <span style=color:#d88200>&#39;int3&#39;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>__init__</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#111>int1</span><span style=color:red>,</span> <span style=color:#111>int2</span><span style=color:red>,</span> <span style=color:#111>int3</span><span style=color:red>):</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int1</span> <span style=color:#f92672>=</span> <span style=color:#111>int1</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int2</span> <span style=color:#f92672>=</span> <span style=color:#111>int2</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>int3</span> <span style=color:#f92672>=</span> <span style=color:#111>int3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#111>current_process</span> <span style=color:#f92672>=</span> <span style=color:#111>psutil</span><span style=color:#f92672>.</span><span style=color:#111>Process</span><span style=color:red>(</span><span style=color:#111>os</span><span style=color:#f92672>.</span><span style=color:#111>getpid</span><span style=color:red>())</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>log_memory</span><span style=color:red>(</span><span style=color:#111>dataclass</span><span style=color:red>):</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>gc</span><span style=color:#f92672>.</span><span style=color:#111>collect</span><span style=color:red>()</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>memory_every</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>10000</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>total_values</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>1000000</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#111>created</span> <span style=color:#f92672>=</span> <span style=color:red>[</span><span style=color:#111>None</span><span style=color:red>]</span> <span style=color:#f92672>*</span> <span style=color:#111>total_values</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#00a8c8>print</span><span style=color:red>(</span><span style=color:#111>f</span><span style=color:#d88200>&#39;0,{current_process.memory_info().vms}&#39;</span><span style=color:red>,</span> <span style=color:#111>flush</span><span style=color:#f92672>=</span><span style=color:#111>True</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#00a8c8>for</span> <span style=color:#111>i</span> <span style=color:#f92672>in</span> <span style=color:#111>range</span><span style=color:red>(</span><span style=color:#111>total_values</span><span style=color:red>):</span>
+</span></span><span style=display:flex><span>        <span style=color:#111>created</span><span style=color:red>[</span><span style=color:#111>i</span><span style=color:red>]</span> <span style=color:#f92672>=</span> <span style=color:#111>dataclass</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>,</span> <span style=color:#ae81ff>3</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>        <span style=color:#00a8c8>if</span> <span style=color:red>(</span><span style=color:#111>i</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:red>)</span> <span style=color:#f92672>%</span> <span style=color:#111>memory_every</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span><span style=color:red>:</span>
+</span></span><span style=display:flex><span>            <span style=color:#00a8c8>print</span><span style=color:red>(</span><span style=color:#111>f</span><span style=color:#d88200>&#39;{i+1},{current_process.memory_info().vms}&#39;</span><span style=color:red>,</span> <span style=color:#111>flush</span><span style=color:#f92672>=</span><span style=color:#111>True</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00a8c8>if</span> <span style=color:#111>__name__</span> <span style=color:#f92672>==</span> <span style=color:#d88200>&#39;__main__&#39;</span><span style=color:red>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>log_memory</span><span style=color:red>(</span><span style=color:#111>NormalDataClass</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>log_memory</span><span style=color:red>(</span><span style=color:#111>NamedtupleDataClass</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#111>log_memory</span><span style=color:red>(</span><span style=color:#111>SlotsDataClass</span><span style=color:red>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=what-should-we-expect-to-see>What should we expect to see?</h3><p>The benchmark of course is not perfect as we depend on things like the garbage
 collector freeing memory correctly, however, what really matters for each case
 is how memory usage scales. Memory use will probably grow linearly, but what is
 really important is to take a look at the slope in each of the three cases. I
 expect the regular class to take a lot more memory than the other two which I
-expect will look pretty much the same.</p>
-<p>Without further ado&hellip; the results!</p>
-<figure><img src="/static/img/slots/chart.png"/>
-</figure>
-
-<p>In the graph we can see the Data Class in blue, namedtuple in yellow and
+expect will look pretty much the same.</p><p>Without further ado&mldr; the results!</p><figure><img src=/static/img/slots/chart.png></figure><p>In the graph we can see the Data Class in blue, namedtuple in yellow and
 <code>__slots__</code> in red. As expected the three show up as lines, with regular Data
 classes taking a lot more memory than instances that do not contain a
 <code>__dict__</code>. However, what is most surprising is that <code>namedtuple</code> instances
 take a bit more memory than instances with <code>__slots__</code>. If we look at the
-<a href="https://github.com/python/cpython/blob/master/Lib/collections/__init__.py">CPython source code</a>
+<a href=https://github.com/python/cpython/blob/master/Lib/collections/__init__.py>CPython source code</a>
 and see what is happening internally, we can probably guess it is because by
 default they implement some dunder methods that were not added in the example.
 This however is a guess and should probably be investigated in detail to figure
-out where the memory is going.</p>
-<h2 id="some-questions">Some questions&hellip;</h2>
-<p>Using <code>__slots__</code> seems pretty beneficial, however, there are some questions
-that have not been answered here:</p>
-<ul>
-<li>What happens if a <code>__dict__</code> attribute is added?</li>
-<li>What happens when subclassing classes with <code>__slots__</code>? What if there&rsquo;s
-multiple inheritance in the mix?</li>
-<li>How does this affect long term maintainability of code?</li>
-<li>Does this have any effect on meta classes?</li>
-</ul>
-<p>There is an excellent Stack Overflow post
-<a href="https://stackoverflow.com/questions/472000/usage-of-slots">here</a> that
-addresses about the use of <code>__slots__</code> and some of these possible caveats.</p>
-<h2 id="tldr">tl;dr</h2>
-<p>When needing Data Classes, if the number of objects that need to be created is
+out where the memory is going.</p><h2 id=some-questions>Some questions&mldr;</h2><p>Using <code>__slots__</code> seems pretty beneficial, however, there are some questions
+that have not been answered here:</p><ul><li>What happens if a <code>__dict__</code> attribute is added?</li><li>What happens when subclassing classes with <code>__slots__</code>? What if there&rsquo;s
+multiple inheritance in the mix?</li><li>How does this affect long term maintainability of code?</li><li>Does this have any effect on meta classes?</li></ul><p>There is an excellent Stack Overflow post
+<a href=https://stackoverflow.com/questions/472000/usage-of-slots>here</a> that
+addresses about the use of <code>__slots__</code> and some of these possible caveats.</p><h2 id=tldr>tl;dr</h2><p>When needing Data Classes, if the number of objects that need to be created is
 large, memory usage can be reduces drastically and easily by using <code>namedtuples</code>
-or classes implementing <code>__slots__</code>.</p>
-    </div>
-
-      </div>
-    </div>
-
-    <footer>
-      <div id=footer-content>
-        <p>Made with ❤️ by Mauro de Carvalho using <a href="https://gohugo.io/">Hugo</a>.</p>
-        <p><a href="https://github.com/maurodec">Github</a> &#9679 mauro@maurodec.com &#9679 <a href="https://www.linkedin.com/in/maurodec/">LinkedIn</a> </p>
-</div>
-
-    </footer>
-  </body>
-
-
-</html>
+or classes implementing <code>__slots__</code>.</p></div></div></div><footer><div id=footer-content><p>Made with ❤️ by Mauro de Carvalho using <a href=https://gohugo.io/>Hugo</a>.</p><p><a href=https://github.com/maurodec>Github</a> &#9679 mauro@maurodec.com &#9679 <a href=https://www.linkedin.com/in/maurodec/>LinkedIn</a></p></div></footer></body></html>
