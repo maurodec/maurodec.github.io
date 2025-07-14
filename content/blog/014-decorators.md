@@ -36,7 +36,15 @@ to remember:
 A decorator will wrap a function and add some behavior (before or after) the
 original function. Probably the simplest way of decorating a function is:
 
-{{< gist maurodec 40325afb2da14657400857267f6fd944 >}}
+```python
+def say_name():
+    print("I'm Mauro.")
+
+def decorated():
+    print("I'm going to say my name...")
+    say_name()
+    print("I just said my name.")
+```
 
 This works, but it's pretty clunky. There's the obvious problem that we need to
 remember to call the `decorated` function instead of the original. Of course we
@@ -51,11 +59,24 @@ function that takes a function to be wrapped and whose return value will be
 the decorated function. This sounds like a bit of a tongue-twister, it is
 better understood when seen in action.
 
-{{< gist maurodec e5ce531f87fe6163ee0ee8e4a4d2887f >}}
+```python
+def say_name():
+    print("I'm Mauro.")
+
+def decorator(function_to_wrap):
+    def wrapped():
+        print("I'm going to call the original function...")
+        function_to_wrap()
+        print("I just called the original function.")
+
+    return wrapped
+
+wrapped_say_name = decorator(say_name)
+```
 
 If we now call `wrapped_say_name` we will get:
 
-```
+```plaintext {lineNos=false}
 I'm going to call the original function...
 I'm Mauro.
 I just called the original function.
@@ -87,11 +108,31 @@ Let's look at a more real life example of decorating a function. Let's create
 a decorator that will time how long a function takes to execute and will
 print it out.
 
-{{< gist maurodec 8d264374c8a2f928d24cfbdb5a0c5143 >}}
+```python
+import time
+
+def division(a, b):
+    return a / b
+
+def timed(f):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = f(*args, **kwargs)
+        end = time.time()
+        print(f'Function took {end - start} seconds.')
+
+        return result
+    return wrapper
+
+timed_division = timed(division)
+
+print(timed_division(1, 2))
+print(timed_division(10, 2))
+```
 
 The output was:
 
-```
+```plaintext {lineNos=false}
 Function took 1.9073486328125e-06 seconds.
 0.5
 Function took 9.5367431640625e-07 seconds.
@@ -119,12 +160,36 @@ original exception.
 
 A fixed version of our decorator could look like:
 
-{{< gist maurodec 0d50b5a78a5ff111b7b78a7c0f36a511 >}}
+```python
+def timed(f):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        try:
+            result = f(*args, **kwargs)
+        except:
+            end = time.time()
+            print(f'Function call failed after {end - start} seconds.')
+            raise
+        else:
+            end = time.time()
+            print(f'Function took {end - start} seconds.')
+            return result
+    return wrapper
+```
 
 Something interesting about exceptions raised in decorators is that when
 looking at the stack trace we can see the decorator is there.
 
-{{< gist maurodec e211af81e6171a803f501eb1a86c1df4 >}}
+```plaintext {lineNos=false}
+Traceback (most recent call last):
+  File "/Users/mauro/Desktop/timed.py", line 24, in <module>
+    print(timed_division(1, 0))
+  File "/Users/mauro/Desktop/timed.py", line 10, in wrapper
+    result = f(*args, **kwargs)
+  File "/Users/mauro/Desktop/timed.py", line 4, in division
+    return a / b
+ZeroDivisionError: division by zero
+```
 
 Now that we've understood what decorators can do, let's look at some syntactic
 sugar we can use and at some more complex examples.
@@ -136,7 +201,11 @@ definition with a `@` followed by the decorator name. This can be used
 in module-level functions or even in class methods. If we go back to our
 previous example, we can simply define our `division` function as:
 
-{{< gist maurodec 82f01eba4502b27eb758400fddbb4fcb >}}
+```python
+@timed
+def division(a, b):
+    return a / b
+```
 
 If we do this, our definition of `division` is replaced by the decorated
 function, so in this case using `@timed` replaces `division` with what we
@@ -154,11 +223,40 @@ from before and make it so that it can print a shorter version of the message.
 For brevity's sake we will remove the exception handling. This new decorator
 will look like so:
 
-{{< gist maurodec 35f2478423a19393e5cf457feac75cf8 >}}
+```python
+import time
+
+def timed(verbose=True):
+    def decorator(f):
+        def wrapper(*args, **kwargs):
+            start = time.time()
+            result = f(*args, **kwargs)
+            end = time.time()
+
+            if verbose:
+                print(f'Function took {end - start} seconds.')
+            else:
+                print(f'{end - start}s.')
+
+            return result
+        return wrapper
+    return decorator
+
+@timed()
+def division(a, b):
+    return a / b
+
+@timed(verbose=False)
+def quiet_division(a, b):
+    return a / b
+
+print(division(1, 2))
+print(quiet_division(1, 2))
+```
 
 This will output:
 
-```
+```plaintext {lineNos=false}
 Function call took 2.1457672119140625e-06 seconds.
 0.5
 1.1920928955078125e-06s.
@@ -178,7 +276,44 @@ instead of returning a function we can return a class instance that is also
 callable. Calling that class instance will return the decorated function. An
 alternative implementation of the decorator in this case could look like so:
 
-{{< gist maurodec a1a0e391255b07b9143a035415171bf2 >}}
+```python
+import time
+
+class timed:
+    def __init__(self, verbose=True):
+        self.verbose = verbose
+        self.decorated_f = None
+
+    def __call__(self, f):
+        self.decorated_f = f
+        return self.wrapper
+
+    def print_time(self, duration):
+        if self.verbose:
+            print(f'Function took {duration} seconds.')
+        else:
+            print(f'{duration}s.')
+
+    def wrapper(self, *args, **kwargs):
+        start = time.time()
+        result = self.decorated_f(*args, **kwargs)
+        end = time.time()
+
+        self.print_time(end - start)
+        return result
+
+
+@timed()
+def division(a, b):
+    return a / b
+
+@timed(verbose=False)
+def quiet_division(a, b):
+    return a / b
+
+print(division(1, 2))
+print(quiet_division(1, 2))
+```
 
 When we do `@timed()`, a new instance of the `timed` class is created and
 initialized with `verbose = false`. Then that instance is called with

@@ -127,7 +127,45 @@ Thread, via a `Message`, to update the UI. Our background Thread will live as
 long as out Activity is showing so we will handle creating and destroying it in
 the `onResume` and `onPause` methods of our activity respectively
 
-{{< gist maurodec 6c4d0ae50d179f3e8b5971da3c5587bd >}}
+```java
+public class MainActivity extends AppCompatActivity {
+    // This is a thread that will be doing work in the background. This thread will run as long as
+    // the activity is presented to the user. If the activity goes to the background then this thread is destroyed.
+    private BackgroundThread bgThread;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // The activity will no longer be presented to the user.
+        // Kill the background thread.
+        bgThread.interrupt();
+        bgThread = null;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // The activity was just created or is coming back to the foreground.
+        // the activity is presented to the user, so create a background thread to do work.
+        bgThread = new BackgroundThread();
+        bgThread.start();
+    }
+
+    // This is the background thread that will be doing work for us.
+    public class BackgroundThread extends Thread {
+        @Override
+        public void run() {
+          // We will generate random colors here
+        }
+    }
+}
+```
 
 Remember that switch we added to our activity? Well, it wasn't just for
 decoration. With that switch we will be telling our background Thread that we
@@ -143,7 +181,21 @@ This means we will need two `Handler`s, one for the Main Thread and one for the
 background Thread. Let's take a look at how we will handle messages in the Main
 Thread first:
 
-{{< gist maurodec 51d8d94f614f23f48749acccdcb273c0 >}}
+```java
+private View colorDisplay;
+
+// This Handler will take care of messages sent to the main thread (as it is created there).
+// Its job is to update the UI.
+private Handler uiThreadHandler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+        // Get the color that was sent to us.
+        int color = msg.arg1;
+        // Set it. this can only be done on the Main Thread.
+        colorDisplay.setBackgroundColor(color);
+    }
+};
+```
 
 The code is rather straightforward, however, there are two things we should
 look at here. The first is that we create and assign our `Handler` at the same
@@ -175,7 +227,44 @@ be avoided whenever possible as to avoid unnecessary overhead.
 We can now take a look at how the handler for the background Thread should be
 created:
 
-{{< gist maurodec 670cfc8762d8c79c8a6637976d35672c >}}
+```java
+public class BackgroundThread extends Thread {
+    private static final int BG_CHANGE_INTERVAL = 1 * 1000;
+
+    private static final int WORK = 1;
+    private static final int STOP = 0;
+
+    private Handler bgThreadHandler;
+
+    @Override
+    public void run() {
+        Looper.prepare();
+
+        this.bgThreadHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case STOP:
+                        // Stop, so remove all pending messages and just sit there idling.
+                        this.removeMessages(WORK);
+                        break;
+                    case WORK:
+                        // Obtain a message that we will send to the Main Thread.
+                        Message messageToUI = MainActivity.this.uiThreadHandler.obtainMessage();
+                        messageToUI.arg1 = getRandomColor();
+                        // Send the message to the Main Thread.
+                        MainActivity.this.uiThreadHandler.sendMessage(messageToUI);
+
+                        this.sendEmptyMessageDelayed(WORK, BG_CHANGE_INTERVAL);
+                        break;
+                }
+            }
+        };
+
+        Looper.loop();
+    }
+}
+```
 
 As with the Handler in the Main Thread, there are a few things to note here.
 For starters, we do not define the Handler the same way we did in the Main

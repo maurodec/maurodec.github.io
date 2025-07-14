@@ -1,3 +1,17 @@
-baseurl = "http://maurodec.com"
+baseurl = "https://maurodec.com"
 title = "Blog - maurodec.com"
 languageCode = "en-us"
+enableRobotsTXT = false
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    style = "RPGLE"
+    wrapperClass = "code-sample"
+    noClasses = true
+    lineNos = true
+    lineNumbersInTable = true
+    tabWidth = 4
+
+[minify]
+minifyOutput = true

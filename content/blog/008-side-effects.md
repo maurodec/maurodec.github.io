@@ -34,7 +34,7 @@ I always found performance problems to be interesting for some reason. I've
 come across some problems with really simple solutions (like applying the
 [Flyweight](https://en.wikipedia.org/wiki/Flyweight_pattern) pattern to avoid
 unnecessary object creation), while others have proven to be a lot more
-challenging (such as having to debug and fix polygon merging algorithms). 
+challenging (such as having to debug and fix polygon merging algorithms).
 
 For this particular case, I decided to go for simple and obvious optimizations
 and best practices first and delve into more complicated ones later. My first
@@ -66,7 +66,17 @@ inputs somehow disabled previous inputs (which was very very rare), no more
 than two iterations would be needed to make sure the form was valid. A _very_
 simple version of the algorithm looked like this:
 
-{{< gist maurodec c54989238a5cf6685d6e90d3171d2e9d >}}
+```javascript
+function setValid() {
+    var inputsChanged = false;
+
+    for (var question in form.questions) {
+      for (var input in question.inputs) {
+        inputsChanged = inputsChanged || isDisabled(input);
+      }
+    }
+}
+```
 
 This solution was pretty straight forward, we loaded forms, checked the number
 of iterations and they were indeed 2. We selected an input that would cause
@@ -76,14 +86,14 @@ work, notwithstanding, performance did not improve much.
 ## More optimizations and the real culprit, code smell
 
 Days passed, and more things were optimized, but performance still was not as
-expected. While adding some logging statements we accidentally found out that 
+expected. While adding some logging statements we accidentally found out that
 the `setValid` function was looping many times, as in, thousands of times for
 some forms, but why? This made no sense!
 We went through the code, tested things, but couldn't figure out what was
 wrong, it made no sense! Until finally... the problem was so obvious! It was in
 front of us the whole time but we failed to notice it! We were relying on side
 effects for things to work! The `isDisabled` function would not only tell us if
-an input was not disabled it would also actually go and disable it. Because 
+an input was not disabled it would also actually go and disable it. Because
 the `||` operator short circuits only the first input would be disabled, but
 subsequent inputs were totally ignored. This made it so that only one input was
 disabled per iteration instead of all (or most) of them. We felt like total

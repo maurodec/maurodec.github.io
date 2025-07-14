@@ -93,7 +93,55 @@ enough to take a look at how they all perform.
 If you want to run this script yourself you will have to install `psutil` as a
 dependency.
 
-{{< gist maurodec 963edefaec4500c02aecff1f0441a063 >}}
+```python2
+import gc
+import os
+
+from collections import namedtuple
+
+import psutil
+
+
+NamedtupleDataClass = namedtuple('NamedtupleDataClass', ['int1', 'int2', 'int3'])
+
+
+class NormalDataClass:
+    def __init__(self, int1, int2, int3):
+        self.int1 = int1
+        self.int2 = int2
+        self.int3 = int3
+
+
+class SlotsDataClass:
+    __slots__ = ('int1', 'int2', 'int3')
+
+    def __init__(self, int1, int2, int3):
+        self.int1 = int1
+        self.int2 = int2
+        self.int3 = int3
+
+
+current_process = psutil.Process(os.getpid())
+
+def log_memory(dataclass):
+    gc.collect()
+    memory_every = 10000
+    total_values = 1000000
+
+    created = [None] * total_values
+
+    print(f'0,{current_process.memory_info().vms}', flush=True)
+    for i in range(total_values):
+        created[i] = dataclass(1, 2, 3)
+        if (i + 1) % memory_every == 0:
+            print(f'{i+1},{current_process.memory_info().vms}', flush=True)
+
+
+if __name__ == '__main__':
+    log_memory(NormalDataClass)
+    log_memory(NamedtupleDataClass)
+    log_memory(SlotsDataClass)
+```
 
 ### What should we expect to see?
 

@@ -58,7 +58,17 @@ code, but lets see how to build this first.
 
 Our `UIView` Category will look like this:
 
-{{< gist maurodec 08beefc7b8501f23b0afe59c53f89d75 >}}
+```objectivec
+@interface UIView (SimpleRipple)
+
+- (void)rippleStartingAt:(CGPoint)origin
+               withColor:(UIColor *)color
+                duration:(NSTimeInterval)duration
+                  radius:(CGFloat)radius
+               fadeAfter:(NSTimeInterval)fadeAfter;
+
+@end
+```
 
 Our animation will be taking place in a new `CAShapeLayer`. This new layer will
 sit behind all other layers so that it doesn't cover any of the content of the
@@ -68,11 +78,37 @@ we specified as one of our parameters.
 
 This is a simplified version of how to do it:
 
-{{< gist maurodec 0b4c1989cab07dddb071046f91896121 >}}
+```objectivec
+CAShapeLayer *rippleLayer = [CAShapeLayer layer];
+
+UIBezierPath *startPath = [UIBezierPath bezierPathWithArcCenter:origin
+                                                         radius:startRadius
+                                                     startAngle:0 endAngle:FULL
+                                                      clockwise:YES];
+UIBezierPath *endPath = [UIBezierPath bezierPathWithArcCenter:origin
+                                                       radius:endRadius
+                                                   startAngle:0 endAngle:FULL
+                                                    clockwise:YES];
+
+CABasicAnimation *rippleAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+rippleAnimation.fromValue = (id)(startPath.CGPath);
+rippleAnimation.toValue = (id)(endPath.CGPath);
+rippleAnimation.duration = duration;
+
+[self.layer insertSublayer:rippleLayer atIndex:0];
+[rippleLayer addAnimation:rippleAnimation forKey:nil];
+```
 
 We will do the same for the fade out effect in a similar manner:
 
-{{< gist maurodec 1de86b46518ace12e343a028adee9999 >}}
+```objectivec
+CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+fadeAnimation.duration = duration - fadeAfter;
+fadeAnimation.fromValue = @1.0f;
+fadeAnimation.toValue = @0.0f;
+
+[rippleLayer addAnimation:fadeAnimation forKey:nil];
+```
 
 Finally, once we are done with our animations we can remove our ripple
 animation from our `UIView`. There is a small catch though. Normally we would
@@ -84,7 +120,12 @@ animation going at the same time. Thus we are going to go for a very simple
 solution, we will enqueue a block of code to execute when the animations are
 done and get rid of the ripple layer in that block.
 
-{{< gist maurodec 339ad058447bf491185e9c90ab5e36c3 >}}
+```objectivec
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    [rippleLayer removeAllAnimations];
+    [rippleLayer removeFromSuperlayer];
+});
+```
 
 ## The end result
 

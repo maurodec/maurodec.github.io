@@ -58,7 +58,17 @@ building the variable's name.
 
 A simplified pseudocode version of the function looks like:
 
-{{< gist maurodec e9ec8db07e87dd15cb786524b17edf54 >}}
+```python
+def read_from_environment(config, prefix):
+  for key, value in config:
+    if value is a dictionary:
+      config[key] = read_from_environment(value, prefix+key)
+    else:
+      config[key] = environment[key]
+  return config
+
+configuration = read_from_environment(configuration_template, '')
+```
 
 As you can see this has its own problems. Without any extra work, any `int`
 values will not be converted automatically, probably making it infuriatingly
@@ -74,7 +84,17 @@ pairs for us.  This is even simpler than reading.
 
 A simplified pseudocode version of the function looks like:
 
-{{< gist maurodec efe473036f1fc55aa20c3651fdf5d4ef >}}
+```python
+variables = {}
+def get_environ_vars(config, prefix):
+  for key, value in config:
+    if value is a dictionary:
+      get_environ_vars(value, prefix+key)
+    else:
+      variables[prefix+key] = value
+
+get_environ_vars(configuration, '')
+```
 
 After we have our dictionary of variable names as keys we can either
 `export` them or (in my case)
