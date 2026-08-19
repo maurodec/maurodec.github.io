@@ -1,0 +1,18 @@
+version: '3'
+
+vars:
+  # Path to a copy of the repo pointing to master
+  # TODO: Add validation
+  BUILD_DIR: ../maurodec.github.io
+
+tasks:
+  build:
+    desc: Build blog from source
+    cmds:
+      - hugo build -d "{{.BUILD_DIR}}" --cleanDestinationDir --gc
+      - cp LICENSE "{{.BUILD_DIR}}"/LICENSE
+      - cp CNAME "{{.BUILD_DIR}}"/CNAME
+
+  serve:
+    desc: Serve the blog
+    cmd: hugo serve -M
