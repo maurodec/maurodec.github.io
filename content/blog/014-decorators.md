@@ -366,7 +366,7 @@ Some commonly used decorators in the standard library include:
   and [`functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache)
   for caching method calls. The
   [implementation](https://github.com/python/cpython/blob/3.9/Lib/functools.py#L478)
-  if the latter is actually quite cool.
+  of the latter is actually quite cool.
 
 ## Decorating classes
 

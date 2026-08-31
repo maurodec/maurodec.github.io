@@ -1,12 +1,12 @@
 baseurl = "https://maurodec.com"
 title = "Blog - maurodec.com"
-languageCode = "en-us"
+locale = "en-us"
 enableRobotsTXT = false
 
 [markup]
   [markup.highlight]
     codeFences = true
-    style = "RPGLE"
+    style = "catppuccin-mocha"
     wrapperClass = "code-sample"
     noClasses = true
     lineNos = true
