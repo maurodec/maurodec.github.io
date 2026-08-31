@@ -1,6 +1,6 @@
-<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.b7ba360344d296c7ba210239ede4128485b60a5b141b4de7e987b01937611386.css><title>Python Decorators - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
-<a href=/about/>About me</a>
-<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=post-title><a href=https://maurodec.com/blog/decorators/>Python Decorators</a></h1><div id=post-metadata><span class="date-container extra-info">February 7 - 2021</span><div class=tag-container><span class=tag>Python</span></div></div><div id=post-content><p>Originally described in the &ldquo;Design Patterns: Elements of Reusable
+<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.f92950aa80a3901120f160e2d540b6ba60f988dc60b7e447ef87256c58e6c96e.css><title>Python Decorators - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
+<a href=/about/>About</a>
+<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=content-title>Python Decorators</h1><div id=post-metadata><span class="info-container extra-info">February 7 - 2021 <b>&#183;</b> <a href=https://maurodec.com/blog/decorators/>Permalink</a></span><div class=tag-container><span class=tag>Python</span></div></div><div id=post-content><p>Originally described in the &ldquo;Design Patterns: Elements of Reusable
 Object-Oriented Software&rdquo; book, decorators are a powerful design pattern that
 allows us to extend or augment an object&rsquo;s functionality. In this post I will
 show with some practical examples how this can be achieved in Python via the
@@ -14,20 +14,20 @@ to remember:</p><ul><li>Functions and classes are objects, and they can be passe
 arguments, functions can also return functions.</li><li>When we define nested functions, they will have access to the context they
 were defined in. This is basically a
 <a href=https://en.wikipedia.org/wiki/Closure_(computer_programming)>closure</a>.</li></ul><h2 id=building-the-concept-with-examples>Building the concept with examples</h2><p>A decorator will wrap a function and add some behavior (before or after) the
-original function. Probably the simplest way of decorating a function is:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>say_name</span><span style=color:red>():</span>
-</span></span><span style=display:flex><span>    <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I&#39;m Mauro.&#34;</span><span style=color:red>)</span>
+original function. Probably the simplest way of decorating a function is:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>say_name</span>():
+</span></span><span style=display:flex><span>    <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I&#39;m Mauro.&#34;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>decorated</span><span style=color:red>():</span>
-</span></span><span style=display:flex><span>    <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I&#39;m going to say my name...&#34;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>    <span style=color:#111>say_name</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>    <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I just said my name.&#34;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>decorated</span>():
+</span></span><span style=display:flex><span>    <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I&#39;m going to say my name...&#34;</span>)
+</span></span><span style=display:flex><span>    say_name()
+</span></span><span style=display:flex><span>    <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I just said my name.&#34;</span>)
 </span></span></code></pre></td></tr></table></div></div><p>This works, but it&rsquo;s pretty clunky. There&rsquo;s the obvious problem that we need to
 remember to call the <code>decorated</code> function instead of the original. Of course we
 could add something like <code>say_name = decorated</code> at the end of our code, but
@@ -37,31 +37,31 @@ but it&rsquo;s just not particularly useful.</p><p>If we consider we can pass fu
 more reusable way of decorating functions. We can write our decorator as a
 function that takes a function to be wrapped and whose return value will be
 the decorated function. This sounds like a bit of a tongue-twister, it is
-better understood when seen in action.</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>say_name</span><span style=color:red>():</span>
-</span></span><span style=display:flex><span>    <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I&#39;m Mauro.&#34;</span><span style=color:red>)</span>
+better understood when seen in action.</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>say_name</span>():
+</span></span><span style=display:flex><span>    <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I&#39;m Mauro.&#34;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>decorator</span><span style=color:red>(</span><span style=color:#111>function_to_wrap</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>wrapped</span><span style=color:red>():</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I&#39;m going to call the original function...&#34;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>function_to_wrap</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>&#34;I just called the original function.&#34;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>decorator</span>(function_to_wrap):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>wrapped</span>():
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I&#39;m going to call the original function...&#34;</span>)
+</span></span><span style=display:flex><span>        function_to_wrap()
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>print</span>(<span style=color:#a6e3a1>&#34;I just called the original function.&#34;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>wrapped</span>
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> wrapped
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#111>wrapped_say_name</span> <span style=color:#f92672>=</span> <span style=color:#111>decorator</span><span style=color:red>(</span><span style=color:#111>say_name</span><span style=color:red>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>If we now call <code>wrapped_say_name</code> we will get:</p><div class=code-sample><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>I&#39;m going to call the original function...
+</span></span><span style=display:flex><span>wrapped_say_name <span style=color:#89dceb;font-weight:700>=</span> decorator(say_name)
+</span></span></code></pre></td></tr></table></div></div><p>If we now call <code>wrapped_say_name</code> we will get:</p><div class=code-sample><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>I&#39;m going to call the original function...
 </span></span><span style=display:flex><span>I&#39;m Mauro.
 </span></span><span style=display:flex><span>I just called the original function.
 </span></span></code></pre></div><p>There&rsquo;s a few important things to note here:</p><ol><li>We are passing the <code>say_name</code> function as an argument to <code>decorator</code>.</li><li>The nested function, <code>wrapped</code>, has access to the context in which it was
@@ -77,45 +77,45 @@ here would be to take advantage of using
 <a href=https://stackoverflow.com/questions/36901/what-does-double-star-asterisk-and-star-asterisk-do-for-parameters><code>* and **</code></a>
 in function definitions.</p><p>Let&rsquo;s look at a more real life example of decorating a function. Let&rsquo;s create
 a decorator that will time how long a function takes to execute and will
-print it out.</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>time</span>
+print it out.</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">19
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#94e2d5>import</span> <span style=color:#fab387>time</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>timed</span><span style=color:red>(</span><span style=color:#111>f</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>wrapper</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>start</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>result</span> <span style=color:#f92672>=</span> <span style=color:#111>f</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>end</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;Function took </span><span style=color:#d88200>{</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:#d88200>}</span><span style=color:#d88200> seconds.&#39;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>timed</span>(f):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>wrapper</span>(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs):
+</span></span><span style=display:flex><span>        start <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>        result <span style=color:#89dceb;font-weight:700>=</span> f(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs)
+</span></span><span style=display:flex><span>        end <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;Function took </span><span style=color:#a6e3a1>{</span>end <span style=color:#89dceb;font-weight:700>-</span> start<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1> seconds.&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>return</span> <span style=color:#111>result</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>wrapper</span>
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>return</span> result
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> wrapper
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#111>timed_division</span> <span style=color:#f92672>=</span> <span style=color:#111>timed</span><span style=color:red>(</span><span style=color:#111>division</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>timed_division <span style=color:#89dceb;font-weight:700>=</span> timed(division)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>timed_division</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>timed_division</span><span style=color:red>(</span><span style=color:#ae81ff>10</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
-</span></span></code></pre></td></tr></table></div></div><p>The output was:</p><div class=code-sample><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Function took 1.9073486328125e-06 seconds.
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(timed_division(<span style=color:#fab387>1</span>, <span style=color:#fab387>2</span>))
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(timed_division(<span style=color:#fab387>10</span>, <span style=color:#fab387>2</span>))
+</span></span></code></pre></td></tr></table></div></div><p>The output was:</p><div class=code-sample><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Function took 1.9073486328125e-06 seconds.
 </span></span><span style=display:flex><span>0.5
 </span></span><span style=display:flex><span>Function took 9.5367431640625e-07 seconds.
 </span></span><span style=display:flex><span>5.0
@@ -134,36 +134,36 @@ decorator&rsquo;s responsibility to decide that to do (or not do) with them. In 
 case exceptions are ignored and allowed to go though, but this means we will
 never know how long it took for the function to fail. If it was relevant to us
 we would probably wrap the call in a <code>try/except</code> block and re-raise the
-original exception.</p><p>A fixed version of our decorator could look like:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>timed</span><span style=color:red>(</span><span style=color:#111>f</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>wrapper</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>start</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>try</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>result</span> <span style=color:#f92672>=</span> <span style=color:#111>f</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>except</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>end</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;Function call failed after </span><span style=color:#d88200>{</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:#d88200>}</span><span style=color:#d88200> seconds.&#39;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>raise</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>else</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>end</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;Function took </span><span style=color:#d88200>{</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:#d88200>}</span><span style=color:#d88200> seconds.&#39;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>return</span> <span style=color:#111>result</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>wrapper</span>
+original exception.</p><p>A fixed version of our decorator could look like:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>timed</span>(f):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>wrapper</span>(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs):
+</span></span><span style=display:flex><span>        start <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>try</span>:
+</span></span><span style=display:flex><span>            result <span style=color:#89dceb;font-weight:700>=</span> f(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs)
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>except</span>:
+</span></span><span style=display:flex><span>            end <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>            <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;Function call failed after </span><span style=color:#a6e3a1>{</span>end <span style=color:#89dceb;font-weight:700>-</span> start<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1> seconds.&#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#cba6f7>raise</span>
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>else</span>:
+</span></span><span style=display:flex><span>            end <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>            <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;Function took </span><span style=color:#a6e3a1>{</span>end <span style=color:#89dceb;font-weight:700>-</span> start<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1> seconds.&#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#cba6f7>return</span> result
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> wrapper
 </span></span></code></pre></td></tr></table></div></div><p>Something interesting about exceptions raised in decorators is that when
-looking at the stack trace we can see the decorator is there.</p><div class=code-sample><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Traceback (most recent call last):
+looking at the stack trace we can see the decorator is there.</p><div class=code-sample><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Traceback (most recent call last):
 </span></span><span style=display:flex><span>  File &#34;/Users/mauro/Desktop/timed.py&#34;, line 24, in &lt;module&gt;
 </span></span><span style=display:flex><span>    print(timed_division(1, 0))
 </span></span><span style=display:flex><span>  File &#34;/Users/mauro/Desktop/timed.py&#34;, line 10, in wrapper
@@ -175,12 +175,12 @@ looking at the stack trace we can see the decorator is there.</p><div class=code
 sugar we can use and at some more complex examples.</p><h2 id=the-decorator-syntax>The <code>@decorator</code> syntax</h2><p>Python provides a handy way of decorating functions by preceding a function
 definition with a <code>@</code> followed by the decorator name. This can be used
 in module-level functions or even in class methods. If we go back to our
-previous example, we can simply define our <code>division</code> function as:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75af00>@timed</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+previous example, we can simply define our <code>division</code> function as:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#89b4fa;font-weight:700>@timed</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span></code></pre></td></tr></table></div></div><p>If we do this, our definition of <code>division</code> is replaced by the decorated
 function, so in this case using <code>@timed</code> replaces <code>division</code> with what we
 previously defined as <code>timed_division</code>. Using <code>@timed</code> just allowed us to call
@@ -191,63 +191,63 @@ first &ldquo;built&rdquo; before it can be used to return a decorated function. 
 a bit confusing so let&rsquo;s look at an example. Let&rsquo;s take the <code>timed</code> decorator
 from before and make it so that it can print a shorter version of the message.
 For brevity&rsquo;s sake we will remove the exception handling. This new decorator
-will look like so:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>time</span>
+will look like so:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">28
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#94e2d5>import</span> <span style=color:#fab387>time</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>timed</span><span style=color:red>(</span><span style=color:#111>verbose</span><span style=color:#f92672>=</span><span style=color:#00a8c8>True</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>decorator</span><span style=color:red>(</span><span style=color:#111>f</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>def</span> <span style=color:#75af00>wrapper</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>start</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>result</span> <span style=color:#f92672>=</span> <span style=color:#111>f</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>end</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>timed</span>(verbose<span style=color:#89dceb;font-weight:700>=</span><span style=color:#fab387>True</span>):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>decorator</span>(f):
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>wrapper</span>(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs):
+</span></span><span style=display:flex><span>            start <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>            result <span style=color:#89dceb;font-weight:700>=</span> f(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs)
+</span></span><span style=display:flex><span>            end <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>if</span> <span style=color:#111>verbose</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>                <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;Function took </span><span style=color:#d88200>{</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:#d88200>}</span><span style=color:#d88200> seconds.&#39;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>else</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>                <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;</span><span style=color:#d88200>{</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:#d88200>}</span><span style=color:#d88200>s.&#39;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#cba6f7>if</span> verbose:
+</span></span><span style=display:flex><span>                <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;Function took </span><span style=color:#a6e3a1>{</span>end <span style=color:#89dceb;font-weight:700>-</span> start<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1> seconds.&#39;</span>)
+</span></span><span style=display:flex><span>            <span style=color:#cba6f7>else</span>:
+</span></span><span style=display:flex><span>                <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;</span><span style=color:#a6e3a1>{</span>end <span style=color:#89dceb;font-weight:700>-</span> start<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1>s.&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>return</span> <span style=color:#111>result</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>return</span> <span style=color:#111>wrapper</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>decorator</span>
+</span></span><span style=display:flex><span>            <span style=color:#cba6f7>return</span> result
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>return</span> wrapper
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> decorator
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75af00>@timed</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+</span></span><span style=display:flex><span><span style=color:#89b4fa;font-weight:700>@timed</span>()
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75af00>@timed</span><span style=color:red>(</span><span style=color:#111>verbose</span><span style=color:#f92672>=</span><span style=color:#00a8c8>False</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>quiet_division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+</span></span><span style=display:flex><span><span style=color:#89b4fa;font-weight:700>@timed</span>(verbose<span style=color:#89dceb;font-weight:700>=</span><span style=color:#fab387>False</span>)
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>quiet_division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>division</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>quiet_division</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
-</span></span></code></pre></td></tr></table></div></div><p>This will output:</p><div class=code-sample><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Function call took 2.1457672119140625e-06 seconds.
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(division(<span style=color:#fab387>1</span>, <span style=color:#fab387>2</span>))
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(quiet_division(<span style=color:#fab387>1</span>, <span style=color:#fab387>2</span>))
+</span></span></code></pre></td></tr></table></div></div><p>This will output:</p><div class=code-sample><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>Function call took 2.1457672119140625e-06 seconds.
 </span></span><span style=display:flex><span>0.5
 </span></span><span style=display:flex><span>1.1920928955078125e-06s.
 </span></span><span style=display:flex><span>0.5
@@ -258,78 +258,78 @@ with a call. Using plain old <code>@timed</code> will not work, we need to eithe
 like <code>@timed()</code> or pass a boolean in this case like <code>@timed(False)</code>.</p><p>To do this we could also use a class instead of nesting functions. Basically
 instead of returning a function we can return a class instance that is also
 callable. Calling that class instance will return the decorated function. An
-alternative implementation of the decorator in this case could look like so:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> <span style=color:#111>time</span>
+alternative implementation of the decorator in this case could look like so:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">36
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#94e2d5>import</span> <span style=color:#fab387>time</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>class</span> <span style=color:#75af00>timed</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>__init__</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#111>verbose</span><span style=color:#f92672>=</span><span style=color:#00a8c8>True</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>verbose</span> <span style=color:#f92672>=</span> <span style=color:#111>verbose</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>decorated_f</span> <span style=color:#f92672>=</span> <span style=color:#00a8c8>None</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>class</span> <span style=color:#f9e2af>timed</span>:
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>__init__</span>(<span style=color:#89dceb>self</span>, verbose<span style=color:#89dceb;font-weight:700>=</span><span style=color:#fab387>True</span>):
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>verbose <span style=color:#89dceb;font-weight:700>=</span> verbose
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>decorated_f <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#fab387>None</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>__call__</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#111>f</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>decorated_f</span> <span style=color:#f92672>=</span> <span style=color:#111>f</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>return</span> <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>wrapper</span>
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>__call__</span>(<span style=color:#89dceb>self</span>, f):
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>decorated_f <span style=color:#89dceb;font-weight:700>=</span> f
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>return</span> <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>wrapper
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>print_time</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#111>duration</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>if</span> <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>verbose</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;Function took </span><span style=color:#d88200>{</span><span style=color:#111>duration</span><span style=color:#d88200>}</span><span style=color:#d88200> seconds.&#39;</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>else</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>            <span style=color:#111>print</span><span style=color:red>(</span><span style=color:#d88200>f</span><span style=color:#d88200>&#39;</span><span style=color:#d88200>{</span><span style=color:#111>duration</span><span style=color:#d88200>}</span><span style=color:#d88200>s.&#39;</span><span style=color:red>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>print_time</span>(<span style=color:#89dceb>self</span>, duration):
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>if</span> <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>verbose:
+</span></span><span style=display:flex><span>            <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;Function took </span><span style=color:#a6e3a1>{</span>duration<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1> seconds.&#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#89dceb>print</span>(<span style=color:#f38ba8>f</span><span style=color:#a6e3a1>&#39;</span><span style=color:#a6e3a1>{</span>duration<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1>s.&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>def</span> <span style=color:#75af00>wrapper</span><span style=color:red>(</span><span style=color:#111>self</span><span style=color:red>,</span> <span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>start</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>result</span> <span style=color:#f92672>=</span> <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>decorated_f</span><span style=color:red>(</span><span style=color:#f92672>*</span><span style=color:#111>args</span><span style=color:red>,</span> <span style=color:#f92672>**</span><span style=color:#111>kwargs</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>end</span> <span style=color:#f92672>=</span> <span style=color:#111>time</span><span style=color:#f92672>.</span><span style=color:#111>time</span><span style=color:red>()</span>
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>wrapper</span>(<span style=color:#89dceb>self</span>, <span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs):
+</span></span><span style=display:flex><span>        start <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
+</span></span><span style=display:flex><span>        result <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>decorated_f(<span style=color:#89dceb;font-weight:700>*</span>args, <span style=color:#89dceb;font-weight:700>**</span>kwargs)
+</span></span><span style=display:flex><span>        end <span style=color:#89dceb;font-weight:700>=</span> time<span style=color:#89dceb;font-weight:700>.</span>time()
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#111>self</span><span style=color:#f92672>.</span><span style=color:#111>print_time</span><span style=color:red>(</span><span style=color:#111>end</span> <span style=color:#f92672>-</span> <span style=color:#111>start</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>return</span> <span style=color:#111>result</span>
+</span></span><span style=display:flex><span>        <span style=color:#89dceb>self</span><span style=color:#89dceb;font-weight:700>.</span>print_time(end <span style=color:#89dceb;font-weight:700>-</span> start)
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>return</span> result
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75af00>@timed</span><span style=color:red>()</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+</span></span><span style=display:flex><span><span style=color:#89b4fa;font-weight:700>@timed</span>()
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75af00>@timed</span><span style=color:red>(</span><span style=color:#111>verbose</span><span style=color:#f92672>=</span><span style=color:#00a8c8>False</span><span style=color:red>)</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>def</span> <span style=color:#75af00>quiet_division</span><span style=color:red>(</span><span style=color:#111>a</span><span style=color:red>,</span> <span style=color:#111>b</span><span style=color:red>):</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>return</span> <span style=color:#111>a</span> <span style=color:#f92672>/</span> <span style=color:#111>b</span>
+</span></span><span style=display:flex><span><span style=color:#89b4fa;font-weight:700>@timed</span>(verbose<span style=color:#89dceb;font-weight:700>=</span><span style=color:#fab387>False</span>)
+</span></span><span style=display:flex><span><span style=color:#cba6f7>def</span> <span style=color:#89b4fa>quiet_division</span>(a, b):
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>return</span> a <span style=color:#89dceb;font-weight:700>/</span> b
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>division</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
-</span></span><span style=display:flex><span><span style=color:#111>print</span><span style=color:red>(</span><span style=color:#111>quiet_division</span><span style=color:red>(</span><span style=color:#ae81ff>1</span><span style=color:red>,</span> <span style=color:#ae81ff>2</span><span style=color:red>))</span>
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(division(<span style=color:#fab387>1</span>, <span style=color:#fab387>2</span>))
+</span></span><span style=display:flex><span><span style=color:#89dceb>print</span>(quiet_division(<span style=color:#fab387>1</span>, <span style=color:#fab387>2</span>))
 </span></span></code></pre></td></tr></table></div></div><p>When we do <code>@timed()</code>, a new instance of the <code>timed</code> class is created and
 initialized with <code>verbose = false</code>. Then that instance is called with
 <code>division</code> as an argument which is stored in <code>self.decorated_f</code> and a reference
@@ -360,7 +360,7 @@ for easily patching functions during unit tests.</li><li><a href=https://docs.py
 and <a href=https://docs.python.org/3/library/functools.html#functools.lru_cache><code>functools.lru_cache</code></a>
 for caching method calls. The
 <a href=https://github.com/python/cpython/blob/3.9/Lib/functools.py#L478>implementation</a>
-if the latter is actually quite cool.</li></ul><h2 id=decorating-classes>Decorating classes</h2><p>It is also possible to decorate classes, the difference is that the decorator
+of the latter is actually quite cool.</li></ul><h2 id=decorating-classes>Decorating classes</h2><p>It is also possible to decorate classes, the difference is that the decorator
 will return a class instead of a function (or at least something that behaves
 like a class).</p><p>One example of this is the
 <a href=https://www.python.org/dev/peps/pep-0557/><code>@dataclass</code> decorator</a> in the
@@ -370,4 +370,4 @@ use-case better. This is a whole other topic and is something too big to cover
 here.</p><h2 id=conclusion>Conclusion</h2><p>Decorators are powerful tools that allow us to enhance our code and change its
 behavior in a very simple way that does not require us to change the structure
 of our programs. Mastering the use of decorators is a must for every Python
-programmer.</p></div></div></div><footer><div id=footer-content><p>Made with ❤️ by Mauro de Carvalho using <a href=https://gohugo.io/>Hugo</a>.</p><p><a href=https://github.com/maurodec>Github</a> &#9679 mauro@maurodec.com &#9679 <a href=https://www.linkedin.com/in/maurodec/>LinkedIn</a></p></div></footer></body></html>
+programmer.</p></div></div></div><footer><div id=footer-content><p><b>Made with ❤️ using <a href=https://gohugo.io/>Hugo</a> &#183; Made by a human, not AI.</b></p><p>© Mauro de Carvalho 2017–2026 &#183; <a href=https://github.com/maurodec>Github</a> &#183; mauro@maurodec.com</p></div></footer></body></html>

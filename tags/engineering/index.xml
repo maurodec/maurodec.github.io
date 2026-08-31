@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Engineering on Blog - maurodec.com</title><link>https://maurodec.com/tags/engineering/</link><description>Recent content in Engineering on Blog - maurodec.com</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://maurodec.com/tags/engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>The difficulty in learning a new Programming Language</title><link>https://maurodec.com/blog/learning-new-languages/</link><pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/learning-new-languages/</guid><description>&lt;p>Programming Languages come in all shapes and sizes. When attempting to learn a
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Engineering on Blog - maurodec.com</title><link>https://maurodec.com/tags/engineering/</link><description>Recent content in Engineering on Blog - maurodec.com</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://maurodec.com/tags/engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>The difficulty in learning a new Programming Language</title><link>https://maurodec.com/blog/learning-new-languages/</link><pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/learning-new-languages/</guid><description>&lt;p&gt;Programming Languages come in all shapes and sizes. When attempting to learn a
 new Programming Language there are many hurdles one has to overcome, some easy
-and some very challenging.&lt;/p>
-&lt;p>Here I will explore what some of these hurdles are.&lt;/p></description></item><item><title>Use automated code formatting</title><link>https://maurodec.com/blog/code-formatting/</link><pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/code-formatting/</guid><description>&lt;p>Tabs or spaces? Newlines before braces? End every line with a semicolon, even
+and some very challenging.&lt;/p&gt;
+&lt;p&gt;Here I will explore what some of these hurdles are.&lt;/p&gt;</description></item><item><title>Use automated code formatting</title><link>https://maurodec.com/blog/code-formatting/</link><pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/code-formatting/</guid><description>&lt;p&gt;Tabs or spaces? Newlines before braces? End every line with a semicolon, even
 if unneeded? Code formatting is one of those topics where discussions are
 endless and consensus is pretty much impossible. Everybody prefers things a
 certain way and sometimes it can be tough to find a middle ground where
-everyone is happy.&lt;/p>
-&lt;p>In this post I will argue in favor of using tools to enforce code formatting in
-order to ensure it stays consistent.&lt;/p></description></item><item><title>Short Thoughts: keep your tests simple</title><link>https://maurodec.com/blog/keep-tests-simple/</link><pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/keep-tests-simple/</guid><description>&lt;p>Writing good tests, whether they are unit, acceptance, integration etc, is
+everyone is happy.&lt;/p&gt;
+&lt;p&gt;In this post I will argue in favor of using tools to enforce code formatting in
+order to ensure it stays consistent.&lt;/p&gt;</description></item><item><title>Short Thoughts: keep your tests simple</title><link>https://maurodec.com/blog/keep-tests-simple/</link><pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/keep-tests-simple/</guid><description>&lt;p&gt;Writing good tests, whether they are unit, acceptance, integration etc, is
 hard. Few tests will run quickly but probably won&amp;rsquo;t cover much of the code,
 however, having high coverage doesn&amp;rsquo;t mean your tests are good either.
 The way tests are written also depends on what the software and it&amp;rsquo;s structure
 is. Notwithstanding, there&amp;rsquo;s one aspect that I believe always helps,
-simplicity.&lt;/p></description></item><item><title>Text editors: which is the best?</title><link>https://maurodec.com/blog/best-text-editors/</link><pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/best-text-editors/</guid><description>&lt;p>Text editors are probably the most basic tool of every software developer,
+simplicity.&lt;/p&gt;</description></item><item><title>Text editors: which is the best?</title><link>https://maurodec.com/blog/best-text-editors/</link><pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/best-text-editors/</guid><description>&lt;p&gt;Text editors are probably the most basic tool of every software developer,
 without them we would not be able to do our jobs. It makes sense then to try
 and find out what the best text editor is, doesn&amp;rsquo;t it? Is it Vim? Is it Emacs?
 Is it another? It&amp;rsquo;s important to first look at what we want in a text editor
-before we are able to answer this.&lt;/p></description></item><item><title>Code smell and a lesson learned</title><link>https://maurodec.com/blog/side-effects/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/side-effects/</guid><description>&lt;p>In an ideal world there&amp;rsquo;s always time and resources available to refactor code
+before we are able to answer this.&lt;/p&gt;</description></item><item><title>Code smell and a lesson learned</title><link>https://maurodec.com/blog/side-effects/</link><pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate><guid>https://maurodec.com/blog/side-effects/</guid><description>&lt;p&gt;In an ideal world there&amp;rsquo;s always time and resources available to refactor code
 and to make sure it is as clean as possible. Even though it is well known that
 refactoring code helps with maintainability and thus reduces development costs
 in the long run, for various reasons refactoring does not always happen, or at
-least not until things start to fall apart.&lt;/p>
-&lt;p>In this post I will tell a little horror story that happened to me recently and
+least not until things start to fall apart.&lt;/p&gt;
+&lt;p&gt;In this post I will tell a little horror story that happened to me recently and
 that could have been avoided if we had stopped to refactor the code we were
-working on&amp;hellip;&lt;/p></description></item></channel></rss>
+working on&amp;hellip;&lt;/p&gt;</description></item></channel></rss>

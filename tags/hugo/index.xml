@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Blog - maurodec.com</title><link>https://maurodec.com/tags/hugo/</link><description>Recent content in Hugo on Blog - maurodec.com</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 12 Mar 2017 00:00:00 -0300</lastBuildDate><atom:link href="https://maurodec.com/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Creating this Blog with Hugo</title><link>https://maurodec.com/blog/using-hugo/</link><pubDate>Sun, 12 Mar 2017 00:00:00 -0300</pubDate><guid>https://maurodec.com/blog/using-hugo/</guid><description>&lt;p>It&amp;rsquo;s sometimes a bit funny how trends come and go in tech.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Blog - maurodec.com</title><link>https://maurodec.com/tags/hugo/</link><description>Recent content in Hugo on Blog - maurodec.com</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 12 Mar 2017 00:00:00 -0300</lastBuildDate><atom:link href="https://maurodec.com/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Creating this Blog with Hugo</title><link>https://maurodec.com/blog/using-hugo/</link><pubDate>Sun, 12 Mar 2017 00:00:00 -0300</pubDate><guid>https://maurodec.com/blog/using-hugo/</guid><description>&lt;p&gt;It&amp;rsquo;s sometimes a bit funny how trends come and go in tech.
 For a long time dynamic websites were seen as the way to go, no matter
 for what kind of content. Lately a lot of people have gone back to
 basics and (thankfully) decided to build their sites as a collection
-of static pages.&lt;/p>
-&lt;p>When I started this blog I decided I did not want to go through the
+of static pages.&lt;/p&gt;
+&lt;p&gt;When I started this blog I decided I did not want to go through the
 hassle of maintaining a complex site and decided to use Hugo, a static
 site generator. In this post I will talk about my experience building
-my blog using &lt;a href="http://gohugo.io/">Hugo&lt;/a>.&lt;/p></description></item></channel></rss>
+my blog using &lt;a href="http://gohugo.io/"&gt;Hugo&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

@@ -1,6 +1,6 @@
-<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.b7ba360344d296c7ba210239ede4128485b60a5b141b4de7e987b01937611386.css><title>Android Handlers, Loopers, Message Queues and communication between Threads - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
-<a href=/about/>About me</a>
-<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=post-title><a href=https://maurodec.com/blog/android-handlers/>Android Handlers, Loopers, Message Queues and communication between Threads</a></h1><div id=post-metadata><span class="date-container extra-info">March 4 - 2017</span><div class=tag-container><span class=tag>Android</span>
+<!doctype html><html><head><meta charset=utf-8><link rel=apple-touch-icon sizes=180x180 href=/static/favicon/apple-touch-icon.png><link rel=icon type=image/png href=/static/favicon/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/static/favicon/favicon-16x16.png sizes=16x16><link rel=manifest href=/static/favicon/manifest.json><link rel=mask-icon href=/static/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/static/favicon/favicon.ico><meta name=msapplication-config content="/static/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Source+Code+Pro&display=swap" rel=stylesheet><link rel=stylesheet href=/css/style.min.f92950aa80a3901120f160e2d540b6ba60f988dc60b7e447ef87256c58e6c96e.css><title>Android Handlers, Loopers, Message Queues and communication between Threads - maurodec.com</title></head><body><div id=content><header><div class=highlight></div><div class=navbar><a class=pull-left href=/>Home</a><div class="pull-right navbar-extra"><a href=/blog/>Blog</a>
+<a href=/about/>About</a>
+<a href=https://github.com/maurodec/maurodec.github.io>Source</a></div></div></header><div id=main><h1 class=content-title>Android Handlers, Loopers, Message Queues and communication between Threads</h1><div id=post-metadata><span class="info-container extra-info">March 4 - 2017 <b>&#183;</b> <a href=https://maurodec.com/blog/android-handlers/>Permalink</a></span><div class=tag-container><span class=tag>Android</span>
 <span class=tag>Java</span>
 <span class=tag>Open Source</span></div></div><div id=post-content><p>In Android applications, as well as in applications with a GUI in general,
 doing work in the background is essential as we do not want the UI to be
@@ -76,80 +76,80 @@ being turned on or off). On the other hand, we will have a background Thread.
 This Thread will create a random color periodically, and will tell the Main
 Thread, via a <code>Message</code>, to update the UI. Our background Thread will live as
 long as out Activity is showing so we will handle creating and destroying it in
-the <code>onResume</code> and <code>onPause</code> methods of our activity respectively</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#00a8c8>public</span> <span style=color:#00a8c8>class</span> <span style=color:#75af00>MainActivity</span> <span style=color:#00a8c8>extends</span> <span style=color:#111>AppCompatActivity</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// This is a thread that will be doing work in the background. This thread will run as long as</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// the activity is presented to the user. If the activity goes to the background then this thread is destroyed.</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>private</span> <span style=color:#111>BackgroundThread</span> <span style=color:#111>bgThread</span><span style=color:red>;</span>
+the <code>onResume</code> and <code>onPause</code> methods of our activity respectively</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">37
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f38ba8>public</span> <span style=color:#f38ba8>class</span> <span style=color:#f9e2af>MainActivity</span> <span style=color:#f38ba8>extends</span> AppCompatActivity {
+</span></span><span style=display:flex><span>    <span style=color:#6c7086;font-style:italic>// This is a thread that will be doing work in the background. This thread will run as long as</span>
+</span></span><span style=display:flex><span>    <span style=color:#6c7086;font-style:italic>// the activity is presented to the user. If the activity goes to the background then this thread is destroyed.</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>private</span> BackgroundThread bgThread;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>protected</span> <span style=color:maroon>void</span> <span style=color:#75af00>onCreate</span><span style=color:red>(</span><span style=color:#111>Bundle</span> <span style=color:#111>savedInstanceState</span><span style=color:red>)</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>super</span><span style=color:red>.</span><span style=color:#75af00>onCreate</span><span style=color:red>(</span><span style=color:#111>savedInstanceState</span><span style=color:red>);</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>setContentView</span><span style=color:red>(</span><span style=color:#111>R</span><span style=color:red>.</span><span style=color:#75af00>layout</span><span style=color:red>.</span><span style=color:#75af00>activity_main</span><span style=color:red>);</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>protected</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>onCreate</span>(Bundle savedInstanceState) {
+</span></span><span style=display:flex><span>        <span style=color:#f38ba8>super</span>.<span style=color:#89b4fa>onCreate</span>(savedInstanceState);
+</span></span><span style=display:flex><span>        setContentView(R.<span style=color:#89b4fa>layout</span>.<span style=color:#89b4fa>activity_main</span>);
+</span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>protected</span> <span style=color:maroon>void</span> <span style=color:#75af00>onPause</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>super</span><span style=color:red>.</span><span style=color:#75af00>onPause</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// The activity will no longer be presented to the user.</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Kill the background thread.</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>bgThread</span><span style=color:red>.</span><span style=color:#75af00>interrupt</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>bgThread</span> <span style=color:#f92672>=</span> <span style=color:#00a8c8>null</span><span style=color:red>;</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>protected</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>onPause</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#f38ba8>super</span>.<span style=color:#89b4fa>onPause</span>();
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// The activity will no longer be presented to the user.</span>
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// Kill the background thread.</span>
+</span></span><span style=display:flex><span>        bgThread.<span style=color:#89b4fa>interrupt</span>();
+</span></span><span style=display:flex><span>        bgThread <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#fab387>null</span>;
+</span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>protected</span> <span style=color:maroon>void</span> <span style=color:#75af00>onResume</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>super</span><span style=color:red>.</span><span style=color:#75af00>onResume</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// The activity was just created or is coming back to the foreground.</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// the activity is presented to the user, so create a background thread to do work.</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>bgThread</span> <span style=color:#f92672>=</span> <span style=color:#00a8c8>new</span> <span style=color:#111>BackgroundThread</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>bgThread</span><span style=color:red>.</span><span style=color:#75af00>start</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>protected</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>onResume</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#f38ba8>super</span>.<span style=color:#89b4fa>onResume</span>();
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// The activity was just created or is coming back to the foreground.</span>
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// the activity is presented to the user, so create a background thread to do work.</span>
+</span></span><span style=display:flex><span>        bgThread <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#cba6f7>new</span> BackgroundThread();
+</span></span><span style=display:flex><span>        bgThread.<span style=color:#89b4fa>start</span>();
+</span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// This is the background thread that will be doing work for us.</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>public</span> <span style=color:#00a8c8>class</span> <span style=color:#75af00>BackgroundThread</span> <span style=color:#00a8c8>extends</span> <span style=color:#111>Thread</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>public</span> <span style=color:maroon>void</span> <span style=color:#75af00>run</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>          <span style=color:#75715e>// We will generate random colors here</span>
-</span></span><span style=display:flex><span>        <span style=color:red>}</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
-</span></span><span style=display:flex><span><span style=color:red>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#6c7086;font-style:italic>// This is the background thread that will be doing work for us.</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>public</span> <span style=color:#f38ba8>class</span> <span style=color:#f9e2af>BackgroundThread</span> <span style=color:#f38ba8>extends</span> Thread {
+</span></span><span style=display:flex><span>        <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#f38ba8>public</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>run</span>() {
+</span></span><span style=display:flex><span>          <span style=color:#6c7086;font-style:italic>// We will generate random colors here</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
 </span></span></code></pre></td></tr></table></div></div><p>Remember that switch we added to our activity? Well, it wasn&rsquo;t just for
 decoration. With that switch we will be telling our background Thread that we
 want it to create (or to stop creating) random colors for us. How will we do
@@ -160,32 +160,32 @@ new color and will send it to the Main Thread to have it update the UI and will
 keep doing so every second. When we flip the switch off, we will send another
 <code>Message</code> to the background Thread telling it to stop creating random colors.</p><p>This means we will need two <code>Handler</code>s, one for the Main Thread and one for the
 background Thread. Let&rsquo;s take a look at how we will handle messages in the Main
-Thread first:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#00a8c8>private</span> <span style=color:#111>View</span> <span style=color:#111>colorDisplay</span><span style=color:red>;</span>
+Thread first:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f38ba8>private</span> View colorDisplay;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// This Handler will take care of messages sent to the main thread (as it is created there).</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Its job is to update the UI.</span>
-</span></span><span style=display:flex><span><span style=color:#00a8c8>private</span> <span style=color:#111>Handler</span> <span style=color:#111>uiThreadHandler</span> <span style=color:#f92672>=</span> <span style=color:#00a8c8>new</span> <span style=color:#111>Handler</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>public</span> <span style=color:maroon>void</span> <span style=color:#75af00>handleMessage</span><span style=color:red>(</span><span style=color:#111>Message</span> <span style=color:#111>msg</span><span style=color:red>)</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Get the color that was sent to us.</span>
-</span></span><span style=display:flex><span>        <span style=color:maroon>int</span> <span style=color:#111>color</span> <span style=color:#f92672>=</span> <span style=color:#111>msg</span><span style=color:red>.</span><span style=color:#75af00>arg1</span><span style=color:red>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// Set it. this can only be done on the Main Thread.</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>colorDisplay</span><span style=color:red>.</span><span style=color:#75af00>setBackgroundColor</span><span style=color:red>(</span><span style=color:#111>color</span><span style=color:red>);</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
-</span></span><span style=display:flex><span><span style=color:red>};</span>
+</span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic>// This Handler will take care of messages sent to the main thread (as it is created there).</span>
+</span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic>// Its job is to update the UI.</span>
+</span></span><span style=display:flex><span><span style=color:#f38ba8>private</span> Handler uiThreadHandler <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#cba6f7>new</span> Handler() {
+</span></span><span style=display:flex><span>    <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>public</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>handleMessage</span>(Message msg) {
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// Get the color that was sent to us.</span>
+</span></span><span style=display:flex><span>        <span style=color:#f38ba8>int</span> color <span style=color:#89dceb;font-weight:700>=</span> msg.<span style=color:#89b4fa>arg1</span>;
+</span></span><span style=display:flex><span>        <span style=color:#6c7086;font-style:italic>// Set it. this can only be done on the Main Thread.</span>
+</span></span><span style=display:flex><span>        colorDisplay.<span style=color:#89b4fa>setBackgroundColor</span>(color);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
 </span></span></code></pre></td></tr></table></div></div><p>The code is rather straightforward, however, there are two things we should
 look at here. The first is that we create and assign our <code>Handler</code> at the same
 time. The Android Framework will create our Activity on the Main Thread which
@@ -206,78 +206,78 @@ Parcelable of a framework class (not one implemented by the application).
 For other data transfer use <code>setData(Bundle)</code>.</p></blockquote><p>This means that in some cases the second way of passing data, the <code>setData</code>
 method should be used. Using <code>setData</code> also means doing more work, so it should
 be avoided whenever possible as to avoid unnecessary overhead.</p><p>We can now take a look at how the handler for the background Thread should be
-created:</p><div class=code-sample><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#00a8c8>public</span> <span style=color:#00a8c8>class</span> <span style=color:#75af00>BackgroundThread</span> <span style=color:#00a8c8>extends</span> <span style=color:#111>Thread</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>private</span> <span style=color:#00a8c8>static</span> <span style=color:#00a8c8>final</span> <span style=color:maroon>int</span> <span style=color:#111>BG_CHANGE_INTERVAL</span> <span style=color:#f92672>=</span> <span style=color:#111>1</span> <span style=color:#f92672>*</span> <span style=color:#111>1000</span><span style=color:red>;</span>
+created:</p><div class=code-sample><div style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f849c">36
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f38ba8>public</span> <span style=color:#f38ba8>class</span> <span style=color:#f9e2af>BackgroundThread</span> <span style=color:#f38ba8>extends</span> Thread {
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>private</span> <span style=color:#f38ba8>static</span> <span style=color:#f38ba8>final</span> <span style=color:#f38ba8>int</span> BG_CHANGE_INTERVAL <span style=color:#89dceb;font-weight:700>=</span> 1 <span style=color:#89dceb;font-weight:700>*</span> 1000;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>private</span> <span style=color:#00a8c8>static</span> <span style=color:#00a8c8>final</span> <span style=color:maroon>int</span> <span style=color:#111>WORK</span> <span style=color:#f92672>=</span> <span style=color:#111>1</span><span style=color:red>;</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>private</span> <span style=color:#00a8c8>static</span> <span style=color:#00a8c8>final</span> <span style=color:maroon>int</span> <span style=color:#111>STOP</span> <span style=color:#f92672>=</span> <span style=color:#111>0</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>private</span> <span style=color:#f38ba8>static</span> <span style=color:#f38ba8>final</span> <span style=color:#f38ba8>int</span> WORK <span style=color:#89dceb;font-weight:700>=</span> 1;
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>private</span> <span style=color:#f38ba8>static</span> <span style=color:#f38ba8>final</span> <span style=color:#f38ba8>int</span> STOP <span style=color:#89dceb;font-weight:700>=</span> 0;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>private</span> <span style=color:#111>Handler</span> <span style=color:#111>bgThreadHandler</span><span style=color:red>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>private</span> Handler bgThreadHandler;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>    <span style=color:#00a8c8>public</span> <span style=color:maroon>void</span> <span style=color:#75af00>run</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#111>Looper</span><span style=color:red>.</span><span style=color:#75af00>prepare</span><span style=color:red>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#f38ba8>public</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>run</span>() {
+</span></span><span style=display:flex><span>        Looper.<span style=color:#89b4fa>prepare</span>();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#00a8c8>this</span><span style=color:red>.</span><span style=color:#75af00>bgThreadHandler</span> <span style=color:#f92672>=</span> <span style=color:#00a8c8>new</span> <span style=color:#111>Handler</span><span style=color:red>()</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>            <span style=color:#75af00>@Override</span>
-</span></span><span style=display:flex><span>            <span style=color:#00a8c8>public</span> <span style=color:maroon>void</span> <span style=color:#75af00>handleMessage</span><span style=color:red>(</span><span style=color:#111>Message</span> <span style=color:#111>msg</span><span style=color:red>)</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>                <span style=color:#00a8c8>switch</span> <span style=color:red>(</span><span style=color:#111>msg</span><span style=color:red>.</span><span style=color:#75af00>what</span><span style=color:red>)</span> <span style=color:red>{</span>
-</span></span><span style=display:flex><span>                    <span style=color:#00a8c8>case</span> <span style=color:#111>STOP</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>                        <span style=color:#75715e>// Stop, so remove all pending messages and just sit there idling.</span>
-</span></span><span style=display:flex><span>                        <span style=color:#00a8c8>this</span><span style=color:red>.</span><span style=color:#75af00>removeMessages</span><span style=color:red>(</span><span style=color:#111>WORK</span><span style=color:red>);</span>
-</span></span><span style=display:flex><span>                        <span style=color:#00a8c8>break</span><span style=color:red>;</span>
-</span></span><span style=display:flex><span>                    <span style=color:#00a8c8>case</span> <span style=color:#111>WORK</span><span style=color:red>:</span>
-</span></span><span style=display:flex><span>                        <span style=color:#75715e>// Obtain a message that we will send to the Main Thread.</span>
-</span></span><span style=display:flex><span>                        <span style=color:#111>Message</span> <span style=color:#111>messageToUI</span> <span style=color:#f92672>=</span> <span style=color:#111>MainActivity</span><span style=color:red>.</span><span style=color:#75af00>this</span><span style=color:red>.</span><span style=color:#75af00>uiThreadHandler</span><span style=color:red>.</span><span style=color:#75af00>obtainMessage</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>                        <span style=color:#111>messageToUI</span><span style=color:red>.</span><span style=color:#75af00>arg1</span> <span style=color:#f92672>=</span> <span style=color:#111>getRandomColor</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>                        <span style=color:#75715e>// Send the message to the Main Thread.</span>
-</span></span><span style=display:flex><span>                        <span style=color:#111>MainActivity</span><span style=color:red>.</span><span style=color:#75af00>this</span><span style=color:red>.</span><span style=color:#75af00>uiThreadHandler</span><span style=color:red>.</span><span style=color:#75af00>sendMessage</span><span style=color:red>(</span><span style=color:#111>messageToUI</span><span style=color:red>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#cba6f7>this</span>.<span style=color:#89b4fa>bgThreadHandler</span> <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#cba6f7>new</span> Handler() {
+</span></span><span style=display:flex><span>            <span style=color:#89b4fa;font-weight:700>@Override</span>
+</span></span><span style=display:flex><span>            <span style=color:#f38ba8>public</span> <span style=color:#f38ba8>void</span> <span style=color:#89b4fa>handleMessage</span>(Message msg) {
+</span></span><span style=display:flex><span>                <span style=color:#cba6f7>switch</span> (msg.<span style=color:#89b4fa>what</span>) {
+</span></span><span style=display:flex><span>                    <span style=color:#cba6f7>case</span> STOP:
+</span></span><span style=display:flex><span>                        <span style=color:#6c7086;font-style:italic>// Stop, so remove all pending messages and just sit there idling.</span>
+</span></span><span style=display:flex><span>                        <span style=color:#cba6f7>this</span>.<span style=color:#89b4fa>removeMessages</span>(WORK);
+</span></span><span style=display:flex><span>                        <span style=color:#cba6f7>break</span>;
+</span></span><span style=display:flex><span>                    <span style=color:#cba6f7>case</span> WORK:
+</span></span><span style=display:flex><span>                        <span style=color:#6c7086;font-style:italic>// Obtain a message that we will send to the Main Thread.</span>
+</span></span><span style=display:flex><span>                        Message messageToUI <span style=color:#89dceb;font-weight:700>=</span> MainActivity.<span style=color:#89b4fa>this</span>.<span style=color:#89b4fa>uiThreadHandler</span>.<span style=color:#89b4fa>obtainMessage</span>();
+</span></span><span style=display:flex><span>                        messageToUI.<span style=color:#89b4fa>arg1</span> <span style=color:#89dceb;font-weight:700>=</span> getRandomColor();
+</span></span><span style=display:flex><span>                        <span style=color:#6c7086;font-style:italic>// Send the message to the Main Thread.</span>
+</span></span><span style=display:flex><span>                        MainActivity.<span style=color:#89b4fa>this</span>.<span style=color:#89b4fa>uiThreadHandler</span>.<span style=color:#89b4fa>sendMessage</span>(messageToUI);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                        <span style=color:#00a8c8>this</span><span style=color:red>.</span><span style=color:#75af00>sendEmptyMessageDelayed</span><span style=color:red>(</span><span style=color:#111>WORK</span><span style=color:red>,</span> <span style=color:#111>BG_CHANGE_INTERVAL</span><span style=color:red>);</span>
-</span></span><span style=display:flex><span>                        <span style=color:#00a8c8>break</span><span style=color:red>;</span>
-</span></span><span style=display:flex><span>                <span style=color:red>}</span>
-</span></span><span style=display:flex><span>            <span style=color:red>}</span>
-</span></span><span style=display:flex><span>        <span style=color:red>};</span>
+</span></span><span style=display:flex><span>                        <span style=color:#cba6f7>this</span>.<span style=color:#89b4fa>sendEmptyMessageDelayed</span>(WORK, BG_CHANGE_INTERVAL);
+</span></span><span style=display:flex><span>                        <span style=color:#cba6f7>break</span>;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#111>Looper</span><span style=color:red>.</span><span style=color:#75af00>loop</span><span style=color:red>();</span>
-</span></span><span style=display:flex><span>    <span style=color:red>}</span>
-</span></span><span style=display:flex><span><span style=color:red>}</span>
+</span></span><span style=display:flex><span>        Looper.<span style=color:#89b4fa>loop</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
 </span></span></code></pre></td></tr></table></div></div><p>As with the Handler in the Main Thread, there are a few things to note here.
 For starters, we do not define the Handler the same way we did in the Main
 Thread. If we did, the Handler would be attached to the Main Thread, as the
@@ -303,4 +303,4 @@ the Looper etc, we could have just created an instance of this class.</p><h2 id=
 and crude, it is actually really powerful tool for communicating between
 threads and components. Understanding how this works also gives us a lot of
 insight into the inner workings of the Android Framework, thus helping us
-create better, more reliable and easier to maintain applications.</p></div></div></div><footer><div id=footer-content><p>Made with ❤️ by Mauro de Carvalho using <a href=https://gohugo.io/>Hugo</a>.</p><p><a href=https://github.com/maurodec>Github</a> &#9679 mauro@maurodec.com &#9679 <a href=https://www.linkedin.com/in/maurodec/>LinkedIn</a></p></div></footer></body></html>
+create better, more reliable and easier to maintain applications.</p></div></div></div><footer><div id=footer-content><p><b>Made with ❤️ using <a href=https://gohugo.io/>Hugo</a> &#183; Made by a human, not AI.</b></p><p>© Mauro de Carvalho 2017–2026 &#183; <a href=https://github.com/maurodec>Github</a> &#183; mauro@maurodec.com</p></div></footer></body></html>
